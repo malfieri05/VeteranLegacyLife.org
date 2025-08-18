@@ -1,16 +1,26 @@
 import React, { useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
+import { getStepConfig } from '../../store/stepConfig'
 
 export const LoadingScreen: React.FC = () => {
   const { goToNextStep } = useFunnelStore()
+  const stepConfig = getStepConfig(13) // Loading screen is step 13
 
   useEffect(() => {
-    // Auto-advance to next step after 3 seconds
+    // Use the configured delay from stepConfig, default to 12 seconds
+    const delay = stepConfig?.autoAdvanceDelay || 12000
+    
+    console.log(`🎯 LoadingScreen: Auto-advancing in ${delay}ms`)
+    
     const timer = setTimeout(() => {
+      console.log('🎯 LoadingScreen: Auto-advancing to next step')
       goToNextStep()
-    }, 3000)
+    }, delay)
 
-    return () => clearTimeout(timer)
+    return () => {
+      console.log('🎯 LoadingScreen: Cleaning up timer')
+      clearTimeout(timer)
+    }
   }, [goToNextStep])
 
   return (

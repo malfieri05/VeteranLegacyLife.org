@@ -23,7 +23,7 @@ export const COVERAGE_AMOUNTS: CoverageTier[] = [
 
 // Available ages
 export const AGE_RANGE = {
-  min: 50,
+  min: 18,
   max: 80
 };
 
@@ -249,7 +249,140 @@ export const QUOTE_RATES: QuoteRate[] = [
   // Note: This is a sample of the data. The full dataset would include all combinations
   // of gender, health tier, age (50-80), and coverage amounts (5000-40000)
 
-  // IUL (Indexed Universal Life) - Male
+  // IUL (Indexed Universal Life) - Male (Ages 18-39)
+  { gender: 'Male', healthTier: 'IUL', age: 18, coverageAmount: 50000, monthlyPremium: 25.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 18, coverageAmount: 100000, monthlyPremium: 45.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 18, coverageAmount: 150000, monthlyPremium: 65.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 18, coverageAmount: 200000, monthlyPremium: 84.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 18, coverageAmount: 250000, monthlyPremium: 104.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 19, coverageAmount: 50000, monthlyPremium: 26.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 19, coverageAmount: 100000, monthlyPremium: 46.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 19, coverageAmount: 150000, monthlyPremium: 66.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 19, coverageAmount: 200000, monthlyPremium: 87.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 19, coverageAmount: 250000, monthlyPremium: 107.25 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 20, coverageAmount: 50000, monthlyPremium: 27.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 20, coverageAmount: 100000, monthlyPremium: 47.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 20, coverageAmount: 150000, monthlyPremium: 68.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 20, coverageAmount: 200000, monthlyPremium: 89.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 20, coverageAmount: 250000, monthlyPremium: 110.00 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 21, coverageAmount: 50000, monthlyPremium: 27.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 21, coverageAmount: 100000, monthlyPremium: 49.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 21, coverageAmount: 150000, monthlyPremium: 70.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 21, coverageAmount: 200000, monthlyPremium: 91.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 21, coverageAmount: 250000, monthlyPremium: 112.75 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 22, coverageAmount: 50000, monthlyPremium: 28.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 22, coverageAmount: 100000, monthlyPremium: 50.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 22, coverageAmount: 150000, monthlyPremium: 72.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 22, coverageAmount: 200000, monthlyPremium: 93.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 22, coverageAmount: 250000, monthlyPremium: 115.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 23, coverageAmount: 50000, monthlyPremium: 29.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 23, coverageAmount: 100000, monthlyPremium: 51.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 23, coverageAmount: 150000, monthlyPremium: 73.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 23, coverageAmount: 200000, monthlyPremium: 96.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 23, coverageAmount: 250000, monthlyPremium: 118.25 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 24, coverageAmount: 50000, monthlyPremium: 30.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 24, coverageAmount: 100000, monthlyPremium: 52.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 24, coverageAmount: 150000, monthlyPremium: 75.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 24, coverageAmount: 200000, monthlyPremium: 98.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 24, coverageAmount: 250000, monthlyPremium: 121.00 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 25, coverageAmount: 50000, monthlyPremium: 30.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 25, coverageAmount: 100000, monthlyPremium: 54.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 25, coverageAmount: 150000, monthlyPremium: 77.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 25, coverageAmount: 200000, monthlyPremium: 100.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 25, coverageAmount: 250000, monthlyPremium: 123.75 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 26, coverageAmount: 50000, monthlyPremium: 31.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 26, coverageAmount: 100000, monthlyPremium: 55.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 26, coverageAmount: 150000, monthlyPremium: 79.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 26, coverageAmount: 200000, monthlyPremium: 102.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 26, coverageAmount: 250000, monthlyPremium: 126.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 27, coverageAmount: 50000, monthlyPremium: 32.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 27, coverageAmount: 100000, monthlyPremium: 56.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 27, coverageAmount: 150000, monthlyPremium: 80.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 27, coverageAmount: 200000, monthlyPremium: 105.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 27, coverageAmount: 250000, monthlyPremium: 129.25 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 28, coverageAmount: 50000, monthlyPremium: 33.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 28, coverageAmount: 100000, monthlyPremium: 57.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 28, coverageAmount: 150000, monthlyPremium: 82.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 28, coverageAmount: 200000, monthlyPremium: 107.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 28, coverageAmount: 250000, monthlyPremium: 132.00 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 29, coverageAmount: 50000, monthlyPremium: 33.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 29, coverageAmount: 100000, monthlyPremium: 59.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 29, coverageAmount: 150000, monthlyPremium: 84.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 29, coverageAmount: 200000, monthlyPremium: 109.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 29, coverageAmount: 250000, monthlyPremium: 134.75 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 30, coverageAmount: 50000, monthlyPremium: 34.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 30, coverageAmount: 100000, monthlyPremium: 60.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 30, coverageAmount: 150000, monthlyPremium: 86.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 30, coverageAmount: 200000, monthlyPremium: 111.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 30, coverageAmount: 250000, monthlyPremium: 137.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 31, coverageAmount: 50000, monthlyPremium: 35.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 31, coverageAmount: 100000, monthlyPremium: 61.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 31, coverageAmount: 150000, monthlyPremium: 87.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 31, coverageAmount: 200000, monthlyPremium: 114.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 31, coverageAmount: 250000, monthlyPremium: 140.25 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 32, coverageAmount: 50000, monthlyPremium: 36.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 32, coverageAmount: 100000, monthlyPremium: 62.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 32, coverageAmount: 150000, monthlyPremium: 89.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 32, coverageAmount: 200000, monthlyPremium: 116.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 32, coverageAmount: 250000, monthlyPremium: 143.00 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 33, coverageAmount: 50000, monthlyPremium: 36.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 33, coverageAmount: 100000, monthlyPremium: 64.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 33, coverageAmount: 150000, monthlyPremium: 91.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 33, coverageAmount: 200000, monthlyPremium: 118.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 33, coverageAmount: 250000, monthlyPremium: 145.75 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 34, coverageAmount: 50000, monthlyPremium: 37.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 34, coverageAmount: 100000, monthlyPremium: 65.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 34, coverageAmount: 150000, monthlyPremium: 93.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 34, coverageAmount: 200000, monthlyPremium: 120.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 34, coverageAmount: 250000, monthlyPremium: 148.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 35, coverageAmount: 50000, monthlyPremium: 38.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 35, coverageAmount: 100000, monthlyPremium: 66.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 35, coverageAmount: 150000, monthlyPremium: 94.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 35, coverageAmount: 200000, monthlyPremium: 123.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 35, coverageAmount: 250000, monthlyPremium: 151.25 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 36, coverageAmount: 50000, monthlyPremium: 39.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 36, coverageAmount: 100000, monthlyPremium: 67.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 36, coverageAmount: 150000, monthlyPremium: 96.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 36, coverageAmount: 200000, monthlyPremium: 125.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 36, coverageAmount: 250000, monthlyPremium: 154.00 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 37, coverageAmount: 50000, monthlyPremium: 39.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 37, coverageAmount: 100000, monthlyPremium: 69.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 37, coverageAmount: 150000, monthlyPremium: 98.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 37, coverageAmount: 200000, monthlyPremium: 127.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 37, coverageAmount: 250000, monthlyPremium: 156.75 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 38, coverageAmount: 50000, monthlyPremium: 40.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 38, coverageAmount: 100000, monthlyPremium: 70.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 38, coverageAmount: 150000, monthlyPremium: 100.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 38, coverageAmount: 200000, monthlyPremium: 129.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 38, coverageAmount: 250000, monthlyPremium: 159.50 },
+  
+  { gender: 'Male', healthTier: 'IUL', age: 39, coverageAmount: 50000, monthlyPremium: 41.25 },
+  { gender: 'Male', healthTier: 'IUL', age: 39, coverageAmount: 100000, monthlyPremium: 71.50 },
+  { gender: 'Male', healthTier: 'IUL', age: 39, coverageAmount: 150000, monthlyPremium: 101.75 },
+  { gender: 'Male', healthTier: 'IUL', age: 39, coverageAmount: 200000, monthlyPremium: 132.00 },
+  { gender: 'Male', healthTier: 'IUL', age: 39, coverageAmount: 250000, monthlyPremium: 162.25 },
+
+  // IUL (Indexed Universal Life) - Male (Ages 40+)
   { gender: 'Male', healthTier: 'IUL', age: 40, coverageAmount: 50000, monthlyPremium: 35.75 },
   { gender: 'Male', healthTier: 'IUL', age: 40, coverageAmount: 55000, monthlyPremium: 39.26 },
   { gender: 'Male', healthTier: 'IUL', age: 40, coverageAmount: 60000, monthlyPremium: 42.77 },
@@ -334,7 +467,140 @@ export const QUOTE_RATES: QuoteRate[] = [
   { gender: 'Male', healthTier: 'IUL', age: 41, coverageAmount: 245000, monthlyPremium: 164.24 },
   { gender: 'Male', healthTier: 'IUL', age: 41, coverageAmount: 250000, monthlyPremium: 167.99 },
 
-  // IUL - Female
+  // IUL - Female (Ages 18-39)
+  { gender: 'Female', healthTier: 'IUL', age: 18, coverageAmount: 50000, monthlyPremium: 20.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 18, coverageAmount: 100000, monthlyPremium: 35.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 18, coverageAmount: 150000, monthlyPremium: 50.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 18, coverageAmount: 200000, monthlyPremium: 66.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 18, coverageAmount: 250000, monthlyPremium: 81.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 19, coverageAmount: 50000, monthlyPremium: 20.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 19, coverageAmount: 100000, monthlyPremium: 36.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 19, coverageAmount: 150000, monthlyPremium: 51.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 19, coverageAmount: 200000, monthlyPremium: 67.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 19, coverageAmount: 250000, monthlyPremium: 82.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 20, coverageAmount: 50000, monthlyPremium: 21.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 20, coverageAmount: 100000, monthlyPremium: 37.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 20, coverageAmount: 150000, monthlyPremium: 52.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 20, coverageAmount: 200000, monthlyPremium: 68.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 20, coverageAmount: 250000, monthlyPremium: 84.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 21, coverageAmount: 50000, monthlyPremium: 21.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 21, coverageAmount: 100000, monthlyPremium: 37.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 21, coverageAmount: 150000, monthlyPremium: 53.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 21, coverageAmount: 200000, monthlyPremium: 69.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 21, coverageAmount: 250000, monthlyPremium: 85.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 22, coverageAmount: 50000, monthlyPremium: 22.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 22, coverageAmount: 100000, monthlyPremium: 38.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 22, coverageAmount: 150000, monthlyPremium: 54.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 22, coverageAmount: 200000, monthlyPremium: 71.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 22, coverageAmount: 250000, monthlyPremium: 87.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 23, coverageAmount: 50000, monthlyPremium: 22.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 23, coverageAmount: 100000, monthlyPremium: 39.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 23, coverageAmount: 150000, monthlyPremium: 55.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 23, coverageAmount: 200000, monthlyPremium: 72.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 23, coverageAmount: 250000, monthlyPremium: 88.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 24, coverageAmount: 50000, monthlyPremium: 23.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 24, coverageAmount: 100000, monthlyPremium: 40.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 24, coverageAmount: 150000, monthlyPremium: 56.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 24, coverageAmount: 200000, monthlyPremium: 73.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 24, coverageAmount: 250000, monthlyPremium: 90.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 25, coverageAmount: 50000, monthlyPremium: 23.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 25, coverageAmount: 100000, monthlyPremium: 40.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 25, coverageAmount: 150000, monthlyPremium: 57.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 25, coverageAmount: 200000, monthlyPremium: 74.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 25, coverageAmount: 250000, monthlyPremium: 91.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 26, coverageAmount: 50000, monthlyPremium: 24.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 26, coverageAmount: 100000, monthlyPremium: 41.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 26, coverageAmount: 150000, monthlyPremium: 58.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 26, coverageAmount: 200000, monthlyPremium: 76.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 26, coverageAmount: 250000, monthlyPremium: 93.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 27, coverageAmount: 50000, monthlyPremium: 24.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 27, coverageAmount: 100000, monthlyPremium: 42.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 27, coverageAmount: 150000, monthlyPremium: 59.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 27, coverageAmount: 200000, monthlyPremium: 77.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 27, coverageAmount: 250000, monthlyPremium: 94.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 28, coverageAmount: 50000, monthlyPremium: 25.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 28, coverageAmount: 100000, monthlyPremium: 43.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 28, coverageAmount: 150000, monthlyPremium: 60.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 28, coverageAmount: 200000, monthlyPremium: 78.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 28, coverageAmount: 250000, monthlyPremium: 96.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 29, coverageAmount: 50000, monthlyPremium: 25.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 29, coverageAmount: 100000, monthlyPremium: 43.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 29, coverageAmount: 150000, monthlyPremium: 61.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 29, coverageAmount: 200000, monthlyPremium: 79.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 29, coverageAmount: 250000, monthlyPremium: 97.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 30, coverageAmount: 50000, monthlyPremium: 26.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 30, coverageAmount: 100000, monthlyPremium: 44.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 30, coverageAmount: 150000, monthlyPremium: 62.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 30, coverageAmount: 200000, monthlyPremium: 81.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 30, coverageAmount: 250000, monthlyPremium: 99.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 31, coverageAmount: 50000, monthlyPremium: 26.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 31, coverageAmount: 100000, monthlyPremium: 45.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 31, coverageAmount: 150000, monthlyPremium: 63.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 31, coverageAmount: 200000, monthlyPremium: 82.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 31, coverageAmount: 250000, monthlyPremium: 100.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 32, coverageAmount: 50000, monthlyPremium: 27.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 32, coverageAmount: 100000, monthlyPremium: 46.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 32, coverageAmount: 150000, monthlyPremium: 64.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 32, coverageAmount: 200000, monthlyPremium: 83.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 32, coverageAmount: 250000, monthlyPremium: 102.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 33, coverageAmount: 50000, monthlyPremium: 27.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 33, coverageAmount: 100000, monthlyPremium: 46.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 33, coverageAmount: 150000, monthlyPremium: 65.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 33, coverageAmount: 200000, monthlyPremium: 84.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 33, coverageAmount: 250000, monthlyPremium: 103.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 34, coverageAmount: 50000, monthlyPremium: 28.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 34, coverageAmount: 100000, monthlyPremium: 47.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 34, coverageAmount: 150000, monthlyPremium: 66.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 34, coverageAmount: 200000, monthlyPremium: 86.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 34, coverageAmount: 250000, monthlyPremium: 105.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 35, coverageAmount: 50000, monthlyPremium: 28.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 35, coverageAmount: 100000, monthlyPremium: 48.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 35, coverageAmount: 150000, monthlyPremium: 67.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 35, coverageAmount: 200000, monthlyPremium: 87.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 35, coverageAmount: 250000, monthlyPremium: 106.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 36, coverageAmount: 50000, monthlyPremium: 29.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 36, coverageAmount: 100000, monthlyPremium: 49.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 36, coverageAmount: 150000, monthlyPremium: 68.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 36, coverageAmount: 200000, monthlyPremium: 88.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 36, coverageAmount: 250000, monthlyPremium: 108.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 37, coverageAmount: 50000, monthlyPremium: 29.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 37, coverageAmount: 100000, monthlyPremium: 49.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 37, coverageAmount: 150000, monthlyPremium: 69.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 37, coverageAmount: 200000, monthlyPremium: 89.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 37, coverageAmount: 250000, monthlyPremium: 109.75 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 38, coverageAmount: 50000, monthlyPremium: 30.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 38, coverageAmount: 100000, monthlyPremium: 50.50 },
+  { gender: 'Female', healthTier: 'IUL', age: 38, coverageAmount: 150000, monthlyPremium: 70.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 38, coverageAmount: 200000, monthlyPremium: 91.00 },
+  { gender: 'Female', healthTier: 'IUL', age: 38, coverageAmount: 250000, monthlyPremium: 111.25 },
+  
+  { gender: 'Female', healthTier: 'IUL', age: 39, coverageAmount: 50000, monthlyPremium: 30.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 39, coverageAmount: 100000, monthlyPremium: 51.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 39, coverageAmount: 150000, monthlyPremium: 71.75 },
+  { gender: 'Female', healthTier: 'IUL', age: 39, coverageAmount: 200000, monthlyPremium: 92.25 },
+  { gender: 'Female', healthTier: 'IUL', age: 39, coverageAmount: 250000, monthlyPremium: 112.75 },
+
+  // IUL - Female (Ages 40+)
   { gender: 'Female', healthTier: 'IUL', age: 40, coverageAmount: 50000, monthlyPremium: 28.52 },
   { gender: 'Female', healthTier: 'IUL', age: 40, coverageAmount: 55000, monthlyPremium: 31.31 },
   { gender: 'Female', healthTier: 'IUL', age: 40, coverageAmount: 60000, monthlyPremium: 34.1 },
@@ -1895,8 +2161,8 @@ export function calculatePremium(
   const normalizedGender = gender.toLowerCase() === 'male' ? 'Male' : 'Female'
   
   // Validate age range
-  if (age < 40 || age > 60) {
-    console.log(`❌ Age ${age} is outside valid range (40-60)`)
+  if (age < 18 || age > 80) {
+    console.log(`❌ Age ${age} is outside valid range (18-80)`)
     return null
   }
   

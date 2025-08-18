@@ -105,8 +105,6 @@ export const ContactInfo: React.FC = () => {
         required
       />
       
-
-      
       {/* Required Consent Checkboxes */}
       <div style={{ marginTop: '1.5rem' }}>
         <h3 style={{ fontSize: '1rem', marginBottom: '1rem', color: '#374151' }}>Required Consents</h3>

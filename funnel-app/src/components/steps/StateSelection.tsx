@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 import { FormField } from '../shared/FormField'
 
@@ -56,19 +56,7 @@ const states = [
 ]
 
 export const StateSelection: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
-  
-
-
-  // Auto-continue when state is selected and auto-advance is enabled
-  useEffect(() => {
-    if (formData.preQualification?.state && autoAdvanceEnabled) {
-      const timer = setTimeout(() => {
-        goToNextStep()
-      }, 500) // Small delay for better UX
-      return () => clearTimeout(timer)
-    }
-  }, [formData.preQualification?.state, autoAdvanceEnabled, goToNextStep])
+  const { formData, updateFormData } = useFunnelStore()
   
   return (
     <div>
@@ -87,7 +75,6 @@ export const StateSelection: React.FC = () => {
               state: value
             }
           })
-          setAutoAdvanceEnabled(true)
         }}
         options={states}
         required

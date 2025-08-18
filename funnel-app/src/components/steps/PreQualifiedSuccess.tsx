@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
+import { getStepConfig } from '../../store/stepConfig'
 
 export const PreQualifiedSuccess: React.FC = () => {
   const { goToNextStep } = useFunnelStore()
+  const stepConfig = getStepConfig(14) // PreQualifiedSuccess is step 14
 
-  const handleCompleteApplication = () => {
-    console.log('🔍 PreQualifiedSuccess - handleCompleteApplication called')
-    console.log('🔍 Current step before goToNextStep:', useFunnelStore.getState().currentStep)
-    console.log('🔍 Modal open before goToNextStep:', useFunnelStore.getState().isModalOpen)
+  useEffect(() => {
+    // Use the configured delay from stepConfig, default to 5 seconds
+    const delay = stepConfig?.autoAdvanceDelay || 5000
     
-    // Move to the next step (IUL Quote Modal)
-    goToNextStep()
+    console.log(`🎯 PreQualifiedSuccess: Auto-advancing in ${delay}ms`)
     
-    // Check state after goToNextStep
-    setTimeout(() => {
-      console.log('🔍 Current step after goToNextStep:', useFunnelStore.getState().currentStep)
-      console.log('🔍 Modal open after goToNextStep:', useFunnelStore.getState().isModalOpen)
-    }, 100)
-  }
+    const timer = setTimeout(() => {
+      console.log('🎯 PreQualifiedSuccess: Auto-advancing to next step')
+      goToNextStep()
+    }, delay)
+
+    return () => {
+      console.log('🎯 PreQualifiedSuccess: Cleaning up timer')
+      clearTimeout(timer)
+    }
+  }, [goToNextStep])
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -65,26 +69,18 @@ export const PreQualifiedSuccess: React.FC = () => {
         </ul>
       </div>
 
-      {/* CTA Button */}
-      <button
-        onClick={handleCompleteApplication}
-        style={{
-          background: '#2563eb',
-          color: 'white',
-          padding: '0.75rem 2rem',
-          borderRadius: '0.5rem',
-          fontSize: '1.125rem',
-          fontWeight: '600',
-          border: 'none',
-          cursor: 'pointer',
-          marginBottom: '2rem',
-          transition: 'background-color 0.3s'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.background = '#1d4ed8'}
-        onMouseLeave={(e) => e.currentTarget.style.background = '#2563eb'}
-      >
-        See Personalized Quote
-      </button>
+      {/* Auto-advance indicator */}
+      <div style={{ 
+        background: '#eff6ff', 
+        borderLeft: '4px solid #3b82f6', 
+        padding: '1rem', 
+        borderRadius: '0.5rem',
+        marginBottom: '1rem'
+      }}>
+        <p style={{ color: '#1e40af', fontSize: '0.875rem', margin: 0 }}>
+          <strong>Loading your personalized quote...</strong>
+        </p>
+      </div>
 
       {/* Help Section */}
       <div style={{ background: '#eff6ff', borderLeft: '4px solid #3b82f6', padding: '1rem', borderRadius: '0.5rem' }}>

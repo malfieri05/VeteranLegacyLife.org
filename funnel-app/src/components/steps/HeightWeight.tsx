@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 
 export const HeightWeight: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
+  const { formData, updateFormData } = useFunnelStore()
   
   // State for searchable dropdowns
   const [heightSearch, setHeightSearch] = useState('')
@@ -13,16 +13,6 @@ export const HeightWeight: React.FC = () => {
   // Refs for dropdown containers
   const heightDropdownRef = useRef<HTMLDivElement>(null)
   const weightDropdownRef = useRef<HTMLDivElement>(null)
-
-  // Auto-continue when both height and weight are filled (only if auto-advance is enabled)
-  useEffect(() => {
-    if (formData.medicalAnswers?.height && formData.medicalAnswers?.weight && autoAdvanceEnabled) {
-      const timer = setTimeout(() => {
-        goToNextStep()
-      }, 500) // Small delay for better UX
-      return () => clearTimeout(timer)
-    }
-  }, [formData.medicalAnswers?.height, formData.medicalAnswers?.weight, autoAdvanceEnabled, goToNextStep])
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -48,8 +38,6 @@ export const HeightWeight: React.FC = () => {
     })
     setHeightSearch('')
     setShowHeightDropdown(false)
-    // Re-enable auto-advance when user makes a selection
-    setAutoAdvanceEnabled(true)
   }
 
   const handleWeightChange = (value: string) => {
@@ -61,8 +49,6 @@ export const HeightWeight: React.FC = () => {
     })
     setWeightSearch('')
     setShowWeightDropdown(false)
-    // Re-enable auto-advance when user makes a selection
-    setAutoAdvanceEnabled(true)
   }
 
   // Height options from script.js
@@ -159,7 +145,7 @@ export const HeightWeight: React.FC = () => {
                 border: '1px solid #d1d5db',
                 borderRadius: '0.375rem',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                maxHeight: '200px',
+                maxHeight: '400px', // Increased to prevent cutoff
                 overflowY: 'auto',
                 zIndex: 1000
               }}>
@@ -168,11 +154,11 @@ export const HeightWeight: React.FC = () => {
                     <div
                       key={option.value}
                       onClick={() => handleHeightChange(option.value)}
-                                             style={{
-                         padding: '0.75rem',
-                         cursor: 'pointer',
-                         borderBottom: '1px solid #f3f4f6'
-                       }}
+                      style={{
+                        padding: '0.75rem',
+                        cursor: 'pointer',
+                        borderBottom: '1px solid #f3f4f6'
+                      }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = '#f9fafb'
                       }}
@@ -237,7 +223,7 @@ export const HeightWeight: React.FC = () => {
                 border: '1px solid #d1d5db',
                 borderRadius: '0.375rem',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                maxHeight: '200px',
+                maxHeight: '400px', // Increased to prevent cutoff
                 overflowY: 'auto',
                 zIndex: 1000
               }}>
