@@ -10,6 +10,7 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true
   },
+  base: '/',
   define: {
     'process.env.NODE_ENV': '"production"'
   }
