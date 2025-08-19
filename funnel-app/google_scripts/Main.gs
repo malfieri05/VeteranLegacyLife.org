@@ -627,7 +627,11 @@ function testNewEntriesAndEmails() {
         city: 'Test City',
         state: 'CA',
         zipCode: '90210',
-        beneficiaries: [{ name: 'Jane Doe', relationship: 'Spouse', percentage: 100 }],
+        beneficiaries: [
+          { name: 'Jane Doe', relationship: 'Spouse', percentage: 60 },
+          { name: 'John Doe Jr.', relationship: 'Child', percentage: 25 },
+          { name: 'Sarah Doe', relationship: 'Child', percentage: 15 }
+        ],
         vaNumber: '123456789',
         serviceConnected: 'No',
         ssn: '123-45-6789',
@@ -683,7 +687,10 @@ function testNewEntriesAndEmails() {
         city: '',
         state: '',
         zipCode: '',
-        beneficiaries: [{ name: '', relationship: '', percentage: 100 }],
+        beneficiaries: [
+          { name: 'Mike Smith', relationship: 'Spouse', percentage: 70 },
+          { name: 'Emma Smith', relationship: 'Child', percentage: 30 }
+        ],
         vaNumber: '',
         serviceConnected: '',
         ssn: '',
@@ -739,7 +746,11 @@ function testNewEntriesAndEmails() {
         city: 'Partial City',
         state: 'FL',
         zipCode: '33101',
-        beneficiaries: [{ name: 'Child Johnson', relationship: 'Child', percentage: 100 }],
+        beneficiaries: [
+          { name: 'Child Johnson', relationship: 'Child', percentage: 50 },
+          { name: 'Spouse Johnson', relationship: 'Spouse', percentage: 30 },
+          { name: 'Parent Johnson', relationship: 'Parent', percentage: 20 }
+        ],
         vaNumber: '987654321',
         serviceConnected: 'Yes',
         ssn: '987-65-4321',
