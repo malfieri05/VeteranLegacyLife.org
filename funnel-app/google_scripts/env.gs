@@ -48,9 +48,43 @@ var CONFIG = {
   }
 };
 
+// Global function to access CONFIG from any file
+function getGlobalConfig() {
+  return CONFIG;
+}
+
 // Helper functions to access configuration
 function getEmailConfig() {
-  return CONFIG.EMAIL;
+  try {
+    // Try direct access first
+    if (typeof CONFIG !== 'undefined' && CONFIG.EMAIL) {
+      return CONFIG.EMAIL;
+    }
+    
+    // Fallback to global function
+    const globalConfig = getGlobalConfig();
+    if (globalConfig && globalConfig.EMAIL) {
+      return globalConfig.EMAIL;
+    }
+    
+    // Last resort - return hardcoded values
+    Logger.log('⚠️ CONFIG not accessible, using fallback email config');
+    return {
+      ADMIN: 'michaelalfieri.ffl@gmail.com',
+      FROM: 'michaelalfieri.ffl@gmail.com',
+      TO: 'michaelalfieri.ffl@gmail.com',
+      REPLY_TO: 'michaelalfieri.ffl@gmail.com'
+    };
+  } catch (error) {
+    Logger.log('❌ Error in getEmailConfig:', error.toString());
+    // Return fallback values
+    return {
+      ADMIN: 'michaelalfieri.ffl@gmail.com',
+      FROM: 'michaelalfieri.ffl@gmail.com',
+      TO: 'michaelalfieri.ffl@gmail.com',
+      REPLY_TO: 'michaelalfieri.ffl@gmail.com'
+    };
+  }
 }
 
 function getGoogleSheetConfig() {
