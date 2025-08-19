@@ -44,8 +44,6 @@ const initialState: FormData = {
     city: '',
     state: '',
     zipCode: '',
-    beneficiaryName: '',
-    beneficiaryRelationship: '',
     beneficiaries: [{ name: '', relationship: '', percentage: 100 }],
     vaClinicName: '',
     primaryDoctor: '',

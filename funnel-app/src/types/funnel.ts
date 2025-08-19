@@ -38,8 +38,6 @@ export interface ApplicationData {
   city: string
   state: string
   zipCode: string
-  beneficiaryName: string
-  beneficiaryRelationship: string
   beneficiaries: Beneficiary[]
   vaClinicName: string
   primaryDoctor: string
