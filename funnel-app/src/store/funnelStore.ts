@@ -1,104 +1,9 @@
 import { create } from 'zustand'
 import { getApiUrl } from '../config/globalConfig'
-
-// Types
-export interface ContactInfo {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  dateOfBirth: string
-  transactionalConsent: boolean
-  marketingConsent: boolean
-}
-
-export interface PreQualification {
-  state: string
-  militaryStatus: string
-  branchOfService: string
-  maritalStatus: string
-  coverageAmount: string
-}
-
-export interface MedicalAnswers {
-  tobaccoUse: string
-  medicalConditions: string
-  height: string
-  weight: string
-  hospitalCare: string
-  diabetesMedication: string
-  age: string
-}
-
-export interface Beneficiary {
-  name: string
-  relationship: string
-  percentage: number
-}
-
-export interface ApplicationData {
-  streetAddress: string
-  city: string
-  state: string
-  zipCode: string
-  beneficiaryName: string
-  beneficiaryRelationship: string
-  beneficiaries: Beneficiary[]
-  vaClinicName: string
-  primaryDoctor: string
-  ssn: string
-  driversLicense: string
-  licenseState: string
-  bankName: string
-  routingNumber: string
-  accountNumber: string
-}
-
-export interface QuoteData {
-  policyDate: string
-  coverage: string
-  premium: string
-  age: string
-  gender: string
-  type: string
-}
-
-export interface TrackingData {
-  currentStep: string
-  stepName: string
-}
-
-export interface FormData {
-  contactInfo: ContactInfo
-  preQualification: PreQualification
-  medicalAnswers: MedicalAnswers
-  applicationData: ApplicationData
-  quoteData: QuoteData
-  trackingData: TrackingData
-}
-
-interface FunnelStore {
-  currentStep: number
-  isModalOpen: boolean
-  isLoading: boolean
-  autoAdvanceEnabled: boolean
-  sessionId: string
-  formData: FormData
-  
-  setCurrentStep: (step: number) => void
-  openModal: () => void
-  closeModal: () => void
-  setLoading: (loading: boolean) => void
-  setAutoAdvanceEnabled: (enabled: boolean) => void
-  updateFormData: (data: Partial<FormData>) => void
-  submitPartial: (currentStep: number, stepName: string) => Promise<void>
-  submitLeadPartial: () => Promise<void>
-  submitLead: () => Promise<void>
-  submitApplication: () => Promise<void>
-  reset: () => void
-  goToNextStep: () => void
-  goToPreviousStep: () => void
-}
+import { 
+  FormData
+} from '../types/funnel'
+import { getStepConfig, getStepName, getRadioButtonSteps } from './stepConfig'
 
 const initialState: FormData = {
   contactInfo: {
@@ -119,7 +24,7 @@ const initialState: FormData = {
   },
   medicalAnswers: {
     tobaccoUse: '',
-    medicalConditions: '',
+    medicalConditions: [],
     height: '',
     weight: '',
     hospitalCare: '',
@@ -131,8 +36,6 @@ const initialState: FormData = {
     city: '',
     state: '',
     zipCode: '',
-    beneficiaryName: '',
-    beneficiaryRelationship: '',
     beneficiaries: [{ name: '', relationship: '', percentage: 100 }],
     vaClinicName: '',
     primaryDoctor: '',
@@ -161,36 +64,118 @@ const generateSessionId = () => {
   return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 };
 
+export interface FunnelState {
+  currentStep: number
+  isModalOpen: boolean
+  isLoading: boolean
+  sessionId: string
+  formData: FormData
+  visitedSteps: Set<number>
+  isExitModalOpen: boolean // New property for exit modal
+  isManualNavigation: boolean // Flag to prevent auto-advance during manual navigation
+}
+
+export interface FunnelActions {
+  setCurrentStep: (step: number) => void
+  openModal: () => void
+  closeModal: () => void
+  setLoading: (loading: boolean) => void
+  goToNextStep: () => void
+  goToPreviousStep: () => void
+  updateFormData: (data: Partial<FormData>) => void
+  submitPartial: (step: number, stepName: string) => void
+  submitLead: () => void
+  submitApplication: () => void
+  resetFunnel: () => void
+  showExitModal: () => void // New action
+  hideExitModal: () => void // New action
+  setManualNavigation: (isManual: boolean) => void // New action to control manual navigation flag
+}
+
+export type FunnelStore = FunnelState & FunnelActions
+
 export const useFunnelStore = create<FunnelStore>((set, get) => ({
   currentStep: 1,
   isModalOpen: false,
   isLoading: false,
-  autoAdvanceEnabled: true,
   sessionId: '',
   formData: initialState,
+  visitedSteps: new Set<number>(), // Track which steps have been visited
+  isExitModalOpen: false, // Initialize new state
+  isManualNavigation: false, // Initialize manual navigation flag
 
   setCurrentStep: (step) => set({ currentStep: step }),
+  
   openModal: () => {
     const newSessionId = generateSessionId();
     console.log('🎯 OPENING MODAL - Generated new session ID:', newSessionId);
     set({ 
       isModalOpen: true,
-      sessionId: newSessionId
+      sessionId: newSessionId,
+      isExitModalOpen: false // reset exit modal on open
     });
   },
-  closeModal: () => set({ isModalOpen: false }),
-  setLoading: (loading) => set({ isLoading: loading }),
-  setAutoAdvanceEnabled: (enabled) => set({ autoAdvanceEnabled: enabled }),
   
-  updateFormData: (data) => set((state) => ({
-    formData: { ...state.formData, ...data }
-  })),
+  closeModal: () => set({ isModalOpen: false, isExitModalOpen: false }),
+  
+  setLoading: (loading: boolean) => set({ isLoading: loading }),
+  
+  updateFormData: (data) => {
+    const { currentStep, visitedSteps, formData, isManualNavigation } = get()
+    const radioButtonSteps = getRadioButtonSteps()
+    
+    // Check if this is a radio button step
+    if (radioButtonSteps.includes(currentStep)) {
+      const hasVisited = visitedSteps.has(currentStep)
+      
+      // Determine if this is a new answer or a change
+      let isNewAnswer = false
+      let isAnswerChange = false
+      
+      if (!hasVisited) {
+        // First time visiting this step
+        isNewAnswer = true
+      } else {
+        // Check if the answer has changed
+        const currentValue = getCurrentStepValue(currentStep, formData)
+        const newValue = getCurrentStepValue(currentStep, { ...formData, ...data })
+        isAnswerChange = currentValue !== newValue && newValue !== ''
+      }
+      
+      // Auto-advance only for new answers or answer changes, and NOT during manual navigation
+      if ((isNewAnswer || isAnswerChange) && !isManualNavigation) {
+        const stepConfig = getStepConfig(currentStep)
+        if (stepConfig?.requiresValidation) {
+          // Check if the step is now valid
+          const isValid = checkStepValidation(currentStep, { ...formData, ...data })
+          if (isValid) {
+            // Auto-advance after a short delay
+            setTimeout(() => {
+              console.log(`🎯 Auto-advancing from radio button step ${currentStep} (${isNewAnswer ? 'new answer' : 'answer change'})`)
+              get().goToNextStep()
+            }, 500) // 500ms delay for better UX
+          }
+        }
+      }
+      
+      // Update the form data and mark as visited AFTER auto-advance check
+      set((state) => ({
+        formData: { ...state.formData, ...data },
+        visitedSteps: new Set([...visitedSteps, currentStep])
+      }))
+    } else {
+      // For non-radio button steps, just update the data normally
+      set((state) => ({
+        formData: { ...state.formData, ...data },
+        visitedSteps: new Set([...visitedSteps, currentStep])
+      }))
+    }
+  },
 
   submitPartial: async (currentStep: number, stepName: string) => {
     const { formData, sessionId } = get()
     
     console.log(`🎯 SUBMIT PARTIAL - Step ${currentStep} (${stepName}) - Session ID: ${sessionId}`)
-    console.log(`🎯 Current store state:`, { currentStep: get().currentStep, sessionId: get().sessionId, isModalOpen: get().isModalOpen })
     
     // Check if session ID is empty and regenerate if needed
     if (!sessionId) {
@@ -200,23 +185,42 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       console.log('🎯 Generated new session ID:', newSessionId);
     }
     
+    // Format data to match the nice test data format
+    const formatCurrency = (amount: string | number) => {
+      if (!amount) return ''
+      const num = typeof amount === 'string' ? parseFloat(amount.replace(/[$,]/g, '')) : amount
+      return `$${num.toLocaleString()}`
+    }
+    
+    const formatDate = (date: string) => {
+      if (!date) return ''
+      // Convert YYYY-MM-DD to MM/DD/YYYY for better readability
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    }
+    
     try {
       const payload = {
         sessionId,
         formType: 'Partial',
         contactInfo: formData.contactInfo,
-        preQualification: formData.preQualification,
+        preQualification: {
+          ...formData.preQualification,
+          coverageAmount: formatCurrency(formData.preQualification.coverageAmount)
+        },
         medicalAnswers: formData.medicalAnswers,
         applicationData: formData.applicationData,
-        quoteData: formData.quoteData,
+        quoteData: {
+          ...formData.quoteData,
+          coverage: formatCurrency(formData.quoteData.coverage),
+          premium: formatCurrency(formData.quoteData.premium),
+          policyDate: formatDate(formData.quoteData.policyDate)
+        },
         trackingData: {
           currentStep: currentStep.toString(),
           stepName: stepName
         }
       }
-      
-      console.log(`🔍 submitPartial - Step ${currentStep} (${stepName})`)
-      console.log(`🔍 submitPartial - Quote data:`, formData.quoteData)
       
       const params = new URLSearchParams();
       for (const [key, value] of Object.entries(payload)) {
@@ -239,20 +243,17 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Parse response - Google Apps Script might return different formats
       const responseText = await response.text();
       console.log('🔍 Raw response:', responseText);
       
       let result;
       if (responseText.startsWith('{') || responseText.startsWith('[')) {
-        // JSON response
         try {
           result = JSON.parse(responseText);
         } catch (e) {
           result = { success: false, error: 'Invalid JSON response' };
         }
       } else if (responseText.includes('=')) {
-        // URL-encoded response
         const params = new URLSearchParams(responseText);
         result = {
           success: params.get('success') === 'true',
@@ -260,7 +261,6 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
           message: params.get('message') || null
         };
       } else {
-        // Plain text response
         result = { success: true, message: responseText };
       }
       console.log('Partial save successful:', result)
@@ -308,20 +308,17 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         throw new Error('Failed to submit lead partial data')
       }
       
-      // Parse response - Google Apps Script might return different formats
       const responseText = await response.text();
       console.log('🔍 Raw response:', responseText);
       
       let result;
       if (responseText.startsWith('{') || responseText.startsWith('[')) {
-        // JSON response
         try {
           result = JSON.parse(responseText);
         } catch (e) {
           result = { success: false, error: 'Invalid JSON response' };
         }
       } else if (responseText.includes('=')) {
-        // URL-encoded response
         const params = new URLSearchParams(responseText);
         result = {
           success: params.get('success') === 'true',
@@ -329,7 +326,6 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
           message: params.get('message') || null
         };
       } else {
-        // Plain text response
         result = { success: true, message: responseText };
       }
       
@@ -378,20 +374,17 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         throw new Error('Failed to submit lead data')
       }
       
-      // Parse response - Google Apps Script might return different formats
       const responseText = await response.text();
       console.log('🔍 Raw response:', responseText);
       
       let result;
       if (responseText.startsWith('{') || responseText.startsWith('[')) {
-        // JSON response
         try {
           result = JSON.parse(responseText);
         } catch (e) {
           result = { success: false, error: 'Invalid JSON response' };
         }
       } else if (responseText.includes('=')) {
-        // URL-encoded response
         const params = new URLSearchParams(responseText);
         result = {
           success: params.get('success') === 'true',
@@ -399,7 +392,6 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
           message: params.get('message') || null
         };
       } else {
-        // Plain text response
         result = { success: true, message: responseText };
       }
       
@@ -413,15 +405,41 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   submitApplication: async () => {
     const { formData, sessionId } = get()
     
+    console.log('🎯 SUBMIT APPLICATION - Starting application submission')
+    console.log('🎯 Session ID:', sessionId)
+    console.log('🎯 Form data:', formData)
+    
+    // Format data to match the nice test data format
+    const formatCurrency = (amount: string | number) => {
+      if (!amount) return ''
+      const num = typeof amount === 'string' ? parseFloat(amount.replace(/[$,]/g, '')) : amount
+      return `$${num.toLocaleString()}`
+    }
+    
+    const formatDate = (date: string) => {
+      if (!date) return ''
+      // Convert YYYY-MM-DD to MM/DD/YYYY for better readability
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    }
+    
     try {
       const payload = {
         sessionId,
         formType: 'Application',
         contactInfo: formData.contactInfo,
-        preQualification: formData.preQualification,
+        preQualification: {
+          ...formData.preQualification,
+          coverageAmount: formatCurrency(formData.preQualification.coverageAmount)
+        },
         medicalAnswers: formData.medicalAnswers,
         applicationData: formData.applicationData,
-        quoteData: formData.quoteData,
+        quoteData: {
+          ...formData.quoteData,
+          coverage: formatCurrency(formData.quoteData.coverage),
+          premium: formatCurrency(formData.quoteData.premium),
+          policyDate: formatDate(formData.quoteData.policyDate)
+        },
         trackingData: {
           currentStep: '18',
           stepName: 'Application Complete'
@@ -449,20 +467,17 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         throw new Error('Failed to submit application data')
       }
       
-      // Parse response - Google Apps Script might return different formats
       const responseText = await response.text();
       console.log('🔍 Raw response:', responseText);
       
       let result;
       if (responseText.startsWith('{') || responseText.startsWith('[')) {
-        // JSON response
         try {
           result = JSON.parse(responseText);
         } catch (e) {
           result = { success: false, error: 'Invalid JSON response' };
         }
       } else if (responseText.includes('=')) {
-        // URL-encoded response
         const params = new URLSearchParams(responseText);
         result = {
           success: params.get('success') === 'true',
@@ -470,7 +485,6 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
           message: params.get('message') || null
         };
       } else {
-        // Plain text response
         result = { success: true, message: responseText };
       }
       
@@ -482,107 +496,135 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   },
 
   goToNextStep: () => {
-    const { currentStep, sessionId, isModalOpen } = get()
+    const { currentStep, sessionId } = get()
     const nextStep = currentStep + 1
+    const currentStepConfig = getStepConfig(currentStep)
+    const nextStepConfig = getStepConfig(nextStep)
     
-    console.log(`🎯 GO TO NEXT STEP - From step ${currentStep} to ${nextStep} - Session ID: ${sessionId}`)
-    console.log(`🎯 Modal open before step change: ${isModalOpen}`)
+    console.log(`🎯 GO TO NEXT STEP - From step ${currentStep} (${getStepName(currentStep)}) to ${nextStep} (${getStepName(nextStep)}) - Session ID: ${sessionId}`)
     
-    // Submit partial data after every step (except the last step)
-    if (currentStep < 19) {
-      const stepNames = [
-        'State Selection',
-        'Military Status',
-        'Branch of Service', 
-        'Marital Status',
-        'Coverage Amount',
-        'Birthday',
-        'Contact Information',
-        'Tobacco Use',
-        'Medical Conditions',
-        'Height & Weight',
-        'Hospital Care',
-        'Diabetes Medication',
-        'Loading Screen',
-        'Pre-Qualified Success',
-        'IUL Quote Modal',
-        'Options Modal',
-        'Application Step 1',
-        'Application Step 2',
-        'Final Success'
-      ]
+    // Note: manual navigation flag is controlled by UI when user clicks Continue
+    
+    // Handle step-specific actions based on configuration
+    if (currentStepConfig) {
+      // Submit partial data if configured
+      if (currentStepConfig.submitPartial) {
+        get().submitPartial(currentStep, currentStepConfig.name)
+      }
       
-      get().submitPartial(currentStep, stepNames[currentStep - 1])
+      // Submit lead data if configured
+      if (currentStepConfig.submitLead) {
+        get().submitLead()
+      }
+      
+      // Submit lead partial data if configured
+      if (currentStepConfig.submitLeadPartial) {
+        get().submitLead()
+      }
+      
+      // Submit application data if configured
+      if (currentStepConfig.submitApplication) {
+        get().submitApplication()
+      }
     }
     
-    // Submit lead data after step 7 (contact info)
-    if (currentStep === 7) {
-      get().submitLead()
-    }
-    
-    // After step 12 (Diabetes Medication), go to loading step (13) and submit lead partial
-    if (currentStep === 12) {
-      get().submitLeadPartial()
-      set({ currentStep: 13 })
-      return
-    }
-    
-    // After step 14 (PreQualifiedSuccess), ensure we go to step 15 (IULQuoteModal)
-    if (currentStep === 14) {
-      console.log('🎯 Advancing from PreQualifiedSuccess (step 14) to IULQuoteModal (step 15)')
-      set({ currentStep: 15 })
-      return
-    }
-    
-    // After step 15 (IULQuoteModal), go to step 16 (OptionsModal)
-    if (currentStep === 15) {
-      console.log('🎯 Advancing from IULQuoteModal (step 15) to OptionsModal (step 16)')
-      set({ currentStep: 16 })
-      return
-    }
-    
-    // Submit application data after step 19 (final success)
-    if (currentStep === 19) {
-      get().submitApplication()
-    }
-    
+    // Move to next step
     set({ currentStep: nextStep })
-    console.log(`🎯 Step changed to ${nextStep}, Modal open after step change: ${get().isModalOpen}`)
+    console.log(`🎯 Step changed to ${nextStep} (${getStepName(nextStep)})`)
+    
+    // UI will reset manual navigation flag after navigation
   },
   
   goToPreviousStep: () => {
     const { currentStep } = get()
     if (currentStep > 1) {
-      set({ autoAdvanceEnabled: false })
-      
-      if (currentStep === 14) {
-        set({ currentStep: 12 })
-      } else if (currentStep === 13) {
-        set({ currentStep: 12 })
-      } else if (currentStep === 15) {
-        set({ currentStep: 14 })
-      } else if (currentStep === 16) {
-        set({ currentStep: 15 })
-      } else if (currentStep === 17) {
-        set({ currentStep: 16 })
-      } else if (currentStep === 18) {
-        set({ currentStep: 17 })
-      } else if (currentStep === 19) {
-        set({ currentStep: 18 })
-      } else {
-        set({ currentStep: currentStep - 1 })
-      }
+      const previousStep = currentStep - 1
+      set({ currentStep: previousStep })
+      console.log(`🎯 Step changed to ${previousStep} (${getStepName(previousStep)})`)
     }
   },
   
-  reset: () => {
-    console.log('🎯 RESET CALLED - Clearing session ID');
+  resetFunnel: () => {
+    console.log('🎯 RESET FUNNEL CALLED - Clearing session ID');
     set({
       currentStep: 1,
       isModalOpen: false,
       isLoading: false,
-      sessionId: '', // Clear session ID on reset
-      formData: initialState
+      sessionId: '',
+      formData: initialState,
+      visitedSteps: new Set<number>(),
+      isExitModalOpen: false, // Reset new state
+      isManualNavigation: false // Reset manual navigation flag
     });
+  },
+
+  showExitModal: () => set({ isExitModalOpen: true }),
+  hideExitModal: () => set({ isExitModalOpen: false }),
+  setManualNavigation: (isManual: boolean) => set({ isManualNavigation: isManual })
+}))
+
+// Helper function to check step validation
+const checkStepValidation = (step: number, formData: FormData): boolean => {
+  switch (step) {
+    case 1:
+      return !!formData.preQualification?.state
+    case 2:
+      return !!formData.preQualification?.militaryStatus
+    case 3:
+      return !!formData.preQualification?.branchOfService
+    case 4:
+      return !!formData.preQualification?.maritalStatus
+    case 5:
+      return !!formData.preQualification?.coverageAmount
+    case 6:
+      return !!formData.contactInfo?.dateOfBirth
+    case 7:
+      return !!(formData.contactInfo?.firstName && formData.contactInfo?.lastName && formData.contactInfo?.email && formData.contactInfo?.phone)
+    case 8:
+      return !!formData.medicalAnswers?.tobaccoUse
+    case 9:
+      return Array.isArray(formData.medicalAnswers?.medicalConditions) && formData.medicalAnswers.medicalConditions.length > 0
+    case 10:
+      return !!formData.medicalAnswers?.height && !!formData.medicalAnswers?.weight
+    case 11:
+      return !!formData.medicalAnswers?.hospitalCare
+    case 12:
+      return !!formData.medicalAnswers?.diabetesMedication
+    default:
+      return true
   }
-})) 
+}
+
+// Helper function to get current step value
+const getCurrentStepValue = (step: number, formData: FormData): string => {
+  switch (step) {
+    case 1:
+      return formData.preQualification?.state || ''
+    case 2:
+      return formData.preQualification?.militaryStatus || ''
+    case 3:
+      return formData.preQualification?.branchOfService || ''
+    case 4:
+      return formData.preQualification?.maritalStatus || ''
+    case 5:
+      return formData.preQualification?.coverageAmount || ''
+    case 6:
+      return formData.contactInfo?.dateOfBirth || ''
+    case 7:
+      return formData.contactInfo?.firstName || ''
+    case 8:
+      return formData.medicalAnswers?.tobaccoUse || ''
+    case 9:
+      return Array.isArray(formData.medicalAnswers?.medicalConditions) ? formData.medicalAnswers.medicalConditions.join(', ') : ''
+    case 10:
+      return formData.medicalAnswers?.height && formData.medicalAnswers?.weight 
+        ? `${formData.medicalAnswers.height}-${formData.medicalAnswers.weight}` 
+        : ''
+    case 11:
+      return formData.medicalAnswers?.hospitalCare || ''
+    case 12:
+      return formData.medicalAnswers?.diabetesMedication || ''
+    default:
+      return ''
+  }
+} 

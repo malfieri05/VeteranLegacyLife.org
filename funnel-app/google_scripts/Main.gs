@@ -14,14 +14,13 @@ const SHEET_COLUMNS = {
   MILITARY_STATUS: 13, BRANCH: 14, MARITAL_STATUS: 15, COVERAGE_AMOUNT: 16,
   TOBACCO_USE: 17, MEDICAL_CONDITIONS: 18, HEIGHT: 19, WEIGHT: 20,
   HOSPITAL_CARE: 21, DIABETES_MEDICATION: 22, STREET_ADDRESS: 23,
-  CITY: 24, APPLICATION_STATE: 25, ZIP_CODE: 26, BENEFICIARY_NAME: 27,
-  BENEFICIARY_RELATIONSHIP: 28, VA_NUMBER: 29, SERVICE_CONNECTED: 30,
-  SSN: 31, DRIVERS_LICENSE: 32, BANK_NAME: 33, ROUTING_NUMBER: 34,
-  ACCOUNT_NUMBER: 35, POLICY_DATE: 36, QUOTE_COVERAGE: 37, QUOTE_PREMIUM: 38,
-  QUOTE_AGE: 39, QUOTE_GENDER: 40, QUOTE_TYPE: 41, CURRENT_STEP: 42,
-  STEP_NAME: 43, FORM_TYPE: 44, USER_AGENT: 45, REFERRER: 46,
-  UTM_SOURCE: 47, UTM_MEDIUM: 48, UTM_CAMPAIGN: 49, PARTIAL_EMAIL_SENT: 50,
-  COMPLETED_EMAIL_SENT: 51
+  CITY: 24, APPLICATION_STATE: 25, ZIP_CODE: 26, BENEFICIARIES: 27,
+  VA_NUMBER: 28, SERVICE_CONNECTED: 29, SSN: 30, DRIVERS_LICENSE: 31, 
+  BANK_NAME: 32, ROUTING_NUMBER: 33, ACCOUNT_NUMBER: 34, POLICY_DATE: 35, 
+  QUOTE_COVERAGE: 36, QUOTE_PREMIUM: 37, QUOTE_AGE: 38, QUOTE_GENDER: 39, 
+  QUOTE_TYPE: 40, CURRENT_STEP: 41, STEP_NAME: 42, FORM_TYPE: 43, 
+  USER_AGENT: 44, REFERRER: 45, UTM_SOURCE: 46, UTM_MEDIUM: 47, 
+  UTM_CAMPAIGN: 48, PARTIAL_EMAIL_SENT: 49, COMPLETED_EMAIL_SENT: 50
 };
 
 function doPost(e) {
@@ -153,7 +152,7 @@ function handleApplicationSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(50).fill('');
     
     // Contact Info (columns 5-11)
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -184,8 +183,13 @@ function handleApplicationSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - store all beneficiaries in one column
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
+    
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -245,7 +249,9 @@ function handleApplicationSubmission(data, sessionId) {
     // Send application completion email
     try {
       Logger.log(`[${sessionId}] Sending application completion email`);
-      sendApplicationCompleteEmail(data);
+      Logger.log(`[${sessionId}] Email config: ${JSON.stringify(getEmailConfig())}`);
+      const emailResult = sendApplicationCompleteEmail(data);
+      Logger.log(`[${sessionId}] Email send result: ${emailResult}`);
       rowData[SHEET_COLUMNS.COMPLETED_EMAIL_SENT - 1] = 'Yes';
       // Update the email flag in the sheet
       if (existingRow) {
@@ -254,6 +260,7 @@ function handleApplicationSubmission(data, sessionId) {
       Logger.log(`[${sessionId}] Application completion email sent successfully`);
     } catch (emailError) {
       Logger.log(`[${sessionId}] Error sending application completion email: ${emailError.toString()}`);
+      Logger.log(`[${sessionId}] Error stack: ${emailError.stack}`);
     }
     
     return {
@@ -284,7 +291,7 @@ function handlePartialSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(50).fill('');
     
     // Same mapping as Application but with Partial status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -312,8 +319,13 @@ function handlePartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - store all beneficiaries in one column
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
+    
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -379,7 +391,7 @@ function handleLeadSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(50).fill('');
     
     // Same mapping as Application but with Lead status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -407,8 +419,13 @@ function handleLeadSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - store all beneficiaries in one column
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
+    
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -477,7 +494,7 @@ function handleLeadPartialSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(50).fill('');
     
     // Same mapping as Application but with LeadPartial status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -505,8 +522,13 @@ function handleLeadPartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - store all beneficiaries in one column
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
+    
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -575,6 +597,122 @@ function testNewEntriesAndEmails() {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
+    // Initialize configuration first
+    Logger.log('Initializing configuration...');
+    const configInitialized = initializeConfig();
+    Logger.log('Configuration initialized:', configInitialized);
+    
+    // Try direct access to CONFIG
+    Logger.log('Direct CONFIG access test:');
+    try {
+      Logger.log('CONFIG available:', typeof CONFIG !== 'undefined');
+      if (typeof CONFIG !== 'undefined') {
+        Logger.log('CONFIG.EMAIL:', CONFIG.EMAIL);
+        Logger.log('CONFIG.EMAIL.ADMIN:', CONFIG.EMAIL.ADMIN);
+      }
+    } catch (configError) {
+      Logger.log('❌ Direct CONFIG access failed:', configError.toString());
+    }
+    
+    const emailConfig = getEmailConfig();
+    
+    // Test basic email sending first
+    Logger.log('Testing basic email sending...');
+    Logger.log('getEmailConfig() returned:', emailConfig);
+    Logger.log('emailConfig type:', typeof emailConfig);
+    Logger.log('emailConfig.ADMIN:', emailConfig?.ADMIN);
+    Logger.log('emailConfig.FROM:', emailConfig?.FROM);
+    Logger.log('Email config JSON:', JSON.stringify(emailConfig));
+    
+    // Check if MailApp is available
+    Logger.log('MailApp available:', typeof MailApp !== 'undefined');
+    Logger.log('MailApp.sendEmail available:', typeof MailApp.sendEmail === 'function');
+    
+    if (typeof MailApp === 'undefined') {
+      Logger.log('❌ MailApp is not available!');
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        error: 'MailApp is not available - check script permissions'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Check MailApp permissions and quota
+    try {
+      Logger.log('Checking MailApp permissions...');
+      const remainingDailyQuota = MailApp.getRemainingDailyQuota();
+      Logger.log('Remaining daily quota:', remainingDailyQuota);
+      
+      if (remainingDailyQuota <= 0) {
+        Logger.log('❌ Daily email quota exceeded!');
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          error: 'Daily email quota exceeded'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    } catch (quotaError) {
+      Logger.log('❌ Error checking quota:', quotaError.toString());
+    }
+    
+    // Test email address validation
+    Logger.log('Testing email address validation...');
+    const testEmail = 'michaelalfieri.ffl@gmail.com';
+    Logger.log('Test email:', testEmail);
+    Logger.log('Email type:', typeof testEmail);
+    Logger.log('Email length:', testEmail.length);
+    Logger.log('Email includes @:', testEmail.includes('@'));
+    
+    // Test 1: Try sending with hardcoded email address
+    try {
+      Logger.log('Test 1: Attempting to send email with hardcoded address...');
+      Logger.log('Test 1: To address: michaelalfieri.ffl@gmail.com');
+      Logger.log('Test 1: Subject: 🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel');
+      
+      // Try the simplest possible email
+      const result1 = MailApp.sendEmail('michaelalfieri.ffl@gmail.com', 'Test Email', 'This is a test');
+      
+      Logger.log('✅ Test 1 email sent successfully');
+      Logger.log('✅ Test 1 result:', result1);
+    } catch (emailTestError1) {
+      Logger.log('❌ Test 1 failed with error object:', emailTestError1);
+      Logger.log('❌ Test 1 error type:', typeof emailTestError1);
+      Logger.log('❌ Test 1 error toString:', emailTestError1.toString());
+      Logger.log('❌ Test 1 error name:', emailTestError1.name);
+      Logger.log('❌ Test 1 error message:', emailTestError1.message);
+      Logger.log('❌ Test 1 error stack:', emailTestError1.stack);
+      
+      // Try to get more error details
+      try {
+        Logger.log('❌ Test 1 error JSON:', JSON.stringify(emailTestError1));
+      } catch (jsonError) {
+        Logger.log('❌ Could not stringify error:', jsonError.toString());
+      }
+      
+      // Test 2: Try with different email format
+      try {
+        Logger.log('Test 2: Attempting to send email with different format...');
+        MailApp.sendEmail(emailConfig.ADMIN, '🧪 TEST EMAIL 2 - Veteran Legacy Life Funnel', 'This is a plain text test email.');
+        Logger.log('✅ Test 2 email sent successfully');
+      } catch (emailTestError2) {
+        Logger.log('❌ Test 2 failed:', emailTestError2.toString());
+        Logger.log('❌ Error name:', emailTestError2.name);
+        Logger.log('❌ Error message:', emailTestError2.message);
+        
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          error: 'All email sending tests failed',
+          details: {
+            test1: {
+              name: emailTestError1.name,
+              message: emailTestError1.message
+            },
+            test2: {
+              name: emailTestError2.name,
+              message: emailTestError2.message
+            }
+          }
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
     
     // Test data that matches the new FunnelStore structure exactly
     const testData1 = {
@@ -583,7 +721,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'John',
         lastName: 'Doe',
-        email: 'john.doe@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-123-4567',
         dateOfBirth: '1990-01-01',
         transactionalConsent: true,
@@ -610,8 +748,11 @@ function testNewEntriesAndEmails() {
         city: 'Test City',
         state: 'CA',
         zipCode: '90210',
-        beneficiaryName: 'Jane Doe',
-        beneficiaryRelationship: 'Spouse',
+        beneficiaries: [
+          { name: 'Jane Doe', relationship: 'Spouse', percentage: 60 },
+          { name: 'John Doe Jr.', relationship: 'Child', percentage: 25 },
+          { name: 'Sarah Doe', relationship: 'Child', percentage: 15 }
+        ],
         vaNumber: '123456789',
         serviceConnected: 'No',
         ssn: '123-45-6789',
@@ -640,7 +781,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'Jane',
         lastName: 'Smith',
-        email: 'jane.smith@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-987-6543',
         dateOfBirth: '1985-05-15',
         transactionalConsent: true,
@@ -667,8 +808,10 @@ function testNewEntriesAndEmails() {
         city: '',
         state: '',
         zipCode: '',
-        beneficiaryName: '',
-        beneficiaryRelationship: '',
+        beneficiaries: [
+          { name: 'Mike Smith', relationship: 'Spouse', percentage: 70 },
+          { name: 'Emma Smith', relationship: 'Child', percentage: 30 }
+        ],
         vaNumber: '',
         serviceConnected: '',
         ssn: '',
@@ -697,7 +840,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'Bob',
         lastName: 'Johnson',
-        email: 'bob.johnson@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-555-5555',
         dateOfBirth: '1975-12-25',
         transactionalConsent: false,
@@ -724,8 +867,11 @@ function testNewEntriesAndEmails() {
         city: 'Partial City',
         state: 'FL',
         zipCode: '33101',
-        beneficiaryName: 'Child Johnson',
-        beneficiaryRelationship: 'Child',
+        beneficiaries: [
+          { name: 'Child Johnson', relationship: 'Child', percentage: 50 },
+          { name: 'Spouse Johnson', relationship: 'Spouse', percentage: 30 },
+          { name: 'Parent Johnson', relationship: 'Parent', percentage: 20 }
+        ],
         vaNumber: '987654321',
         serviceConnected: 'Yes',
         ssn: '987-65-4321',
@@ -749,8 +895,13 @@ function testNewEntriesAndEmails() {
     };
     
     // Process all test data
+    Logger.log('Processing test data 1 (Application)...');
     handleApplicationSubmission(testData1, testData1.sessionId);
+    
+    Logger.log('Processing test data 2 (Lead)...');
     handleLeadSubmission(testData2, testData2.sessionId);
+    
+    Logger.log('Processing test data 3 (Partial)...');
     handlePartialSubmission(testData3, testData3.sessionId);
     
     Logger.log('testNewEntriesAndEmails completed successfully');
@@ -779,7 +930,7 @@ function setupHeaders() {
     
     Logger.log('Active sheet name: ' + sheet.getName());
     
-    // Define headers for 51 columns
+    // Define headers for 50 columns
     const headers = [
       'Timestamp',
       'Session ID', 
@@ -807,8 +958,7 @@ function setupHeaders() {
       'City',
       'Application State',
       'ZIP Code',
-      'Beneficiary Name',
-      'Beneficiary Relationship',
+      'Beneficiaries',
       'VA Number',
       'Service Connected',
       'SSN',

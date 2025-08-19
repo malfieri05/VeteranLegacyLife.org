@@ -82,13 +82,16 @@ export const ApplicationStep2: React.FC = () => {
           }
         `}
       </style>
-      <h2>Application Step 2</h2>
-      <p>Please provide your SSN, banking, and policy date information.</p>
-      
+
+      <h2>Complete Your Application</h2>
+      <p style={{ color: '#64748b', marginBottom: '1.5rem' }}>
+        Please provide the following information to complete your application. All fields marked with * are required.
+      </p>
+
       <div className="form-field">
-        <h3>Social Security Number</h3>
+        <h3>Personal Information</h3>
         <div>
-          <label htmlFor="ssn">SSN *</label>
+          <label htmlFor="ssn">Social Security Number *</label>
           <input
             type="text"
             id="ssn"
@@ -113,6 +116,7 @@ export const ApplicationStep2: React.FC = () => {
               name="bankName"
               value={formData.applicationData?.bankName || ''}
               onChange={(e) => handleBankingChange('bankName', e.target.value)}
+              placeholder="Your bank name"
               required
             />
           </div>

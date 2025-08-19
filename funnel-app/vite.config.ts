@@ -7,26 +7,10 @@ export default defineConfig({
     logOverride: { 'this-is-undefined-in-esm': 'silent' }
   },
   build: {
-    lib: {
-      entry: 'src/main.tsx',
-      name: 'VeteranFunnel',
-      fileName: 'veteran-funnel',
-      formats: ['iife'] // Immediately Invoked Function Expression for browser
-    },
-    rollupOptions: {
-      external: [], // Bundle everything
-      output: {
-        globals: {},
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'veteran-funnel.css'
-          return assetInfo.name
-        },
-        extend: true
-      }
-    },
-    cssCodeSplit: false,
+    outDir: 'dist',
     sourcemap: true
   },
+  base: '/',
   define: {
     'process.env.NODE_ENV': '"production"'
   }

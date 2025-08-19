@@ -4,12 +4,14 @@ interface ProgressBarProps {
   currentStep: number
   totalSteps: number
   className?: string
+  hideText?: boolean
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   currentStep,
   totalSteps,
-  className = ''
+  className = '',
+  hideText = false
 }) => {
   // Define the sections and their step ranges
   const sections = [
@@ -34,7 +36,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   } else {
     // For steps outside defined sections (like loading, success screens)
     progressPercentage = 100
-    displayText = 'Done.'
+    displayText = '' // Remove 'Done.' text completely
   }
   
   return (
@@ -45,9 +47,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           style={{ width: `${progressPercentage}%` }}
         ></div>
       </div>
-      <div className="progress-text">
-        {displayText}
-      </div>
+      {!hideText && (
+        <div className="progress-text">
+          {displayText}
+        </div>
+      )}
     </div>
   )
 } 

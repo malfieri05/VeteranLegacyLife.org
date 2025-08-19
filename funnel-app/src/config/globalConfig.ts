@@ -32,19 +32,19 @@ export const GLOBAL_CONFIG = {
   // Google Apps Script Deployment URL - Use global config if available
   GOOGLE_APPS_SCRIPT: {
     URL: (typeof window !== 'undefined' && window.VeteranFunnelConfig?.GOOGLE_APPS_SCRIPT?.URL) || 
-         'https://script.google.com/macros/s/AKfycbwnU-KpI1d0yuFeB1dIqBbpwlvpkakdXu1rN8IiRKFalHwiESYF7gs14w58Dkk_ObHWwg/exec'
+         'https://script.google.com/macros/s/AKfycbzYU1-57qc-KcsOMzUu27pF4fOY4XSVhLikeQqZ2P7pbmeloONN2xxQ2aeOdNl74CkY8w/exec'
   },
   
   // Email Configuration
   EMAIL: {
     // Admin email (where notifications are sent)
-    ADMIN: 'lindsey08092@gmail.com',
+    ADMIN: 'michaelalfieri.ffl@gmail.com',
     // From email (sender)
-    FROM: 'lindsey08092@gmail.com',
+    FROM: 'michaelalfieri.ffl@gmail.com',
     // To email (recipient) - change to actual user email when authorized
-    TO: 'lindsey08092@gmail.com',
+    TO: 'michaelalfieri.ffl@gmail.com',
     // Reply-to email
-    REPLY_TO: 'lindsey08092@gmail.com'
+    REPLY_TO: 'michaelalfieri.ffl@gmail.com'
   },
   
   // Google Sheet Configuration

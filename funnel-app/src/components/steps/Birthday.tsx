@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 
 export const Birthday: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
+  const { formData, updateFormData } = useFunnelStore()
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false)
   const [month, setMonth] = useState('')
@@ -121,25 +121,6 @@ export const Birthday: React.FC = () => {
     return Object.keys(newErrors).length === 0
   }
 
-  // Auto-continue when all fields are filled and valid (only if auto-advance is enabled)
-  useEffect(() => {
-    if (autoAdvanceEnabled) {
-      // Only validate and show errors if all fields have been touched
-      const allFieldsTouched = month && day && year
-      
-      if (allFieldsTouched) {
-        const validation = validateForm()
-        if (validation) {
-          goToNextStep() // Instant progression
-        } else {
-          // If form is invalid and auto-advance is enabled, user has attempted to submit
-          setHasAttemptedSubmit(true)
-          validateForm() // This will now show errors since hasAttemptedSubmit is true
-        }
-      }
-    }
-  }, [month, day, year, autoAdvanceEnabled, goToNextStep])
-
   // Only validate and show errors when user has attempted to submit
   useEffect(() => {
     if (hasAttemptedSubmit && (month || day || year)) {
@@ -183,7 +164,6 @@ export const Birthday: React.FC = () => {
               value={month}
               onChange={(e) => {
                 setMonth(e.target.value)
-                setAutoAdvanceEnabled(true)
               }}
               style={{
                 width: '100%',
@@ -216,7 +196,6 @@ export const Birthday: React.FC = () => {
               value={day}
               onChange={(e) => {
                 setDay(e.target.value)
-                setAutoAdvanceEnabled(true)
               }}
               style={{
                 width: '100%',
@@ -249,7 +228,6 @@ export const Birthday: React.FC = () => {
               value={year}
               onChange={(e) => {
                 setYear(e.target.value)
-                setAutoAdvanceEnabled(true)
               }}
               style={{
                 width: '100%',

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 import { FormField } from '../shared/FormField'
-import { validateContactInfo } from '../../utils/validation'
 
 export const ContactInfo: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
+  const { formData, updateFormData, goToNextStep } = useFunnelStore()
   
   const handleContactInfoChange = (field: keyof typeof formData.contactInfo, value: string | boolean) => {
     updateFormData({
@@ -13,23 +12,18 @@ export const ContactInfo: React.FC = () => {
         [field]: value
       }
     })
-    
-    // Re-enable auto-advance when user makes a change
-    setAutoAdvanceEnabled(true)
   }
   
   // Auto-advance when all required fields are filled
   useEffect(() => {
-    if (autoAdvanceEnabled) {
-      // Check if all required fields are filled
-      const { firstName, lastName, email, phone, transactionalConsent, marketingConsent } = formData.contactInfo
-      const allFieldsFilled = firstName && lastName && email && phone && transactionalConsent && marketingConsent
-      
-      if (allFieldsFilled) {
-        goToNextStep() // Instant progression
-      }
+    // Check if all required fields are filled
+    const { firstName, lastName, email, phone, transactionalConsent, marketingConsent } = formData.contactInfo
+    const allFieldsFilled = firstName && lastName && email && phone && transactionalConsent && marketingConsent
+    
+    if (allFieldsFilled) {
+      goToNextStep() // Instant progression
     }
-  }, [formData.contactInfo, autoAdvanceEnabled, goToNextStep])
+  }, [formData.contactInfo, goToNextStep])
   
   return (
     <div className="contact-info-container">
@@ -104,8 +98,6 @@ export const ContactInfo: React.FC = () => {
         placeholder="Enter your phone number"
         required
       />
-      
-
       
       {/* Required Consent Checkboxes */}
       <div style={{ marginTop: '1.5rem' }}>
