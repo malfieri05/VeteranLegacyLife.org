@@ -15,13 +15,13 @@ const SHEET_COLUMNS = {
   TOBACCO_USE: 17, MEDICAL_CONDITIONS: 18, HEIGHT: 19, WEIGHT: 20,
   HOSPITAL_CARE: 21, DIABETES_MEDICATION: 22, STREET_ADDRESS: 23,
   CITY: 24, APPLICATION_STATE: 25, ZIP_CODE: 26, BENEFICIARY_NAME: 27,
-  BENEFICIARY_RELATIONSHIP: 28, VA_NUMBER: 29, SERVICE_CONNECTED: 30,
-  SSN: 31, DRIVERS_LICENSE: 32, BANK_NAME: 33, ROUTING_NUMBER: 34,
-  ACCOUNT_NUMBER: 35, POLICY_DATE: 36, QUOTE_COVERAGE: 37, QUOTE_PREMIUM: 38,
-  QUOTE_AGE: 39, QUOTE_GENDER: 40, QUOTE_TYPE: 41, CURRENT_STEP: 42,
-  STEP_NAME: 43, FORM_TYPE: 44, USER_AGENT: 45, REFERRER: 46,
-  UTM_SOURCE: 47, UTM_MEDIUM: 48, UTM_CAMPAIGN: 49, PARTIAL_EMAIL_SENT: 50,
-  COMPLETED_EMAIL_SENT: 51
+  BENEFICIARY_RELATIONSHIP: 28, BENEFICIARY_PERCENTAGE: 29, BENEFICIARIES_FULL: 30,
+  VA_NUMBER: 31, SERVICE_CONNECTED: 32, SSN: 33, DRIVERS_LICENSE: 34, 
+  BANK_NAME: 35, ROUTING_NUMBER: 36, ACCOUNT_NUMBER: 37, POLICY_DATE: 38, 
+  QUOTE_COVERAGE: 39, QUOTE_PREMIUM: 40, QUOTE_AGE: 41, QUOTE_GENDER: 42, 
+  QUOTE_TYPE: 43, CURRENT_STEP: 44, STEP_NAME: 45, FORM_TYPE: 46, 
+  USER_AGENT: 47, REFERRER: 48, UTM_SOURCE: 49, UTM_MEDIUM: 50, 
+  UTM_CAMPAIGN: 51, PARTIAL_EMAIL_SENT: 52, COMPLETED_EMAIL_SENT: 53
 };
 
 function doPost(e) {
@@ -153,7 +153,7 @@ function handleApplicationSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(53).fill('');
     
     // Contact Info (columns 5-11)
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -184,12 +184,14 @@ function handleApplicationSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    // Handle beneficiaries array - take the first beneficiary for the main columns
+    // Handle beneficiaries array - store all beneficiaries in one column like email format
     const beneficiaries = data.applicationData?.beneficiaries || [];
-    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
     
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
+    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = beneficiariesText;
+    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = ''; // Keep empty for backward compatibility
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -288,7 +290,7 @@ function handlePartialSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(53).fill('');
     
     // Same mapping as Application but with Partial status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -387,7 +389,7 @@ function handleLeadSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(53).fill('');
     
     // Same mapping as Application but with Lead status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -489,7 +491,7 @@ function handleLeadPartialSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(51).fill('');
+    const rowData = new Array(53).fill('');
     
     // Same mapping as Application but with LeadPartial status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -804,7 +806,7 @@ function setupHeaders() {
     
     Logger.log('Active sheet name: ' + sheet.getName());
     
-    // Define headers for 51 columns
+    // Define headers for 53 columns
     const headers = [
       'Timestamp',
       'Session ID', 
@@ -834,6 +836,8 @@ function setupHeaders() {
       'ZIP Code',
       'Beneficiary Name',
       'Beneficiary Relationship',
+      'Beneficiary Percentage',
+      'Beneficiaries Full',
       'VA Number',
       'Service Connected',
       'SSN',
