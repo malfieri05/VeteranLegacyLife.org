@@ -8,6 +8,7 @@ interface ButtonProps {
   disabled?: boolean
   loading?: boolean
   className?: string
+  style?: React.CSSProperties
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,7 +18,8 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   disabled = false,
   loading = false,
-  className = ''
+  className = '',
+  style
 }) => {
   const baseClasses = 'cta-button'
   const variantClasses = variant === 'secondary' ? 'secondary' : ''
@@ -30,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled || loading}
       className={`${baseClasses} ${variantClasses} ${disabledClasses} ${loadingClasses} ${className}`}
+      style={style}
     >
       {loading && (
         <div className="spinner">

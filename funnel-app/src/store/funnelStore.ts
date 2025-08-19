@@ -1,14 +1,7 @@
 import { create } from 'zustand'
 import { getApiUrl } from '../config/globalConfig'
 import { 
-  FormData, 
-  ContactInfo, 
-  PreQualification, 
-  MedicalAnswers, 
-  Beneficiary, 
-  ApplicationData, 
-  QuoteData, 
-  TrackingData 
+  FormData
 } from '../types/funnel'
 import { getStepConfig, getStepName, getRadioButtonSteps } from './stepConfig'
 
@@ -31,7 +24,7 @@ const initialState: FormData = {
   },
   medicalAnswers: {
     tobaccoUse: '',
-    medicalConditions: '',
+    medicalConditions: [],
     height: '',
     weight: '',
     hospitalCare: '',
@@ -86,6 +79,7 @@ export interface FunnelActions {
   setCurrentStep: (step: number) => void
   openModal: () => void
   closeModal: () => void
+  setLoading: (loading: boolean) => void
   goToNextStep: () => void
   goToPreviousStep: () => void
   updateFormData: (data: Partial<FormData>) => void
@@ -589,7 +583,7 @@ const checkStepValidation = (step: number, formData: FormData): boolean => {
     case 8:
       return !!formData.medicalAnswers?.tobaccoUse
     case 9:
-      return formData.medicalAnswers?.medicalConditions && formData.medicalAnswers.medicalConditions.length > 0
+      return Array.isArray(formData.medicalAnswers?.medicalConditions) && formData.medicalAnswers.medicalConditions.length > 0
     case 10:
       return !!formData.medicalAnswers?.height && !!formData.medicalAnswers?.weight
     case 11:
@@ -621,7 +615,7 @@ const getCurrentStepValue = (step: number, formData: FormData): string => {
     case 8:
       return formData.medicalAnswers?.tobaccoUse || ''
     case 9:
-      return formData.medicalAnswers?.medicalConditions || ''
+      return Array.isArray(formData.medicalAnswers?.medicalConditions) ? formData.medicalAnswers.medicalConditions.join(', ') : ''
     case 10:
       return formData.medicalAnswers?.height && formData.medicalAnswers?.weight 
         ? `${formData.medicalAnswers.height}-${formData.medicalAnswers.weight}` 

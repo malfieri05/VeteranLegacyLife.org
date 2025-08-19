@@ -74,7 +74,7 @@ export const FunnelModal: React.FC = () => {
           return !!formData.contactInfo?.dateOfBirth
         case 7:
           const validation = validateContactInfo(formData.contactInfo)
-          return validation.isValid
+          return validation.isValid === true
         case 8:
           return !!formData.medicalAnswers?.tobaccoUse
         case 9:

@@ -19,7 +19,7 @@ export interface PreQualification {
 
 export interface MedicalAnswers {
   tobaccoUse: string
-  medicalConditions: string
+  medicalConditions: string[]
   height: string
   weight: string
   hospitalCare: string

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 
 export const CoverageAmount: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
+  const { formData, updateFormData, goToNextStep } = useFunnelStore()
 
   // Auto-continue when coverage amount is selected and auto-advance is enabled
   useEffect(() => {

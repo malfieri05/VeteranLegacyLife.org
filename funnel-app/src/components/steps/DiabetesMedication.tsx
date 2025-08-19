@@ -2,17 +2,17 @@ import React, { useEffect } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 
 export const DiabetesMedication: React.FC = () => {
-  const { formData, updateFormData, goToNextStep, autoAdvanceEnabled, setAutoAdvanceEnabled } = useFunnelStore()
+  const { formData, updateFormData, goToNextStep } = useFunnelStore()
 
-  // Auto-continue when a selection is made (only if auto-advance is enabled)
+  // Auto-continue when a selection is made
   useEffect(() => {
-    if (formData.medicalAnswers?.diabetesMedication && autoAdvanceEnabled) {
+    if (formData.medicalAnswers?.diabetesMedication) {
       const timer = setTimeout(() => {
         goToNextStep()
       }, 500) // Small delay for better UX
       return () => clearTimeout(timer)
     }
-  }, [formData.medicalAnswers?.diabetesMedication, autoAdvanceEnabled, goToNextStep])
+  }, [formData.medicalAnswers?.diabetesMedication, goToNextStep])
 
     const handleDiabetesChange = (value: string) => {
     updateFormData({ 
@@ -21,8 +21,6 @@ export const DiabetesMedication: React.FC = () => {
         diabetesMedication: value 
       } 
     })
-    // Re-enable auto-advance when user makes a selection
-    setAutoAdvanceEnabled(true)
   }
 
   return (

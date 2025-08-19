@@ -68,7 +68,7 @@ const VeteranFunnel = {
   reset: () => {
     // Use the store directly without hooks
     const store = useFunnelStore.getState()
-    store.reset()
+    store.resetFunnel()
   }
 }
 
