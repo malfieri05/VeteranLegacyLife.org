@@ -268,8 +268,10 @@ function sendApplicationCompleteEmail(data) {
       city: parsedFormData.applicationData?.city || '',
       applicationState: parsedFormData.applicationData?.state || '',
       zipCode: parsedFormData.applicationData?.zipCode || '',
-      beneficiaryName: parsedFormData.applicationData?.beneficiaryName || '',
-      beneficiaryRelationship: parsedFormData.applicationData?.beneficiaryRelationship || '',
+      // Handle beneficiaries array - take the first beneficiary for email
+      beneficiaries: parsedFormData.applicationData?.beneficiaries || [],
+      beneficiaryName: (parsedFormData.applicationData?.beneficiaries || [])[0]?.name || '',
+      beneficiaryRelationship: (parsedFormData.applicationData?.beneficiaries || [])[0]?.relationship || '',
       vaNumber: parsedFormData.applicationData?.vaNumber || '',
       serviceConnected: parsedFormData.applicationData?.serviceConnected || '',
       ssn: encryptSensitiveData(parsedFormData.applicationData?.ssn || ''),
@@ -337,8 +339,10 @@ function sendApplicationNotification(data, sessionId) {
       city: parsedFormData.applicationData?.city || '',
       applicationState: parsedFormData.applicationData?.state || '',
       zipCode: parsedFormData.applicationData?.zipCode || '',
-      beneficiaryName: parsedFormData.applicationData?.beneficiaryName || '',
-      beneficiaryRelationship: parsedFormData.applicationData?.beneficiaryRelationship || '',
+      // Handle beneficiaries array - take the first beneficiary for email
+      beneficiaries: parsedFormData.applicationData?.beneficiaries || [],
+      beneficiaryName: (parsedFormData.applicationData?.beneficiaries || [])[0]?.name || '',
+      beneficiaryRelationship: (parsedFormData.applicationData?.beneficiaries || [])[0]?.relationship || '',
       vaNumber: parsedFormData.applicationData?.vaNumber || '',
       serviceConnected: parsedFormData.applicationData?.serviceConnected || '',
       ssn: encryptSensitiveData(parsedFormData.applicationData?.ssn || ''),
@@ -651,8 +655,7 @@ function generateApplicationCompleteHTML(data) {
             <tr><td>City</td><td>${data.city}</td></tr>
             <tr><td>State</td><td>${data.applicationState}</td></tr>
             <tr><td>ZIP Code</td><td>${data.zipCode}</td></tr>
-            <tr><td>Beneficiary Name</td><td>${data.beneficiaryName}</td></tr>
-            <tr><td>Beneficiary Relationship</td><td>${data.beneficiaryRelationship}</td></tr>
+            <tr><td>Beneficiaries</td><td>${data.beneficiaries && data.beneficiaries.length > 0 ? data.beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('<br>') : 'None specified'}</td></tr>
             <tr><td>VA Number</td><td>${data.vaNumber}</td></tr>
             <tr><td>Service Connected</td><td>${data.serviceConnected}</td></tr>
             <tr><td>SSN</td><td>${data.ssn}</td></tr>

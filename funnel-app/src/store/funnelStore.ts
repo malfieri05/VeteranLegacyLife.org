@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { getApiUrl } from '../config/globalConfig'
 import { 
-  FunnelStore, 
   FormData, 
   ContactInfo, 
   PreQualification, 
@@ -99,6 +98,8 @@ export interface FunnelActions {
   setManualNavigation: (isManual: boolean) => void // New action to control manual navigation flag
 }
 
+export type FunnelStore = FunnelState & FunnelActions
+
 export const useFunnelStore = create<FunnelStore>((set, get) => ({
   currentStep: 1,
   isModalOpen: false,
@@ -123,7 +124,7 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   
   closeModal: () => set({ isModalOpen: false, isExitModalOpen: false }),
   
-  setLoading: (loading) => set({ isLoading: loading }),
+  setLoading: (loading: boolean) => set({ isLoading: loading }),
   
   updateFormData: (data) => {
     const { currentStep, visitedSteps, formData, isManualNavigation } = get()
@@ -410,6 +411,10 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   submitApplication: async () => {
     const { formData, sessionId } = get()
     
+    console.log('🎯 SUBMIT APPLICATION - Starting application submission')
+    console.log('🎯 Session ID:', sessionId)
+    console.log('🎯 Form data:', formData)
+    
     // Format data to match the nice test data format
     const formatCurrency = (amount: string | number) => {
       if (!amount) return ''
@@ -520,7 +525,7 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       
       // Submit lead partial data if configured
       if (currentStepConfig.submitLeadPartial) {
-        get().submitLeadPartial()
+        get().submitLead()
       }
       
       // Submit application data if configured
@@ -545,8 +550,8 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
     }
   },
   
-  reset: () => {
-    console.log('🎯 RESET CALLED - Clearing session ID');
+  resetFunnel: () => {
+    console.log('🎯 RESET FUNNEL CALLED - Clearing session ID');
     set({
       currentStep: 1,
       isModalOpen: false,
@@ -561,7 +566,7 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
 
   showExitModal: () => set({ isExitModalOpen: true }),
   hideExitModal: () => set({ isExitModalOpen: false }),
-  setManualNavigation: (isManual) => set({ isManualNavigation: isManual })
+  setManualNavigation: (isManual: boolean) => set({ isManualNavigation: isManual })
 }))
 
 // Helper function to check step validation
