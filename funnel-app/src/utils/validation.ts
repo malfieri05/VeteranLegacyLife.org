@@ -128,43 +128,51 @@ export const validateContactInfo = (contactInfo: {
 }
 
 export const validateApplicationData = (applicationData: {
-  address: { street: string; city: string; state: string; zipCode: string }
-  beneficiary: { name: string; relationship: string }
-  vaInfo: { vaNumber: string; serviceConnected: string }
+  streetAddress: string
+  city: string
+  state: string
+  zipCode: string
+  beneficiaries: Array<{ name: string; relationship: string; percentage: number }>
+  vaClinicName: string
+  primaryDoctor: string
   ssn: string
-  banking: { accountNumber: string; routingNumber: string; bankName: string }
-  policyDate: string
+  driversLicense: string
+  licenseState: string
+  bankName: string
+  routingNumber: string
+  accountNumber: string
 }): { isValid: boolean; errors: Record<string, string> } => {
   const errors: Record<string, string> = {}
   
   // Address validation
-  if (!isRequired(applicationData.address.street)) {
-    errors.street = 'Street address is required'
+  if (!isRequired(applicationData.streetAddress)) {
+    errors.streetAddress = 'Street address is required'
   }
   
-  if (!isRequired(applicationData.address.city)) {
+  if (!isRequired(applicationData.city)) {
     errors.city = 'City is required'
   }
   
-  if (!isRequired(applicationData.address.state)) {
+  if (!isRequired(applicationData.state)) {
     errors.state = 'State is required'
   }
   
-  if (!isRequired(applicationData.address.zipCode)) {
+  if (!isRequired(applicationData.zipCode)) {
     errors.zipCode = 'ZIP code is required'
-  } else if (!isValidZipCode(applicationData.address.zipCode)) {
+  } else if (!isValidZipCode(applicationData.zipCode)) {
     errors.zipCode = 'Please enter a valid ZIP code'
   }
   
-  // Beneficiary validation
-  if (!isRequired(applicationData.beneficiary.name)) {
-    errors.beneficiaryName = 'Beneficiary name is required'
-  } else if (!isValidName(applicationData.beneficiary.name)) {
-    errors.beneficiaryName = 'Please enter a valid beneficiary name'
-  }
-  
-  if (!isRequired(applicationData.beneficiary.relationship)) {
-    errors.beneficiaryRelationship = 'Beneficiary relationship is required'
+  // Beneficiary validation - check if at least one beneficiary is complete
+  if (!applicationData.beneficiaries || applicationData.beneficiaries.length === 0) {
+    errors.beneficiaries = 'At least one beneficiary is required'
+  } else {
+    const hasValidBeneficiary = applicationData.beneficiaries.some(beneficiary =>
+      beneficiary.name && beneficiary.relationship
+    )
+    if (!hasValidBeneficiary) {
+      errors.beneficiaries = 'At least one beneficiary must have a name and relationship'
+    }
   }
   
   // SSN validation
@@ -175,27 +183,29 @@ export const validateApplicationData = (applicationData: {
   }
   
   // Banking validation
-  if (!isRequired(applicationData.banking.accountNumber)) {
+  if (!isRequired(applicationData.accountNumber)) {
     errors.accountNumber = 'Account number is required'
-  } else if (!isValidAccountNumber(applicationData.banking.accountNumber)) {
+  } else if (!isValidAccountNumber(applicationData.accountNumber)) {
     errors.accountNumber = 'Please enter a valid account number'
   }
   
-  if (!isRequired(applicationData.banking.routingNumber)) {
+  if (!isRequired(applicationData.routingNumber)) {
     errors.routingNumber = 'Routing number is required'
-  } else if (!isValidRoutingNumber(applicationData.banking.routingNumber)) {
+  } else if (!isValidRoutingNumber(applicationData.routingNumber)) {
     errors.routingNumber = 'Please enter a valid routing number'
   }
   
-  if (!isRequired(applicationData.banking.bankName)) {
+  if (!isRequired(applicationData.bankName)) {
     errors.bankName = 'Bank name is required'
   }
   
-  // Policy date validation
-  if (!isRequired(applicationData.policyDate)) {
-    errors.policyDate = 'Policy date is required'
-  } else if (!isValidDate(applicationData.policyDate)) {
-    errors.policyDate = 'Please enter a valid date'
+  // Driver's license validation
+  if (!isRequired(applicationData.driversLicense)) {
+    errors.driversLicense = 'Driver\'s license number is required'
+  }
+  
+  if (!isRequired(applicationData.licenseState)) {
+    errors.licenseState = 'License state is required'
   }
   
   return {

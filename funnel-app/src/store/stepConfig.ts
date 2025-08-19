@@ -202,7 +202,7 @@ export const STEP_CONFIGS: StepConfig[] = [
     name: 'Application Step 2',
     component: ApplicationStep2,
     requiresValidation: true,
-    submitPartial: true,
+    submitApplication: true, // Changed from submitPartial to submitApplication
     showBackButton: true,
     showContinueButton: true,
     isRadioButtonStep: false

@@ -575,6 +575,7 @@ function testNewEntriesAndEmails() {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
+    const emailConfig = getEmailConfig();
     
     // Test data that matches the new FunnelStore structure exactly
     const testData1 = {
@@ -583,7 +584,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'John',
         lastName: 'Doe',
-        email: 'john.doe@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-123-4567',
         dateOfBirth: '1990-01-01',
         transactionalConsent: true,
@@ -640,7 +641,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'Jane',
         lastName: 'Smith',
-        email: 'jane.smith@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-987-6543',
         dateOfBirth: '1985-05-15',
         transactionalConsent: true,
@@ -697,7 +698,7 @@ function testNewEntriesAndEmails() {
       contactInfo: {
         firstName: 'Bob',
         lastName: 'Johnson',
-        email: 'bob.johnson@example.com',
+        email: emailConfig.ADMIN,
         phone: '555-555-5555',
         dateOfBirth: '1975-12-25',
         transactionalConsent: false,

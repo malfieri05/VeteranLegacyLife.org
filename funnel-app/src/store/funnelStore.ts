@@ -192,15 +192,37 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       console.log('🎯 Generated new session ID:', newSessionId);
     }
     
+    // Format data to match the nice test data format
+    const formatCurrency = (amount: string | number) => {
+      if (!amount) return ''
+      const num = typeof amount === 'string' ? parseFloat(amount.replace(/[$,]/g, '')) : amount
+      return `$${num.toLocaleString()}`
+    }
+    
+    const formatDate = (date: string) => {
+      if (!date) return ''
+      // Convert YYYY-MM-DD to MM/DD/YYYY for better readability
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    }
+    
     try {
       const payload = {
         sessionId,
         formType: 'Partial',
         contactInfo: formData.contactInfo,
-        preQualification: formData.preQualification,
+        preQualification: {
+          ...formData.preQualification,
+          coverageAmount: formatCurrency(formData.preQualification.coverageAmount)
+        },
         medicalAnswers: formData.medicalAnswers,
         applicationData: formData.applicationData,
-        quoteData: formData.quoteData,
+        quoteData: {
+          ...formData.quoteData,
+          coverage: formatCurrency(formData.quoteData.coverage),
+          premium: formatCurrency(formData.quoteData.premium),
+          policyDate: formatDate(formData.quoteData.policyDate)
+        },
         trackingData: {
           currentStep: currentStep.toString(),
           stepName: stepName
@@ -390,15 +412,37 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   submitApplication: async () => {
     const { formData, sessionId } = get()
     
+    // Format data to match the nice test data format
+    const formatCurrency = (amount: string | number) => {
+      if (!amount) return ''
+      const num = typeof amount === 'string' ? parseFloat(amount.replace(/[$,]/g, '')) : amount
+      return `$${num.toLocaleString()}`
+    }
+    
+    const formatDate = (date: string) => {
+      if (!date) return ''
+      // Convert YYYY-MM-DD to MM/DD/YYYY for better readability
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    }
+    
     try {
       const payload = {
         sessionId,
         formType: 'Application',
         contactInfo: formData.contactInfo,
-        preQualification: formData.preQualification,
+        preQualification: {
+          ...formData.preQualification,
+          coverageAmount: formatCurrency(formData.preQualification.coverageAmount)
+        },
         medicalAnswers: formData.medicalAnswers,
         applicationData: formData.applicationData,
-        quoteData: formData.quoteData,
+        quoteData: {
+          ...formData.quoteData,
+          coverage: formatCurrency(formData.quoteData.coverage),
+          premium: formatCurrency(formData.quoteData.premium),
+          policyDate: formatDate(formData.quoteData.policyDate)
+        },
         trackingData: {
           currentStep: '18',
           stepName: 'Application Complete'
