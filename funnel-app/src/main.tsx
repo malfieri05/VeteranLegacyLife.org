@@ -42,6 +42,9 @@ if (document.readyState === 'loading') {
   setTimeout(initializeFunnel, 100)
 }
 
+// Force Vercel to pick up latest changes
+console.log('VeteranFunnel initialized - latest version')
+
 // Create and expose the global API
 const VeteranFunnel = {
   open: () => {
