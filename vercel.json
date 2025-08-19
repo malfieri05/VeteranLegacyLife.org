@@ -4,7 +4,15 @@
     {
       "src": "funnel-app/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "funnel-app/dist" }
+      "config": { 
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/funnel-app/dist/$1"
     }
   ]
 }
