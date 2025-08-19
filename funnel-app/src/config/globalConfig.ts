@@ -32,7 +32,7 @@ export const GLOBAL_CONFIG = {
   // Google Apps Script Deployment URL - Use global config if available
   GOOGLE_APPS_SCRIPT: {
     URL: (typeof window !== 'undefined' && window.VeteranFunnelConfig?.GOOGLE_APPS_SCRIPT?.URL) || 
-         'https://script.google.com/macros/s/AKfycbx_vjBbF6ELeQfrOCKK5iHTAogcLny4M0rlx4NrpAEcH60CuTYi5-UPV8FyJHfLoa_RIA/exec'
+         'https://script.google.com/macros/s/AKfycbyuW_PjJPgpIBSDlmX4DG1OOdnIi-h3HqwGW7p3IF05b6zvt0xs3CuHa2ef_kp72b2YFw/exec'
   },
   
   // Email Configuration
