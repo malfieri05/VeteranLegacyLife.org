@@ -319,12 +319,13 @@ function handlePartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    // Handle beneficiaries array - take the first beneficiary for the main columns
+    // Handle beneficiaries array - store all beneficiaries in one column
     const beneficiaries = data.applicationData?.beneficiaries || [];
-    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
     
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -390,7 +391,7 @@ function handleLeadSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(53).fill('');
+    const rowData = new Array(50).fill('');
     
     // Same mapping as Application but with Lead status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -418,12 +419,13 @@ function handleLeadSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    // Handle beneficiaries array - take the first beneficiary for the main columns
+    // Handle beneficiaries array - store all beneficiaries in one column
     const beneficiaries = data.applicationData?.beneficiaries || [];
-    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
     
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -492,7 +494,7 @@ function handleLeadPartialSubmission(data, sessionId) {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
-    const rowData = new Array(53).fill('');
+    const rowData = new Array(50).fill('');
     
     // Same mapping as Application but with LeadPartial status
     rowData[SHEET_COLUMNS.FIRST_NAME - 1] = data.contactInfo?.firstName || '';
@@ -520,12 +522,13 @@ function handleLeadPartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    // Handle beneficiaries array - take the first beneficiary for the main columns
+    // Handle beneficiaries array - store all beneficiaries in one column
     const beneficiaries = data.applicationData?.beneficiaries || [];
-    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    const beneficiariesText = beneficiaries.length > 0 
+      ? beneficiaries.map(b => `${b.name} (${b.relationship}) - ${b.percentage}%`).join('\n')
+      : '';
     
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
+    rowData[SHEET_COLUMNS.BENEFICIARIES - 1] = beneficiariesText;
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
