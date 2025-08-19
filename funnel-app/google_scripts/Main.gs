@@ -184,8 +184,12 @@ function handleApplicationSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - take the first beneficiary for the main columns
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    
+    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
+    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -312,8 +316,12 @@ function handlePartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - take the first beneficiary for the main columns
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    
+    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
+    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -407,8 +415,12 @@ function handleLeadSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - take the first beneficiary for the main columns
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    
+    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
+    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -505,8 +517,12 @@ function handleLeadPartialSubmission(data, sessionId) {
     rowData[SHEET_COLUMNS.CITY - 1] = data.applicationData?.city || '';
     rowData[SHEET_COLUMNS.APPLICATION_STATE - 1] = data.applicationData?.state || '';
     rowData[SHEET_COLUMNS.ZIP_CODE - 1] = data.applicationData?.zipCode || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = data.applicationData?.beneficiaryName || '';
-    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = data.applicationData?.beneficiaryRelationship || '';
+    // Handle beneficiaries array - take the first beneficiary for the main columns
+    const beneficiaries = data.applicationData?.beneficiaries || [];
+    const primaryBeneficiary = beneficiaries.length > 0 ? beneficiaries[0] : { name: '', relationship: '', percentage: 100 };
+    
+    rowData[SHEET_COLUMNS.BENEFICIARY_NAME - 1] = primaryBeneficiary.name || '';
+    rowData[SHEET_COLUMNS.BENEFICIARY_RELATIONSHIP - 1] = primaryBeneficiary.relationship || '';
     rowData[SHEET_COLUMNS.VA_NUMBER - 1] = data.applicationData?.vaNumber || '';
     rowData[SHEET_COLUMNS.SERVICE_CONNECTED - 1] = data.applicationData?.serviceConnected || '';
     rowData[SHEET_COLUMNS.SSN - 1] = data.applicationData?.ssn || '';
@@ -611,8 +627,7 @@ function testNewEntriesAndEmails() {
         city: 'Test City',
         state: 'CA',
         zipCode: '90210',
-        beneficiaryName: 'Jane Doe',
-        beneficiaryRelationship: 'Spouse',
+        beneficiaries: [{ name: 'Jane Doe', relationship: 'Spouse', percentage: 100 }],
         vaNumber: '123456789',
         serviceConnected: 'No',
         ssn: '123-45-6789',
@@ -668,8 +683,7 @@ function testNewEntriesAndEmails() {
         city: '',
         state: '',
         zipCode: '',
-        beneficiaryName: '',
-        beneficiaryRelationship: '',
+        beneficiaries: [{ name: '', relationship: '', percentage: 100 }],
         vaNumber: '',
         serviceConnected: '',
         ssn: '',
@@ -725,8 +739,7 @@ function testNewEntriesAndEmails() {
         city: 'Partial City',
         state: 'FL',
         zipCode: '33101',
-        beneficiaryName: 'Child Johnson',
-        beneficiaryRelationship: 'Child',
+        beneficiaries: [{ name: 'Child Johnson', relationship: 'Child', percentage: 100 }],
         vaNumber: '987654321',
         serviceConnected: 'Yes',
         ssn: '987-65-4321',
