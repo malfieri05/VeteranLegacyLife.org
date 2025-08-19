@@ -245,6 +245,13 @@ function sendApplicationCompleteEmail(data) {
   Logger.log('Sending COMPLETE APPLICATION notification');
   Logger.log('Data received:', JSON.stringify(data));
   
+  // Test direct CONFIG access in Templates.gs
+  Logger.log('Templates.gs - CONFIG available:', typeof CONFIG !== 'undefined');
+  if (typeof CONFIG !== 'undefined') {
+    Logger.log('Templates.gs - CONFIG.EMAIL:', CONFIG.EMAIL);
+    Logger.log('Templates.gs - CONFIG.EMAIL.ADMIN:', CONFIG.EMAIL.ADMIN);
+  }
+  
   try {
     Logger.log('Step 1: Parsing form data...');
     // Parse form data
@@ -300,6 +307,10 @@ function sendApplicationCompleteEmail(data) {
     // Send admin notification
     Logger.log('Step 4: Getting email config...');
     const emailConfig = getEmailConfig();
+    Logger.log('getEmailConfig() returned:', emailConfig);
+    Logger.log('emailConfig type:', typeof emailConfig);
+    Logger.log('emailConfig.ADMIN:', emailConfig?.ADMIN);
+    Logger.log('emailConfig.FROM:', emailConfig?.FROM);
     Logger.log('Email config retrieved:', JSON.stringify(emailConfig));
     Logger.log('Step 5: Sending email...');
     Logger.log('To:', emailConfig.ADMIN);
