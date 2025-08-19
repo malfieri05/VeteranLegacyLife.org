@@ -598,6 +598,24 @@ function testNewEntriesAndEmails() {
     const sheet = SpreadsheetApp.getActiveSheet();
     const emailConfig = getEmailConfig();
     
+    // Test basic email sending first
+    Logger.log('Testing basic email sending...');
+    try {
+      MailApp.sendEmail({
+        to: emailConfig.ADMIN,
+        from: emailConfig.FROM,
+        subject: '🧪 TEST EMAIL - Veteran Legacy Life Funnel',
+        htmlBody: '<h1>Test Email</h1><p>This is a test email to verify email sending is working.</p>'
+      });
+      Logger.log('✅ Basic test email sent successfully');
+    } catch (emailTestError) {
+      Logger.log('❌ Basic test email failed:', emailTestError.toString());
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        error: 'Email sending test failed: ' + emailTestError.toString()
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
     // Test data that matches the new FunnelStore structure exactly
     const testData1 = {
       sessionId: 'TEST_1_' + Date.now(),
