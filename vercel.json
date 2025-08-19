@@ -1,4 +1,12 @@
 {
-  "buildCommand": "cd funnel-app && npm run build",
-  "outputDirectory": "funnel-app/dist"
+  "version": 2,
+  "builds": [
+    {
+      "src": "funnel-app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ]
 }

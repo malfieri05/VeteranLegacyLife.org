@@ -1,9 +1,5 @@
 {
   "name": "veteran-funnel-root",
   "version": "1.0.0",
-  "scripts": {
-    "build": "cd funnel-app && npm run build",
-    "install": "cd funnel-app && npm install"
-  },
-  "dependencies": {}
+  "private": true
 }
