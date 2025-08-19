@@ -38,7 +38,8 @@ const initializeFunnel = () => {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeFunnel)
 } else {
-  initializeFunnel()
+  // If DOM is already loaded, wait a bit to ensure everything is ready
+  setTimeout(initializeFunnel, 100)
 }
 
 // Create and expose the global API
