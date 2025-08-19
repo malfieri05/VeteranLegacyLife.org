@@ -636,6 +636,23 @@ function testNewEntriesAndEmails() {
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
+    // Check MailApp permissions and quota
+    try {
+      Logger.log('Checking MailApp permissions...');
+      const remainingDailyQuota = MailApp.getRemainingDailyQuota();
+      Logger.log('Remaining daily quota:', remainingDailyQuota);
+      
+      if (remainingDailyQuota <= 0) {
+        Logger.log('❌ Daily email quota exceeded!');
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          error: 'Daily email quota exceeded'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    } catch (quotaError) {
+      Logger.log('❌ Error checking quota:', quotaError.toString());
+    }
+    
     // Test email address validation
     Logger.log('Testing email address validation...');
     const testEmail = 'michaelalfieri.ffl@gmail.com';
@@ -650,11 +667,8 @@ function testNewEntriesAndEmails() {
       Logger.log('Test 1: To address: michaelalfieri.ffl@gmail.com');
       Logger.log('Test 1: Subject: 🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel');
       
-      const result1 = MailApp.sendEmail({
-        to: 'michaelalfieri.ffl@gmail.com',
-        subject: '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel',
-        htmlBody: '<h1>Test Email 1</h1><p>This is a test email with hardcoded address.</p>'
-      });
+      // Try the simplest possible email
+      const result1 = MailApp.sendEmail('michaelalfieri.ffl@gmail.com', 'Test Email', 'This is a test');
       
       Logger.log('✅ Test 1 email sent successfully');
       Logger.log('✅ Test 1 result:', result1);
