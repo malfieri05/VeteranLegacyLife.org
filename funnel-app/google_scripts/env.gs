@@ -10,13 +10,13 @@ const CONFIG = {
   // Email Configuration
   EMAIL: {
     // Admin email (where notifications are sent)
-    ADMIN: 'lindsey08092@gmail.com',
+    ADMIN: 'michaelalfieri.ffl@gmail.com',
     // From email (sender)
-    FROM: 'lindsey08092@gmail.com',
+    FROM: 'michaelalfieri.ffl@gmail.com',
     // To email (recipient) - change to actual user email when authorized
-    TO: 'lindsey08092@gmail.com',
+    TO: 'michaelalfieri.ffl@gmail.com',
     // Reply-to email
-    REPLY_TO: 'lindsey08092@gmail.com'
+    REPLY_TO: 'michaelalfieri.ffl@gmail.com'
   },
   
   // Google Sheet Configuration
