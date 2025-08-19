@@ -601,20 +601,47 @@ function testNewEntriesAndEmails() {
     
     // Test basic email sending first
     Logger.log('Testing basic email sending...');
+    Logger.log('Email config:', JSON.stringify(emailConfig));
+    
+    // Test 1: Try sending without 'from' field (uses default)
     try {
+      Logger.log('Test 1: Attempting to send email without FROM field...');
       MailApp.sendEmail({
         to: emailConfig.ADMIN,
-        from: emailConfig.FROM,
-        subject: '🧪 TEST EMAIL - Veteran Legacy Life Funnel',
-        htmlBody: '<h1>Test Email</h1><p>This is a test email to verify email sending is working.</p>'
+        subject: '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel',
+        htmlBody: '<h1>Test Email 1</h1><p>This is a test email without FROM field.</p>'
       });
-      Logger.log('✅ Basic test email sent successfully');
-    } catch (emailTestError) {
-      Logger.log('❌ Basic test email failed:', emailTestError.toString());
-      return ContentService.createTextOutput(JSON.stringify({
-        success: false,
-        error: 'Email sending test failed: ' + emailTestError.toString()
-      })).setMimeType(ContentService.MimeType.JSON);
+      Logger.log('✅ Test 1 email sent successfully');
+    } catch (emailTestError1) {
+      Logger.log('❌ Test 1 failed:', emailTestError1.toString());
+      Logger.log('❌ Error name:', emailTestError1.name);
+      Logger.log('❌ Error message:', emailTestError1.message);
+      
+      // Test 2: Try with different email format
+      try {
+        Logger.log('Test 2: Attempting to send email with different format...');
+        MailApp.sendEmail(emailConfig.ADMIN, '🧪 TEST EMAIL 2 - Veteran Legacy Life Funnel', 'This is a plain text test email.');
+        Logger.log('✅ Test 2 email sent successfully');
+      } catch (emailTestError2) {
+        Logger.log('❌ Test 2 failed:', emailTestError2.toString());
+        Logger.log('❌ Error name:', emailTestError2.name);
+        Logger.log('❌ Error message:', emailTestError2.message);
+        
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          error: 'All email sending tests failed',
+          details: {
+            test1: {
+              name: emailTestError1.name,
+              message: emailTestError1.message
+            },
+            test2: {
+              name: emailTestError2.name,
+              message: emailTestError2.message
+            }
+          }
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
     }
     
     // Test data that matches the new FunnelStore structure exactly
