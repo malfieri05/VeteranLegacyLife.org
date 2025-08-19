@@ -636,16 +636,24 @@ function testNewEntriesAndEmails() {
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
-    // Test 1: Try sending without 'from' field (uses default)
+    // Test email address validation
+    Logger.log('Testing email address validation...');
+    const testEmail = 'michaelalfieri.ffl@gmail.com';
+    Logger.log('Test email:', testEmail);
+    Logger.log('Email type:', typeof testEmail);
+    Logger.log('Email length:', testEmail.length);
+    Logger.log('Email includes @:', testEmail.includes('@'));
+    
+    // Test 1: Try sending with hardcoded email address
     try {
-      Logger.log('Test 1: Attempting to send email without FROM field...');
-      Logger.log('Test 1: To address:', emailConfig.ADMIN);
-      Logger.log('Test 1: Subject:', '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel');
+      Logger.log('Test 1: Attempting to send email with hardcoded address...');
+      Logger.log('Test 1: To address: michaelalfieri.ffl@gmail.com');
+      Logger.log('Test 1: Subject: 🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel');
       
       const result1 = MailApp.sendEmail({
-        to: emailConfig.ADMIN,
+        to: 'michaelalfieri.ffl@gmail.com',
         subject: '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel',
-        htmlBody: '<h1>Test Email 1</h1><p>This is a test email without FROM field.</p>'
+        htmlBody: '<h1>Test Email 1</h1><p>This is a test email with hardcoded address.</p>'
       });
       
       Logger.log('✅ Test 1 email sent successfully');
