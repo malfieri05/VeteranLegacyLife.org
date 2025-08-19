@@ -597,11 +597,20 @@ function testNewEntriesAndEmails() {
   
   try {
     const sheet = SpreadsheetApp.getActiveSheet();
+    // Initialize configuration first
+    Logger.log('Initializing configuration...');
+    const configInitialized = initializeConfig();
+    Logger.log('Configuration initialized:', configInitialized);
+    
     const emailConfig = getEmailConfig();
     
     // Test basic email sending first
     Logger.log('Testing basic email sending...');
-    Logger.log('Email config:', JSON.stringify(emailConfig));
+    Logger.log('getEmailConfig() returned:', emailConfig);
+    Logger.log('emailConfig type:', typeof emailConfig);
+    Logger.log('emailConfig.ADMIN:', emailConfig?.ADMIN);
+    Logger.log('emailConfig.FROM:', emailConfig?.FROM);
+    Logger.log('Email config JSON:', JSON.stringify(emailConfig));
     
     // Check if MailApp is available
     Logger.log('MailApp available:', typeof MailApp !== 'undefined');
