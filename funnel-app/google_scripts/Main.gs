@@ -603,19 +603,46 @@ function testNewEntriesAndEmails() {
     Logger.log('Testing basic email sending...');
     Logger.log('Email config:', JSON.stringify(emailConfig));
     
+    // Check if MailApp is available
+    Logger.log('MailApp available:', typeof MailApp !== 'undefined');
+    Logger.log('MailApp.sendEmail available:', typeof MailApp.sendEmail === 'function');
+    
+    if (typeof MailApp === 'undefined') {
+      Logger.log('❌ MailApp is not available!');
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        error: 'MailApp is not available - check script permissions'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
     // Test 1: Try sending without 'from' field (uses default)
     try {
       Logger.log('Test 1: Attempting to send email without FROM field...');
-      MailApp.sendEmail({
+      Logger.log('Test 1: To address:', emailConfig.ADMIN);
+      Logger.log('Test 1: Subject:', '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel');
+      
+      const result1 = MailApp.sendEmail({
         to: emailConfig.ADMIN,
         subject: '🧪 TEST EMAIL 1 - Veteran Legacy Life Funnel',
         htmlBody: '<h1>Test Email 1</h1><p>This is a test email without FROM field.</p>'
       });
+      
       Logger.log('✅ Test 1 email sent successfully');
+      Logger.log('✅ Test 1 result:', result1);
     } catch (emailTestError1) {
-      Logger.log('❌ Test 1 failed:', emailTestError1.toString());
-      Logger.log('❌ Error name:', emailTestError1.name);
-      Logger.log('❌ Error message:', emailTestError1.message);
+      Logger.log('❌ Test 1 failed with error object:', emailTestError1);
+      Logger.log('❌ Test 1 error type:', typeof emailTestError1);
+      Logger.log('❌ Test 1 error toString:', emailTestError1.toString());
+      Logger.log('❌ Test 1 error name:', emailTestError1.name);
+      Logger.log('❌ Test 1 error message:', emailTestError1.message);
+      Logger.log('❌ Test 1 error stack:', emailTestError1.stack);
+      
+      // Try to get more error details
+      try {
+        Logger.log('❌ Test 1 error JSON:', JSON.stringify(emailTestError1));
+      } catch (jsonError) {
+        Logger.log('❌ Could not stringify error:', jsonError.toString());
+      }
       
       // Test 2: Try with different email format
       try {
