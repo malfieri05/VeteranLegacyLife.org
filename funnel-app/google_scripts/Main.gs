@@ -251,7 +251,9 @@ function handleApplicationSubmission(data, sessionId) {
     // Send application completion email
     try {
       Logger.log(`[${sessionId}] Sending application completion email`);
-      sendApplicationCompleteEmail(data);
+      Logger.log(`[${sessionId}] Email config: ${JSON.stringify(getEmailConfig())}`);
+      const emailResult = sendApplicationCompleteEmail(data);
+      Logger.log(`[${sessionId}] Email send result: ${emailResult}`);
       rowData[SHEET_COLUMNS.COMPLETED_EMAIL_SENT - 1] = 'Yes';
       // Update the email flag in the sheet
       if (existingRow) {
@@ -260,6 +262,7 @@ function handleApplicationSubmission(data, sessionId) {
       Logger.log(`[${sessionId}] Application completion email sent successfully`);
     } catch (emailError) {
       Logger.log(`[${sessionId}] Error sending application completion email: ${emailError.toString()}`);
+      Logger.log(`[${sessionId}] Error stack: ${emailError.stack}`);
     }
     
     return {
@@ -776,8 +779,13 @@ function testNewEntriesAndEmails() {
     };
     
     // Process all test data
+    Logger.log('Processing test data 1 (Application)...');
     handleApplicationSubmission(testData1, testData1.sessionId);
+    
+    Logger.log('Processing test data 2 (Lead)...');
     handleLeadSubmission(testData2, testData2.sessionId);
+    
+    Logger.log('Processing test data 3 (Partial)...');
     handlePartialSubmission(testData3, testData3.sessionId);
     
     Logger.log('testNewEntriesAndEmails completed successfully');

@@ -243,6 +243,7 @@ function sendAbandonmentAlertSMS(data) {
 
 function sendApplicationCompleteEmail(data) {
   Logger.log('Sending COMPLETE APPLICATION notification');
+  Logger.log('Data received:', JSON.stringify(data));
   
   try {
     // Parse form data
