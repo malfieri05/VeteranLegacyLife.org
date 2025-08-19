@@ -602,6 +602,18 @@ function testNewEntriesAndEmails() {
     const configInitialized = initializeConfig();
     Logger.log('Configuration initialized:', configInitialized);
     
+    // Try direct access to CONFIG
+    Logger.log('Direct CONFIG access test:');
+    try {
+      Logger.log('CONFIG available:', typeof CONFIG !== 'undefined');
+      if (typeof CONFIG !== 'undefined') {
+        Logger.log('CONFIG.EMAIL:', CONFIG.EMAIL);
+        Logger.log('CONFIG.EMAIL.ADMIN:', CONFIG.EMAIL.ADMIN);
+      }
+    } catch (configError) {
+      Logger.log('❌ Direct CONFIG access failed:', configError.toString());
+    }
+    
     const emailConfig = getEmailConfig();
     
     // Test basic email sending first

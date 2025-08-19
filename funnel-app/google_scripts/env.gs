@@ -6,7 +6,7 @@
  */
 
 // Environment Configuration
-const CONFIG = {
+var CONFIG = {
   // Email Configuration
   EMAIL: {
     // Admin email (where notifications are sent)
