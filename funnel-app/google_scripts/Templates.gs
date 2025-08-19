@@ -246,6 +246,7 @@ function sendApplicationCompleteEmail(data) {
   Logger.log('Data received:', JSON.stringify(data));
   
   try {
+    Logger.log('Step 1: Parsing form data...');
     // Parse form data
     const parsedFormData = {
       contactInfo: data.contactInfo || {},
@@ -288,18 +289,32 @@ function sendApplicationCompleteEmail(data) {
       quoteType: parsedFormData.quoteData?.type || ''
     };
     
+    Logger.log('Step 2: Building email data...');
+    Logger.log('Email data built:', JSON.stringify(emailData));
+    
     // Generate HTML email
+    Logger.log('Step 3: Generating HTML...');
     const html = generateApplicationCompleteHTML(emailData);
+    Logger.log('HTML generated successfully, length:', html.length);
     
     // Send admin notification
+    Logger.log('Step 4: Getting email config...');
     const emailConfig = getEmailConfig();
-    MailApp.sendEmail({
+    Logger.log('Email config retrieved:', JSON.stringify(emailConfig));
+    Logger.log('Step 5: Sending email...');
+    Logger.log('To:', emailConfig.ADMIN);
+    Logger.log('From:', emailConfig.FROM);
+    Logger.log('Subject:', `✅ APPLICATION COMPLETE: ${emailData.firstName} ${emailData.lastName} - ${emailData.quoteCoverage} Coverage`);
+    
+    const emailResult = MailApp.sendEmail({
       to: emailConfig.ADMIN,
       from: emailConfig.FROM,
       replyTo: emailConfig.REPLY_TO,
       subject: `✅ APPLICATION COMPLETE: ${emailData.firstName} ${emailData.lastName} - ${emailData.quoteCoverage} Coverage`,
       htmlBody: html
     });
+    
+    Logger.log('Step 6: Email sent successfully, result:', emailResult);
     
     // Send customer confirmation
     sendApplicationConfirmation(data);
