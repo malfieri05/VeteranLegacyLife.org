@@ -73,6 +73,7 @@ export interface FunnelState {
   visitedSteps: Set<number>
   isExitModalOpen: boolean // New property for exit modal
   isManualNavigation: boolean // Flag to prevent auto-advance during manual navigation
+  autoAdvanceEnabled: boolean // Flag to control auto-advance functionality
 }
 
 export interface FunnelActions {
@@ -90,6 +91,7 @@ export interface FunnelActions {
   showExitModal: () => void // New action
   hideExitModal: () => void // New action
   setManualNavigation: (isManual: boolean) => void // New action to control manual navigation flag
+  setAutoAdvanceEnabled: (enabled: boolean) => void // New action to control auto-advance
 }
 
 export type FunnelStore = FunnelState & FunnelActions
@@ -103,6 +105,7 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   visitedSteps: new Set<number>(), // Track which steps have been visited
   isExitModalOpen: false, // Initialize new state
   isManualNavigation: false, // Initialize manual navigation flag
+  autoAdvanceEnabled: true, // Initialize auto-advance as enabled
 
   setCurrentStep: (step) => set({ currentStep: step }),
   
@@ -554,13 +557,15 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       formData: initialState,
       visitedSteps: new Set<number>(),
       isExitModalOpen: false, // Reset new state
-      isManualNavigation: false // Reset manual navigation flag
+      isManualNavigation: false, // Reset manual navigation flag
+      autoAdvanceEnabled: true // Reset auto-advance to enabled
     });
   },
 
   showExitModal: () => set({ isExitModalOpen: true }),
   hideExitModal: () => set({ isExitModalOpen: false }),
-  setManualNavigation: (isManual: boolean) => set({ isManualNavigation: isManual })
+  setManualNavigation: (isManual: boolean) => set({ isManualNavigation: isManual }),
+  setAutoAdvanceEnabled: (enabled: boolean) => set({ autoAdvanceEnabled: enabled })
 }))
 
 // Helper function to check step validation

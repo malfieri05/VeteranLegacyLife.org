@@ -114,7 +114,7 @@ export const ContactInfo: React.FC = () => {
             />
             <div style={{ fontSize: '0.875rem', lineHeight: '1.4' }}>
               <div className="consent-text" style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.25rem' }}>
-                By checking this box, I consent to receive transactional messages related to my account, orders, or services I have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
+                By checking this box, I consent to receive transactional messages related to my account, orders, or services I have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. We will not share your private information with third parties for marketing purposes. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
               </div>
             </div>
           </label>
@@ -131,7 +131,7 @@ export const ContactInfo: React.FC = () => {
             />
             <div style={{ fontSize: '0.875rem', lineHeight: '1.4' }}>
               <div className="consent-text" style={{ color: '#6b7280', fontSize: '0.8rem', marginTop: '0.25rem' }}>
-                By checking this box, I consent to receive marketing and promotional messages, including special offers, discounts, new product updates among others. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
+                By checking this box, I consent to receive marketing and promotional messages, including special offers, discounts, new product updates among others. We will not share your private information with third parties for marketing purposes. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
               </div>
             </div>
           </label>
