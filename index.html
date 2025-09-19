@@ -10,10 +10,13 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Veteran Funnel Styles -->
+    <link rel="stylesheet" href="assets/index-f3d073f2.css">
     
     <style>
         /* Reset and Base Styles */
@@ -23,10 +26,26 @@
             box-sizing: border-box;
         }
 
+        html {
+            background: white;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 6px;
+            background: white;
+            z-index: 2147483647;
+            pointer-events: none;
+        }
+
         :root {
-            --primary-color: #3b6eea;
-            --primary-dark: #2563eb;
-            --primary-bg: #eaf1fd;
+            --primary-color: #1e3a8a;
+            --primary-dark: #1e40af;
+            --primary-bg: #eff6ff;
             --secondary-color: #dc2626;
             --accent-color: #fbbf24;
             --text-dark: #1e293b;
@@ -39,7 +58,7 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --gradient-primary: linear-gradient(135deg, #3b6eea 0%, #2563eb 100%);
+            --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             --gradient-secondary: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
             --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
         }
@@ -48,7 +67,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background-color: var(--bg-white);
+            background-color: #F8FAFC;
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
@@ -79,14 +98,28 @@
             color: var(--text-light);
         }
 
+
+
         /* Header Styles */
         header {
             background: white;
-            padding: 0.2rem 5%;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 0 5%;
             position: sticky;
             top: 0;
             z-index: 100;
+            margin-bottom: -1px;
+            border-bottom: 1px solid white;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 4px;
+            background: white;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .header-container {
@@ -96,6 +129,8 @@
             max-width: 1300px;
             margin: 0 auto;
             min-height: 40px;
+            background: white;
+            width: 100%;
         }
 
         .brand {
@@ -110,13 +145,14 @@
         }
 
         .brand span {
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.7rem;
-            color: #22304a;
-            font-weight: 800;
-            letter-spacing: 0.02em;
-            text-shadow: 0 2px 8px rgba(30,58,138,0.07);
-            font-style: oblique 10deg;
-            transform: skew(-4deg);
+            color: #1A2C42;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-shadow: none;
+            font-style: normal;
+            transform: none;
             display: inline-block;
         }
 
@@ -127,13 +163,25 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--text-dark);
+            color: #1A2C42;
             font-weight: 500;
             transition: color 0.3s ease;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .nav-link:focus,
+        .nav-link:focus-visible,
+        .nav-link:focus-within,
+        .nav-link:target {
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav-link:hover {
-            color: var(--primary-color);
+            color: #60a5fa;
         }
 
         .header-phone {
@@ -143,43 +191,804 @@
         }
 
         .header-phone i {
-            color: var(--primary-color);
+            color: #1A2C42;
             font-size: 1.2rem;
         }
 
         .header-phone-number {
             text-decoration: none;
-            color: var(--text-dark);
+            color: #1A2C42;
             font-weight: 600;
             font-size: 1.1rem;
         }
 
         /* Hero Section */
         .hero {
-            background: #2563eb;
-            color: white;
+            background: #f8fafc;
+            color: #1e293b;
             padding: 4rem 0;
             text-align: center;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+        }
+        
+        .hero-content-box {
+            background: #1A2C42;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-main-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 0;
+        }
+        
+        .hero-text {
+            flex: 1.5;
+            text-align: left;
+            max-width: 800px;
+            padding-right: 2rem;
+            padding-left: 0;
+            margin-left: 0;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-divider {
+            width: 2px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 2rem;
+            align-self: center;
+        }
+        
+        /* Main Hero Section */
+        .main-hero-section {
+            background: #F8FAFC; /* light gray background */
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-right: -50vw;
+            padding: 0; /* removed padding to eliminate white space */
+        }
+
+        .hero-blue {
+            background: #1A2C42; /* central blue strip */
+            padding: 0; /* removed all padding */
+        }
+
+        .pills-section {
+            background: #F8FAFC;
+            padding: 2rem 0;
+        }
+
+        /* Benefit Pills Section */
+        .benefit-pills {
+            background: #f8fafc;
+            padding: 0 0 4rem;
+        }
+
+        .pills-container {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-pill {
+            background: rgba(45, 65, 90, 0.95);
+            color: white;
+            padding: 0.85rem 1.6rem;
+            border-radius: 20px;
+            border: 2px solid #1A2C42;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 6px 12px rgba(2, 8, 23, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .benefit-pill i {
+            color: #FFD700;
+            font-size: 1em;
+            text-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+        }
+
+        .benefit-pill:hover {
+            transform: translateY(-2px);
+        }
+
+        .shield-icon {
+            color: #FFD700;
+            display: inline-flex;
+            align-items: center;
+            margin-right: 2px;
+            filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.2));
+        }
+        
+        .shield-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .pills-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .benefit-pill {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        .banner-fifty-fifty {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .banner-divider {
+            width: 2px;
+            background: #1A2C42;
+            margin: 0;
+            align-self: stretch;
+        }
+
+        .banner-content {
+            flex: 1;
+            padding: 3rem 3rem 3rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            align-self: stretch;
+            gap: 1rem;
+        }
+
+        .banner-accent-heading {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .banner-sub-heading {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .banner-sub-heading sup {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8em;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+            width: fit-content;
+            min-width: 250px;
+            max-width: 300px;
+        }
+
+        .cta-btn.hollow {
+            background: transparent;
+            color: white;
+            border-color: white;
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        .cta-btn.hollow:hover {
+            background: white;
+            color: #1A2C42;
+            animation: none;
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Chatbot Widget Styles */
+        #chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        #chatbot-toggle {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #1A2C42, #2C4A6B);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        #chatbot-modal {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #1A2C42, #2C4A6B);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .chatbot-message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .chatbot-message p {
+            margin: 0;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .chatbot-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chatbot-option {
+            background: #1A2C42;
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .chatbot-option:hover {
+            background: #2C4A6B;
+            transform: translateX(5px);
+        }
+
+        .chatbot-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        #chatbot-input:focus {
+            border-color: #1A2C42;
+        }
+
+        .chatbot-send {
+            background: #1A2C42;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .chatbot-send:hover {
+            background: #2C4A6B;
+        }
+
+        @media (max-width: 768px) {
+            #chatbot-modal {
+                width: 300px;
+                height: 400px;
+            }
+        }
+
+        .cta-btn.primary {
+            background: #1A2C42;
+            color: white;
+        }
+
+        .cta-btn.primary:hover {
+            background: #0f172a;
+        }
+
+        .cta-btn.secondary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .cta-btn.secondary:hover {
+            background: #2563eb;
+        }
+
+        .banner-img-wrap {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 800px;
+            overflow: visible;
+            margin-right: -12%;
+            position: relative;
+            max-height: 500px;
+        }
+
+        .banner-img-wrap .trust-badge {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .bbb-logo {
+            position: absolute;
+            bottom: 0;
+            right: -6%;
+            width: 90px;
+            height: auto;
+            z-index: 2;
+            opacity: 0.9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner-img {
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            max-width: none;
+            max-height: 500px;
+            object-fit: cover;
+            transform: translateX(6%);
+        }
+
+            margin-bottom: 1rem;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .card-footer {
+            text-align: center;
+        }
+
+        .mb-30 {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-cta {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card-cta:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        /* Insurance Plans Section */
+        .insurance-plans-section {
+            padding: 4rem 0;
+            background: #F8FAFC;
+        }
+
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 8px 24px rgba(2, 8, 23, 0.08), 0 2px 6px rgba(2, 8, 23, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            text-align: center;
+            align-items: center;
+            position: relative;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(2, 8, 23, 0.12), 0 4px 14px rgba(2, 8, 23, 0.06);
+        }
+
+        .plan-icon {
+            width: 60px;
+            height: 60px;
+            background: #1A2C42;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-icon svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .plan-icon svg path {
+            fill: white;
+        }
+
+        /* Most Popular badge */
+        .badge-popular {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 6px 10px;
+            border-radius: 9999px;
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: .02em;
+        }
+
+        .plan-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1A2C42;
+            margin: 0;
+            text-align: center;
+        }
+
+        .plan-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 85%;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .plan-features li {
+            color: #1A2C42;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            width: 18px;
+            height: 18px;
+            background: #1A2C42;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1024px) {
+            .plans-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .plans-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Steps Section */
+
+        .h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1A2C42;
+            margin: 0 0 0.5rem 0;
+        }
+
+        /* FAQ alignment with USAA style */
+        .faq {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1A2C42;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+        }
+
+        
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .banner-fifty-fifty {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .banner-divider {
+                width: 80%;
+                height: 2px;
+                margin: 2rem auto;
+            }
+
+            .banner-accent-heading {
+                font-size: 2rem;
+            }
+
+            .banner-sub-heading {
+                font-size: 1.2rem;
+            }
+
+            .two-pack {
+                grid-template-columns: 1fr;
+            }
+
+            .callout {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .section-sub-heading {
+                font-size: 1rem;
+            }
+
+            .fifty-fifty {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .fifty-fifty.reverse {
+                flex-direction: column;
+            }
+
+            .hero-content-box {
+                padding: 2rem 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .hero-main-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .hero-text {
+                flex: none;
+                max-width: 100%;
+                padding: 0 1rem;
+                text-align: center;
+            }
+            
+            .hero-divider {
+                width: 80px;
+                height: 2px;
+                margin: 1rem 0;
+                align-self: center;
+            }
+            
+            .hero-image {
+                flex: none;
+                order: -1;
+            }
+            
+            .hero-main-image {
+                max-width: 80%;
+            }
         }
 
         .trust-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
+            background: rgba(26, 44, 66, 0.9);
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .trust-badge i {
             color: #FFD700;
+            font-size: 0.9em;
+            font-weight: 900;
+            text-shadow: 0px 0px 1px rgba(0,0,0,0.2);
         }
 
         .hero h1 {
@@ -230,15 +1039,15 @@
         @keyframes pulse-attention {
             0% {
                 transform: scale(1);
-                box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+                box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
             }
             50% {
                 transform: scale(1.05);
-                box-shadow: 0 6px 20px rgba(22, 163, 74, 0.5);
+                box-shadow: 0 6px 20px rgba(30, 58, 138, 0.5);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+                box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
             }
         }
 
@@ -249,7 +1058,7 @@
             gap: 0.5rem;
             margin: 2rem 0 1rem 0;
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: #1e293b;
             font-weight: 500;
         }
 
@@ -271,11 +1080,11 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            color: white;
-            background: rgba(255, 255, 255, 0.15);
+            color: #1e293b;
+            background: rgba(26, 44, 66, 0.1);
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(26, 44, 66, 0.2);
         }
 
         .insurance-type i {
@@ -326,7 +1135,7 @@
         .benefit-icon-modern {
             width: 70px;
             height: 70px;
-            background: #2563eb;
+            background: #1e3a8a;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -334,7 +1143,7 @@
             margin: 0 auto 1.5rem;
             color: white;
             font-size: 1.8rem;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
         }
 
         .benefit-card-modern-header h3 {
@@ -366,7 +1175,7 @@
         }
 
         .benefit-list i {
-            color: #2563eb;
+            color: #1e3a8a;
             font-size: 1rem;
         }
 
@@ -401,26 +1210,26 @@
         }
 
         .comparison-table th {
-            background: #1e3a8a;
+            background: #1A2C42;
             font-weight: 600;
             color: #ffffff;
             font-size: 1rem;
         }
 
         .comparison-criteria {
-            background: #1e3a8a !important;
+            background: #1A2C42 !important;
             font-weight: 700 !important;
             color: #ffffff !important;
             width: 25%;
         }
 
         .valife-column {
-            background: #1e3a8a !important;
+            background: #1A2C42 !important;
             width: 37.5%;
         }
 
         .private-column {
-            background: #1e3a8a !important;
+            background: #1A2C42 !important;
             width: 37.5%;
         }
 
@@ -456,10 +1265,10 @@
         }
 
         .private-logo img {
-            width: 40px;
-            height: 40px;
+            width: 52px;
+            height: 52px;
             object-fit: contain;
-            border-radius: 50%;
+            border-radius: 0;
         }
 
         .column-header h3 {
@@ -506,7 +1315,7 @@
         /* FAQ Section */
         .faq {
             padding: 4rem 0;
-            background-color: #f8fafc;
+            background-color: #F8FAFC;
         }
 
         .faq-container {
@@ -516,9 +1325,9 @@
 
         .faq-item {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 0.75rem;
             overflow: hidden;
             border: 1px solid #e5e7eb;
         }
@@ -527,7 +1336,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1rem 1.25rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -538,10 +1347,11 @@
 
         .faq-question h3 {
             margin: 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #374151;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1A2C42;
             flex: 1;
+            line-height: 1.4;
         }
 
         .faq-question i {
@@ -555,7 +1365,7 @@
         }
 
         .faq-answer {
-            padding: 0 1.5rem;
+            padding: 0 1.25rem;
             max-height: 0;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -563,7 +1373,7 @@
         }
 
         .faq-item.active .faq-answer {
-            padding: 1.5rem;
+            padding: 1rem 1.25rem;
             max-height: 1000px;
             border-top: 1px solid #e5e7eb;
         }
@@ -717,41 +1527,595 @@
         .footer {
             background: var(--text-dark);
             color: var(--text-white);
-            padding: 60px 0 20px;
+            padding: 30px 0 15px;
         }
 
-        .footer-legal-text {
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .footer-section p {
+            color: #b0b8c1;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            color: #b0b8c1;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-section i {
+            color: #CC9900;
+            font-size: 0.9rem;
+            width: 18px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-legal {
             text-align: center;
             color: #b0b8c1;
             font-size: 0.75rem;
-            font-weight: 400;
-            line-height: 1.3;
-            padding: 12px 0 12px 0;
-            max-width: 900px;
-            margin: 0 auto;
+            line-height: 1.4;
         }
 
-        .footer-legal-text p {
-            margin-bottom: 0.4rem;
+        .footer-legal p {
+            margin-bottom: 0.75rem;
         }
 
+        .footer-legal a {
+            color: #b0b8c1;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-section ul li {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            :root { --container-pad: 16px; }
+            body { -webkit-text-size-adjust: 100%; }
+            header { padding: 0 16px; }
+            .hero { padding: 20px 0 10px; }
+            .hero-content { padding: 0 var(--container-pad); }
+            .hero-content-box { padding: 14px; border-radius: 12px; }
+            .hero-main-content { flex-direction: column; gap: 14px; }
+            .hero-text { text-align: center; }
+            .hero h1 { font-size: clamp(22px, 6vw, 28px); line-height: 1.15; }
+            .hero h2 { font-size: clamp(16px, 4.8vw, 18px); }
+            .hero p { font-size: 0.95rem; }
+            .hero-image { max-width: 90%; margin: 0 auto; }
+            .hero-main-image { width: 100%; height: auto; }
+            .benefit-pills { padding: 8px var(--container-pad); }
+            .pills-container { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .benefit-pill { padding: 10px 10px; font-size: 0.9rem; border-radius: 14px; }
+            .banner-content { gap: 12px; padding: 0 var(--container-pad); }
+            .plan-cards { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 0 var(--container-pad); }
+            .plan-card { padding: 14px; border-radius: 14px; }
+            .plan-card h3 { font-size: 1.05rem; }
+            .plan-card p { font-size: 0.95rem; }
+            .comparison { padding: 20px var(--container-pad); }
+            .comparison-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .comparison-table { min-width: 640px; }
+            .private-logo img { height: 42px; }
+            .bbb-logo { width: 72px; right: 8px; top: 8px; }
+        }
+
+        @media (max-width: 420px) {
+            .pills-container { grid-template-columns: 1fr; }
+            .private-logo img { height: 36px; }
+            .hero h1 { font-size: clamp(20px, 6.5vw, 24px); }
+        }
     </style>
-  <script type="module" crossorigin src="/assets/index-bf4192a8.js"></script>
-  <link rel="stylesheet" href="/assets/index-fdd03d2a.css">
+  <script type="module">
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    async function loadFunnelDev() {
+      const ports = [5173, 5174, 5175]
+      for (const p of ports) {
+        try {
+          await import(`http://localhost:${p}/src/main.tsx`)
+          return true
+        } catch (e) {
+          // try next
+        }
+      }
+      return false
+    }
+        if (isLocal) {
+      loadFunnelDev().then((ok) => {
+        if (!ok) import('/assets/index-e3aadf94.js')
+      })
+    } else {
+      import('/assets/index-e3aadf94.js')
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/index-f3d073f2.css">
+  
+  <!-- Enhanced Responsive Web Design CSS -->
+  <style>
+    /* ===== RESPONSIVE WEB DESIGN ENHANCEMENTS ===== */
+    
+    /* CSS Custom Properties for Fluid Design */
+    :root {
+      /* Fluid Typography Scale */
+      --fluid-min-width: 320;
+      --fluid-max-width: 1920;
+      --fluid-min-size: 16;
+      --fluid-max-size: 18;
+      --fluid-min-ratio: 1.2;
+      --fluid-max-ratio: 1.333;
+      
+      /* Responsive Spacing */
+      --space-xs: clamp(0.5rem, 2vw, 1rem);
+      --space-sm: clamp(1rem, 3vw, 1.5rem);
+      --space-md: clamp(1.5rem, 4vw, 2rem);
+      --space-lg: clamp(2rem, 5vw, 3rem);
+      --space-xl: clamp(3rem, 6vw, 4rem);
+      
+      /* Responsive Container Widths */
+      --container-padding: clamp(1rem, 4vw, 2rem);
+      --container-max-width: min(90vw, 1200px);
+      
+      /* Color System */
+      --primary-color: #1e3a8a;
+      --primary-dark: #1e40af;
+      --primary-bg: #eff6ff;
+      --gradient-primary: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --bg-light: #f8fafc;
+    }
+    
+    /* Enhanced Container System */
+    .container {
+      width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+    
+          /* Enhanced Hero Section Responsiveness */
+      .hero-content-box {
+        background: #1A2C42;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: var(--space-xl);
+        margin: var(--space-lg) 0;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      
+      .hero-main-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-xl);
+        margin-bottom: 0;
+      }
+      
+      .hero-text {
+        flex: 1;
+        text-align: left;
+        max-width: 600px;
+      }
+      
+      .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .hero-main-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .hero-divider {
+        width: 2px;
+        height: clamp(180px, 25vh, 220px);
+        background: rgba(255, 255, 255, 0.3);
+        margin: 0 var(--space-lg);
+        align-self: center;
+      }
+    
+
+
+    /* Enhanced Benefits Section Responsiveness */
+    .benefits-cards-grid {
+      display: grid;
+      gap: var(--space-lg);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+      margin-top: var(--space-xl);
+    }
+    
+    .benefit-card-modern {
+      background: white;
+      border-radius: 16px;
+      padding: var(--space-lg);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .benefit-card-modern:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Enhanced Button Responsiveness */
+    .cta-button {
+      padding: clamp(0.75rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2.5rem);
+      font-size: clamp(0.875rem, 2.5vw, 1.2rem);
+      min-height: 44px;
+      transition: all 0.3s ease;
+    }
+    
+    /* ===== COMPREHENSIVE BREAKPOINT SYSTEM ===== */
+    
+    /* Large Desktop (1200px+) */
+    @media (min-width: 1200px) {
+      .hero-main-content {
+        gap: var(--space-2xl);
+      }
+      
+      .hero h1 {
+        font-size: clamp(3rem, 5vw, 4rem);
+      }
+      
+      .hero h2 {
+        font-size: clamp(2rem, 3vw, 2.5rem);
+      }
+    }
+    
+    /* Desktop (1024px - 1199px) */
+    @media (max-width: 1199px) and (min-width: 1024px) {
+      .hero-main-content {
+        gap: var(--space-xl);
+      }
+      
+      .hero h1 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+      }
+    }
+    
+    /* Tablet Landscape (768px - 1023px) */
+    @media (max-width: 1023px) and (min-width: 768px) {
+      .hero-main-content {
+        gap: var(--space-lg);
+      }
+      
+      .hero h1 {
+        font-size: clamp(2rem, 3.5vw, 2.5rem);
+      }
+      
+      .hero h2 {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+      }
+      
+      .container {
+        padding: 0 1.5rem;
+      }
+    }
+    
+    /* Tablet Portrait (481px - 767px) */
+    @media (max-width: 767px) and (min-width: 481px) {
+      .hero-content-box {
+        padding: var(--space-lg) var(--space-md);
+        margin: var(--space-md) 0;
+      }
+      
+      .hero-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+      }
+      
+      .hero-text {
+        flex: none;
+        text-align: center;
+      }
+      
+      .hero-divider {
+        width: clamp(60px, 15vw, 80px);
+        height: 2px;
+        margin: var(--space-sm) 0;
+        align-self: center;
+      }
+      
+      .hero-image {
+        flex: none;
+        order: -1;
+      }
+      
+      .hero-main-image {
+        max-width: 70%;
+      }
+      
+      .hero h1 {
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+      }
+      
+      .hero h2 {
+        font-size: clamp(1.25rem, 3vw, 1.75rem);
+      }
+      
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      
+      .header-nav {
+        justify-content: center;
+      }
+      
+      .container {
+        padding: 0 1rem;
+      }
+    }
+    
+    /* Mobile Large (375px - 480px) */
+    @media (max-width: 480px) and (min-width: 375px) {
+      .hero-content-box {
+        padding: var(--space-md) var(--space-sm);
+        margin: var(--space-sm) 0;
+      }
+      
+      .hero-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+      }
+      
+      .hero-text {
+        flex: none;
+        text-align: center;
+      }
+      
+      .hero-divider {
+        width: clamp(50px, 20vw, 70px);
+        height: 2px;
+        margin: var(--space-xs) 0;
+        align-self: center;
+      }
+      
+      .hero-image {
+        flex: none;
+        order: -1;
+      }
+      
+      .hero-main-image {
+        max-width: 85%;
+      }
+      
+      .hero h1 {
+        font-size: clamp(1.5rem, 5vw, 1.875rem);
+      }
+      
+      .hero h2 {
+        font-size: clamp(1.125rem, 4vw, 1.5rem);
+      }
+      
+      .hero p {
+        font-size: clamp(0.875rem, 3vw, 1rem);
+      }
+      
+      .cta-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 0 0.75rem;
+      }
+    }
+    
+    /* Mobile Small (320px - 374px) */
+    @media (max-width: 374px) {
+      .hero-content-box {
+        padding: var(--space-sm);
+        margin: var(--space-xs) 0;
+      }
+      
+      .hero-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-md);
+      }
+      
+      .hero-text {
+        flex: none;
+        text-align: center;
+      }
+      
+      .hero-divider {
+        width: clamp(40px, 25vw, 60px);
+        height: 2px;
+        margin: var(--space-xs) 0;
+        align-self: center;
+      }
+      
+      .hero-image {
+        flex: none;
+        order: -1;
+      }
+      
+      .hero-main-image {
+        max-width: 90%;
+      }
+      
+      .hero h1 {
+        font-size: clamp(1.25rem, 6vw, 1.5rem);
+      }
+      
+      .hero h2 {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+      }
+      
+      .hero p {
+        font-size: clamp(0.8rem, 4vw, 0.875rem);
+      }
+      
+      .container {
+        padding: 0 0.5rem;
+      }
+    }
+    
+    /* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+    
+    @media (hover: none) and (pointer: coarse) {
+      .cta-button,
+      .nav-link {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+
+      
+      .benefit-card-modern:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+    
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+    
+    .cta-button:focus,
+    .nav-link:focus {
+      outline: 2px solid #1e3a8a;
+      outline-offset: 2px;
+    }
+    
+    /* Skip to content link for screen readers */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #1e3a8a;
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 1000;
+    }
+    
+    .skip-link:focus {
+      top: 6px;
+    }
+    
+    /* ===== SMOOTH SCROLLING ===== */
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* ===== QUALIFY BUTTON STYLING ===== */
+    
+    .qualify-button {
+      background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+      border: 2px solid white !important;
+      color: white !important;
+      font-weight: 700 !important;
+      border-radius: 12px !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3) !important;
+      animation: pulse-attention 2s ease-in-out infinite !important;
+    }
+    
+    .qualify-button:hover {
+      background: linear-gradient(135deg, #15803d, #16a34a) !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4) !important;
+    }
+    
+    .qualify-button:focus {
+      outline: 2px solid #16a34a !important;
+      outline-offset: 2px !important;
+    }
+  </style>
 </head>
 <body>
-
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
     <header>
         <div class="header-container">
             <a href="/" class="brand">
                 <img src="/logo.png" alt="Veteran Legacy Life Logo">
-                <span>Veteran Legacy Life</span>
+                <span>Veteran Legacy Life<span style="font-size: 0.5em; font-weight: 300; vertical-align: super; margin-left: 1px;">&reg;</span></span>
             </a>
             <nav class="header-nav">
                 <a href="/" class="nav-link">Home</a>
-                <a href="#benefits" class="nav-link">Products</a>
+                <a href="#insurance-plans" class="nav-link">Products</a>
                 <a href="#compare" class="nav-link">Compare</a>
                 <a href="#faq" class="nav-link">FAQ</a>
             </nav>
@@ -762,90 +2126,102 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+
+
+    <!-- Main Hero Section -->
+    <section class="main-hero-section" id="main-content">
+        <div class="hero-blue">
         <div class="container">
-            <div class="hero-content">
-                <div class="trust-badge">
-                    <i class="fas fa-star"></i>
-                    <span>Trusted by 50,000+ Veterans Nationwide</span>
-                </div>
-                <h2>Veterans & Active Service Members</h2>
-                <h1>You May Qualify for New Life Insurance Benefits in 2025</h1>
-                <p>As a resident of your state, you are entitled to check your eligibility for exclusive life insurance benefits designed specifically for our nation's heroes.</p>
-                <div class="hero-buttons">
-                    <button class="cta-button qualify-button" onclick="window.VeteranFunnel.open()">See If I Qualify <span>→</span></button>
-                </div>
-                <div class="security-note">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Your information is secure and protected</span>
-                </div>
-                <div class="insurance-types">
-                    <div class="insurance-type">
-                        <i class="fas fa-star" style="color:#FFD700;"></i>
-                        <span>No 2 year waiting period!</span>
+            <div class="banner-fifty-fifty">
+                <div class="banner-content">
+                    <h1 class="banner-accent-heading" style="font-size: 2.4rem; line-height: 1.1; margin-bottom: 0.5rem;">Simple. Affordable. Guaranteed Coverage for Veterans</h1>
+                    <h2 class="banner-sub-heading" style="font-size: 1.1rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">Join the 50,000+ Veterans who have secured their legacy</h2>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                        <a class="cta-btn hollow" href="#" onclick="window.VeteranFunnel.open()">Get Protected Today</a>
+                        <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-weight: 400;">No obligation or commitment required.</span>
                     </div>
-                    <div class="insurance-type">
-                        <i class="fas fa-star" style="color:#FFD700;"></i>
-                        <span>No Medical Exam Needed!</span>
+                </div>
+                <div class="banner-divider"></div>
+                <div class="banner-img-wrap">
+                    <img class="banner-img" src="production/armyhouseFULL.png" alt="Military family enjoying life insurance benefits" />
+                    <img class="bbb-logo" src="production/BBBB.png" alt="Better Business Bureau" />
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="pills-section">
+            <div class="container">
+                <div class="pills-container">
+                    <div class="benefit-pill">
+                        <i class="fas fa-shield-alt"></i>
+                        No 2 year waiting period
                     </div>
-                    <div class="insurance-type">
-                        <i class="fas fa-star" style="color:#FFD700;"></i>
-                        <span>Premiums never Increase!</span>
+                    <div class="benefit-pill">
+                        <i class="fas fa-shield-alt"></i>
+                        No Medical Exam Needed
+                    </div>
+                    <div class="benefit-pill">
+                        <i class="fas fa-shield-alt"></i>
+                        Premiums never Increase
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
+    
+
+    <!-- Insurance Plans Section -->
+    <section id="insurance-plans" class="insurance-plans-section">
         <div class="container">
-            <h2 class="section-title">Plans for Veterans, Active Service and Family Members</h2>
-            <div class="benefits-cards-grid">
-                <div class="benefit-card-modern">
-                    <div class="benefit-card-modern-header">
-                        <div class="benefit-icon-modern">
-                            <i class="fas fa-shield-heart"></i>
-                        </div>
-                        <h3>Whole Life Insurance</h3>
-                        <p>Lifetime protection with guaranteed cash value and fixed premiums for your loved ones' security.</p>
+            <h2 class="section-heading">Plans for Veterans, Active Service and Family Members</h2>
+            <div class="plans-container">
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 4L8 14V30C8 44.6 18.2 58.2 32 62C45.8 58.2 56 44.6 56 30V14L32 4ZM32 57.8V8.2L52 16.8V30C52 42.6 43.4 54.4 32 57.8Z" fill="#1A2C42"/>
+                        </svg>
                     </div>
-                    <ul class="benefit-list">
-                        <li><i class="fas fa-check-circle"></i> Guaranteed death benefit</li>
-                        <li><i class="fas fa-check-circle"></i> Cash value growth</li>
-                        <li><i class="fas fa-check-circle"></i> Fixed premiums</li>
-                        <li><i class="fas fa-check-circle"></i> Living benefits included</li>
+                    <h3>Whole Life Insurance</h3>
+                    <p>Lifetime protection with guaranteed cash value and fixed premiums for your loved ones' security.</p>
+                    <ul class="plan-features">
+                        <li>Guaranteed death benefit</li>
+                        <li>Cash value growth</li>
+                        <li>Fixed premiums</li>
+                        <li>Living benefits included</li>
                     </ul>
                 </div>
-                <div class="benefit-card-modern">
-                    <div class="benefit-card-modern-header">
-                        <div class="benefit-icon-modern">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Term Insurance</h3>
-                        <p>Affordable coverage for a set period, with options to convert to permanent protection.</p>
+
+                <div class="plan-card">
+                    <div class="plan-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8C18.8 8 8 18.8 8 32C8 45.2 18.8 56 32 56C45.2 56 56 45.2 56 32C56 18.8 45.2 8 32 8ZM32 52C20.96 52 12 43.04 12 32C12 20.96 20.96 12 32 12C43.04 12 52 20.96 52 32C52 43.04 43.04 52 32 52ZM33 18H29V34H41V30H33V18Z" fill="#1A2C42"/>
+                        </svg>
                     </div>
-                    <ul class="benefit-list">
-                        <li><i class="fas fa-check-circle"></i> Lower initial premiums</li>
-                        <li><i class="fas fa-check-circle"></i> Flexible term lengths</li>
-                        <li><i class="fas fa-check-circle"></i> Conversion options</li>
-                        <li><i class="fas fa-check-circle"></i> Living benefits available</li>
+                    <h3>Term Insurance</h3>
+                    <p>Affordable coverage for a set period, with options to convert to permanent protection.</p>
+                    <ul class="plan-features">
+                        <li>Lower initial premiums</li>
+                        <li>Flexible term lengths</li>
+                        <li>Conversion options</li>
+                        <li>Living benefits available</li>
                     </ul>
                 </div>
-                <div class="benefit-card-modern">
-                    <div class="benefit-card-modern-header">
-                        <div class="benefit-icon-modern">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Indexed Universal Life</h3>
-                        <p>Indexed Universal Life with market-linked growth and advanced living benefits.</p>
+
+                <div class="plan-card">
+                    <span class="badge-popular">Most Popular</span>
+                    <div class="plan-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                            <path d="M19 5L5 19M19 5H9M19 5V15" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
                     </div>
-                    <ul class="benefit-list">
-                        <li><i class="fas fa-check-circle"></i> Market-linked growth</li>
-                        <li><i class="fas fa-check-circle"></i> Downside protection</li>
-                        <li><i class="fas fa-check-circle"></i> Flexible premiums</li>
-                        <li><i class="fas fa-check-circle"></i> Advanced living benefits</li>
+                    <h3>Indexed Universal Life</h3>
+                    <p>Indexed Universal Life with market-linked growth and advanced living benefits.</p>
+                    <ul class="plan-features">
+                        <li>Market-linked growth</li>
+                        <li>Downside protection</li>
+                        <li>Flexible premiums</li>
+                        <li>Advanced living benefits</li>
                     </ul>
                 </div>
             </div>
@@ -1043,39 +2419,73 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How long does it take to get approved?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Approval times vary by policy type:</p>
-                        <ul>
-                            <li><strong>Instant Approval:</strong> Some no-exam policies approved same day</li>
-                            <li><strong>24-48 Hours:</strong> Most simplified issue policies</li>
-                            <li><strong>1-2 Weeks:</strong> Accelerated underwriting with medical records</li>
-                            <li><strong>2-6 Weeks:</strong> Traditional policies with medical exams</li>
-                            <li><strong>Same Day Coverage:</strong> Immediate temporary coverage available</li>
-                        </ul>
-                        <p><strong>Veteran Advantage:</strong> Our streamlined process for veterans often results in faster approvals. We can also provide temporary coverage while your application is being processed.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
+    <!-- Veteran Funnel Component -->
+    <div id="veteran-funnel-container"></div>
+    
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-legal-text">
-                <p>This site in not a part of the Facebook website or Facebook Inc.</p>
-                <p>Additionally, this site is not endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.</p>
-                <p>CRM Center LLC DBA My Affordable Veterans Insurance is not an insurance or operating company but connects individuals with insurance providers. Products and services are provided exclusively by the providers. Descriptions are for informational purposes only and subject to change. Insurance plans may not be available in all states.</p>
-                <p>Terms and Conditions - Privacy Policy</p>
-                <p>By entering your name and information above and clicking this button, you are consenting to receive calls or emails regarding your life insurance options, (at any phone number or email address you provide) from a life insurance representative or one of our licensed insurance agent business partners, and you agree such calls may use an automatic telephone dialing system or an artificial or prerecorded voice to deliver messages even if you are on a government do-not-call registry. This agreement is not a condition of enrollment.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Veteran Legacy Life<sup>®</sup></h4>
+                    <p>Dedicated to serving those who served. We specialize in providing comprehensive life insurance solutions tailored specifically for veterans, active service members, and their families.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Commitment</h4>
+                    <ul>
+                        <li><i class="fas fa-shield-alt"></i> A+ Rated Insurance Carriers</li>
+                        <li><i class="fas fa-star"></i> Veteran-Focused Service</li>
+                        <li><i class="fas fa-heart"></i> Family-First Approach</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> 503-764-5097</p>
+                    <p><i class="fas fa-clock"></i> Available 24/7 for Veterans</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>©2025 Veteran Legacy Life<sup>®</sup>. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget">
+        <div id="chatbot-toggle" onclick="toggleChatbot()">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="white"/>
+                <path d="M7 9H17V11H7V9ZM7 12H15V14H7V12Z" fill="white"/>
+            </svg>
+        </div>
+        <div id="chatbot-modal" style="display: none;">
+            <div class="chatbot-header">
+                <h3>Chat with us</h3>
+                <button onclick="toggleChatbot()" class="chatbot-close">×</button>
+            </div>
+            <div class="chatbot-body">
+                <div class="chatbot-message">
+                    <p>Hi! I'm here to help you with your life insurance needs. How can I assist you today?</p>
+                </div>
+                <div class="chatbot-options">
+                    <button onclick="sendQuickMessage('Get a quote')" class="chatbot-option">Get a quote</button>
+                    <button onclick="sendQuickMessage('Ask about coverage')" class="chatbot-option">Ask about coverage</button>
+                    <button onclick="sendQuickMessage('Speak with an agent')" class="chatbot-option">Speak with an agent</button>
+                </div>
+            </div>
+            <div class="chatbot-footer">
+                <input type="text" id="chatbot-input" placeholder="Type your message..." onkeypress="handleChatbotKeypress(event)">
+                <button onclick="sendMessage()" class="chatbot-send">Send</button>
+            </div>
+        </div>
+    </div>
 
     
     <script>
@@ -1084,8 +2494,118 @@
             document.getElementById('status').textContent = `Funnel: ${isOpen ? 'OPEN' : 'CLOSED'}`;
         }
 
+        // Chatbot functionality
+        function toggleChatbot() {
+            const modal = document.getElementById('chatbot-modal');
+            const isVisible = modal.style.display !== 'none';
+            modal.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                // Focus on input when opening
+                setTimeout(() => {
+                    document.getElementById('chatbot-input').focus();
+                }, 100);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            const input = document.getElementById('chatbot-input');
+            input.value = message;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message to chat
+                addMessageToChat(message, 'user');
+                input.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessageToChat(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function handleChatbotKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessageToChat(message, sender) {
+            const chatBody = document.querySelector('.chatbot-body');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chatbot-message ${sender}`;
+            
+            if (sender === 'user') {
+                messageDiv.style.background = '#1A2C42';
+                messageDiv.style.color = 'white';
+                messageDiv.style.marginLeft = '20px';
+            } else {
+                messageDiv.style.background = '#f8f9fa';
+                messageDiv.style.color = '#333';
+                messageDiv.style.marginRight = '20px';
+            }
+            
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            chatBody.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('quote') || message.includes('get a quote')) {
+                return "Great! I can help you get a life insurance quote. Click the 'Get Protected Today' button on our page to start the process, or would you like me to connect you with one of our agents?";
+            } else if (message.includes('coverage') || message.includes('coverage')) {
+                return "We offer comprehensive life insurance coverage for veterans and their families. Our policies include term life, whole life, and universal life options. What type of coverage are you most interested in?";
+            } else if (message.includes('agent') || message.includes('speak') || message.includes('call')) {
+                return "I'd be happy to connect you with one of our experienced agents! You can call us at 503-764-5097 or fill out our contact form. Our agents are available Monday-Friday 8AM-6PM PST.";
+            } else if (message.includes('price') || message.includes('cost') || message.includes('expensive')) {
+                return "Our life insurance rates are competitive and tailored to your specific needs. The cost depends on factors like age, health, and coverage amount. Get a personalized quote to see your exact rate!";
+            } else if (message.includes('veteran') || message.includes('military')) {
+                return "We specialize in life insurance for veterans and military families! We understand your unique needs and offer special benefits and rates for those who have served our country.";
+            } else {
+                return "Thank you for your message! I'm here to help with any questions about life insurance for veterans. You can also call us at 503-764-5097 or get a quote using our form above.";
+            }
+        }
+
         // FAQ Accordion Functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // Make plan cards open the funnel (click or keyboard)
+            const planCards = document.querySelectorAll('.plan-card')
+            planCards.forEach(card => {
+                // Accessibility
+                card.setAttribute('tabindex', '0')
+                card.setAttribute('role', 'button')
+
+                const openFunnel = () => {
+                    if (window.VeteranFunnel && typeof window.VeteranFunnel.open === 'function') {
+                        window.VeteranFunnel.open()
+                    } else {
+                        const cta = document.querySelector('.cta-btn.hollow')
+                        if (cta) {
+                            cta.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+                        }
+                    }
+                }
+
+                card.addEventListener('click', openFunnel)
+                card.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        openFunnel()
+                    }
+                })
+            })
+
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
@@ -1128,6 +2648,26 @@
                 });
             });
         });
+    </script>
+    
+    <!-- Veteran Funnel Script -->
+    <script type="module">
+      const isLocal2 = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+      async function loadFunnelDev2() {
+        const ports = [5173, 5174, 5175]
+        for (const p of ports) {
+          try {
+            await import(`http://localhost:${p}/src/main.tsx`)
+            return true
+          } catch (e) {}
+        }
+        return false
+      }
+      if (isLocal2) {
+        loadFunnelDev2().then((ok) => { if (!ok) import('assets/index-e3aadf94.js') })
+      } else {
+        import('assets/index-e3aadf94.js')
+      }
     </script>
 </body>
 </html>

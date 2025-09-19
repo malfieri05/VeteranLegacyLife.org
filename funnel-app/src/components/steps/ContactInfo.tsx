@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useFunnelStore } from '../../store/funnelStore'
 import { FormField } from '../shared/FormField'
+import { validateContactInfo } from '../../utils/validation'
 
 export const ContactInfo: React.FC = () => {
   const { formData, updateFormData, goToNextStep } = useFunnelStore()
@@ -14,21 +15,38 @@ export const ContactInfo: React.FC = () => {
     })
   }
   
-  // Auto-advance when all required fields are filled
+  // No auto-advance on final step
   useEffect(() => {
     // Check if all required fields are filled
     const { firstName, lastName, email, phone, transactionalConsent, marketingConsent } = formData.contactInfo
     const allFieldsFilled = firstName && lastName && email && phone && transactionalConsent && marketingConsent
     
     if (allFieldsFilled) {
-      goToNextStep() // Instant progression
+      // Final step - no auto-advance
+      console.log('All contact information fields completed')
     }
-  }, [formData.contactInfo, goToNextStep])
+  }, [formData.contactInfo])
+
+  const isFormValid = useMemo(() => {
+    const validation = validateContactInfo(formData.contactInfo)
+    return validation.isValid === true
+  }, [formData.contactInfo])
   
   return (
     <div className="contact-info-container">
       <style>
         {`
+          /* Gentle pulse to draw attention to Submit */
+          @keyframes pulseScale {
+            0% { transform: scale(1); box-shadow: 0 6px 16px rgba(26,44,66,0.15); }
+            50% { transform: scale(1.015); box-shadow: 0 10px 24px rgba(26,44,66,0.25); }
+            100% { transform: scale(1); box-shadow: 0 6px 16px rgba(26,44,66,0.15); }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .submit-pulse { animation: none !important; }
+          }
+
           @media (max-width: 768px) {
             .contact-info-container h2 {
               font-size: 1.75rem !important;
@@ -141,6 +159,33 @@ export const ContactInfo: React.FC = () => {
       <div className="security-note">
         <i className="fas fa-shield-alt"></i>
         <span>Your information is secure and will only be used to provide you with insurance quotes.</span>
+      </div>
+
+      {/* Submit button for final step progression */}
+      <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
+        <button
+          type="button"
+          onClick={() => isFormValid && goToNextStep()}
+          disabled={!isFormValid}
+          style={{
+            background: isFormValid ? '#1A2C42' : '#94a3b8',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '0.9rem 1.25rem',
+            fontWeight: 600,
+            fontSize: '1rem',
+            cursor: isFormValid ? 'pointer' : 'not-allowed',
+            width: '100%',
+            maxWidth: '360px',
+            boxShadow: '0 6px 16px rgba(26,44,66,0.15)',
+            animation: isFormValid ? 'pulseScale 2s ease-in-out infinite' : 'none',
+            willChange: 'transform, box-shadow'
+          }}
+          className="submit-pulse"
+        >
+          Submit
+        </button>
       </div>
     </div>
   )

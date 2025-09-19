@@ -1,7 +1,7 @@
 /* Import existing CSS variables from main site */
 :root {
-  --primary-color: #3b6eea;
-  --primary-dark: #2563eb;
+  --primary-color: #1A2C42;
+  --primary-dark: #0F1A2E;
   --primary-bg: #eaf1fd;
   --secondary-color: #dc2626;
   --accent-color: #fbbf24;
@@ -15,7 +15,7 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --gradient-primary: linear-gradient(135deg, #3b6eea 0%, #2563eb 100%);
+  --gradient-primary: linear-gradient(135deg, #1A2C42 0%, #2C4A6B 100%);
   --gradient-secondary: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
 }
@@ -67,12 +67,13 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: var(--gradient-primary);
+  background: #0F1A2E !important;
   color: var(--text-white);
   box-shadow: var(--shadow-md);
 }
 
 .veteran-funnel .cta-button:hover:not([disabled]) {
+  background: #0A1220 !important;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -87,6 +88,8 @@
   background: transparent;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
+  /* Explicitly disable any attention animations on Back/secondary buttons */
+  animation: none !important;
 }
 
 .veteran-funnel .cta-button.secondary:hover {
@@ -124,7 +127,7 @@
 .veteran-funnel .form-field textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(59, 110, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(26, 44, 66, 0.1);
 }
 
 .veteran-funnel .form-field input.error,
@@ -239,7 +242,7 @@
   margin-right: 12px;
   width: 18px;
   height: 18px;
-  accent-color: var(--primary-color);
+  accent-color: #2C4A6B;
 }
 
 .veteran-funnel .radio-options label:has(input[type="radio"]:checked),

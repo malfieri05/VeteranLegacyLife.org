@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node modules
+node_modules/
+funnel-app/node_modules/
+
+# Build artifacts
+/dist/
+funnel-app/dist/
+
+# Vite/Source maps
+assets/*.map
+funnel-app/dist/assets/*.map
+
+# Editor
+.idea/
+.vscode/
+*.swp

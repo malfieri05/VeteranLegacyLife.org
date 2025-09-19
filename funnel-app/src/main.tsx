@@ -79,3 +79,13 @@ if (typeof window !== 'undefined') {
 
 // Export for module systems
 export { VeteranFunnel } 
+
+// In local development, auto-open the funnel so the page isn't blank
+// and you can iterate faster. This does NOT run in production builds.
+if (import.meta && (import.meta as any).env && (import.meta as any).env.DEV) {
+  setTimeout(() => {
+    try {
+      window.VeteranFunnel?.open()
+    } catch {}
+  }, 150)
+}

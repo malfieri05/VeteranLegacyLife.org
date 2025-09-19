@@ -19,6 +19,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
 }) => {
   const shouldShowBackButton = stepConfig.showBackButton && canGoBack
   const shouldShowContinueButton = stepConfig.showContinueButton
+  const isBackOnly = shouldShowBackButton && !shouldShowContinueButton
 
   // Don't render anything if no navigation is needed
   if (!shouldShowBackButton && !shouldShowContinueButton) {
@@ -28,7 +29,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
   return (
     <div style={{ 
       display: 'flex', 
-      justifyContent: 'space-between',
+      justifyContent: isBackOnly ? 'center' : 'space-between',
       gap: '1rem',
       marginTop: '2rem'
     }}>
@@ -36,7 +37,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
         <Button
           onClick={onBack}
           variant="secondary"
-          style={{ flex: 1 }}
+          style={isBackOnly ? { maxWidth: 220, width: '100%' } : { flex: 0.5 }}
         >
           Back
         </Button>

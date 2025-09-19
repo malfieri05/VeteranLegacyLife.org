@@ -100,6 +100,11 @@ export const FunnelModal: React.FC = () => {
   }
 
   const handleNext = () => {
+    // Don't advance if we're on the last step
+    if (currentStep === 7) {
+      return;
+    }
+
     if (canGoNext()) {
       // Mark this as manual navigation just for this transition
       // so radio-button auto-advance in the next step is not blocked
@@ -126,7 +131,8 @@ export const FunnelModal: React.FC = () => {
   }
 
   const handleCloseModal = () => {
-    if (currentStep > 1 && currentStep !== 19) { // Don't show exit modal on final step
+    // Do NOT show the exit warning on the final success step (step 8)
+    if (currentStep > 1 && currentStep !== 8) {
       showExitModal()
     } else {
       closeModal()
@@ -208,17 +214,20 @@ export const FunnelModal: React.FC = () => {
               maxHeight: '92vh',
               overflow: 'auto',
               position: 'relative',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)'
+              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+              border: '1px solid #1A2C42' // subtle navy border for professionalism
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Shared Header Component */}
-            <ModalHeader
-              currentStep={currentStep}
-              totalSteps={totalSteps}
-              onClose={handleCloseModal}
-              hideProgressBar={currentStepConfig.hideProgressBar}
-            />
+            {/* Shared Header Component (omit on steps that hide progress bar, e.g., final success) */}
+            {!currentStepConfig.hideProgressBar && (
+              <ModalHeader
+                currentStep={currentStep}
+                totalSteps={totalSteps}
+                onClose={handleCloseModal}
+                hideProgressBar={currentStepConfig.hideProgressBar}
+              />
+            )}
 
             {/* Step Content */}
             <div style={{ marginBottom: '1.5rem' }}>
