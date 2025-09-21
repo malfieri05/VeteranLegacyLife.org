@@ -1653,6 +1653,35 @@
             .private-logo img { height: 36px; }
             .hero h1 { font-size: clamp(20px, 6.5vw, 24px); }
         }
+
+        @media (max-width: 768px) {
+            /* Ensure full-width, centered layout on mobile */
+            .main-hero-section { width: 100%; left: 0; transform: none; margin-right: 0; }
+            .banner-fifty-fifty { flex-direction: column; min-height: auto; }
+            .banner-content { padding: 1.25rem var(--container-pad); align-items: center; text-align: center; }
+            .banner-img-wrap { min-width: 0; width: 100%; margin-right: 0; max-height: none; }
+            .banner-img { width: 100%; height: auto; max-height: none; transform: none; }
+            .bbb-logo { right: 12px; bottom: 12px; width: 64px; }
+        }
+
+        /* ===== COMPACT MOBILE FOOTER ===== */
+        @media (max-width: 640px) {
+          .footer { padding: 20px 0 12px; }
+          .footer-content { grid-template-columns: repeat(2, 1fr); gap: 1rem; text-align: left; }
+          .footer-section h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+          .footer-section p { font-size: 0.8rem; margin-bottom: 0.5rem; }
+          .footer-section ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0.75rem; row-gap: 0.5rem; }
+          .footer-section ul li { font-size: 0.8rem; margin-bottom: 0; }
+          .footer-bottom { padding-top: 0.75rem; margin-top: 0.75rem; }
+          .footer-legal { font-size: 0.7rem; }
+        }
+
+        @media (max-width: 380px) {
+          /* Fall back to single column on extra-small devices */
+          .footer-content { grid-template-columns: 1fr; }
+          .footer-section ul { grid-template-columns: 1fr; }
+          .footer { padding: 18px 0 10px; }
+        }
     </style>
   <script type="module">
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
