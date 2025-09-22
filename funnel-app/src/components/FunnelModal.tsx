@@ -181,42 +181,34 @@ export const FunnelModal: React.FC = () => {
 
   return (
     <>
+      {/* Scoped responsive styles for the funnel modal */}
+      <style>{`
+        .funnel-overlay { 
+          position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; 
+          background-color: rgba(0,0,0,0.5); z-index: 1000; padding: clamp(12px, 4vw, 24px);
+        }
+        .funnel-modal {
+          background: #ffffff; border-radius: 12px; padding: clamp(16px, 3.5vw, 32px); width: 100%;
+          max-width: min(720px, 94vw); max-height: 92vh; overflow: auto; position: relative;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #1A2C42;
+          -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+        }
+        @media (max-width: 480px) { .funnel-modal { border-radius: 10px; } }
+      `}</style>
+
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '20px'
-          }}
+          className="funnel-overlay"
           onClick={handleCloseModal}
         >
           <motion.div
             initial={{ scale: 0.98, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.98, opacity: 0 }}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              padding: '2rem',
-              width: '100%',
-              maxWidth: '720px',
-              maxHeight: '92vh',
-              overflow: 'auto',
-              position: 'relative',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-              border: '1px solid #1A2C42' // subtle navy border for professionalism
-            }}
+            className="funnel-modal"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Shared Header Component (omit on steps that hide progress bar, e.g., final success) */}
