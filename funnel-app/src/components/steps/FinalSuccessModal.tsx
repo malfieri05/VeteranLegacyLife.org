@@ -97,7 +97,7 @@ export const FinalSuccessModal: React.FC = () => {
           @keyframes drawCheck { to { stroke-dashoffset: 0; } }
           .next-steps {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin: 16px 0 16px 0;
           }
@@ -322,7 +322,7 @@ export const FinalSuccessModal: React.FC = () => {
 
       {/* Loading-only: show two cards (Concierge Call, No Obligation) */}
       {phase === 'loading' && (
-        <div className="next-steps" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        <div className="next-steps">
           <div className="next-card">
             <strong style={{ color: '#1A2C42' }}><span style={{ filter: 'brightness(0.5) sepia(1) saturate(3) hue-rotate(180deg)', marginRight: '8px' }}>👤</span>Concierge Call</strong>
             <p className="muted" style={{ marginTop: 6 }}>A licensed specialist reviews your profile and contacts you to tailor options.</p>

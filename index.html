@@ -370,7 +370,7 @@
             align-self: stretch;
         }
 
-        .banner-content {
+            .banner-content {
             flex: 1;
             padding: 3rem 3rem 3rem 0;
             display: flex;
@@ -380,6 +380,13 @@
             align-self: stretch;
             gap: 1rem;
         }
+            /* Mobile-only reordering to match mockup: image first, then headline, CTA, then join text */
+            @media (max-width: 768px) {
+              .banner-img-wrap { order: -1; }
+              .banner-content { align-items: center; text-align: center; }
+              .banner-content .cta-group { order: 2; }
+              .banner-content .banner-sub-heading { order: 3; margin-top: 0.5rem; }
+            }
 
         .banner-accent-heading {
             font-size: 3rem;
@@ -621,7 +628,7 @@
             background: #2563eb;
         }
 
-        .banner-img-wrap {
+            .banner-img-wrap {
             flex: 1.5;
             display: flex;
             flex-direction: column;
@@ -633,6 +640,16 @@
             position: relative;
             max-height: 500px;
         }
+            @media (max-width: 768px) {
+              .banner-img-wrap {
+                min-width: 0;
+                width: 100%;
+                margin-right: 0;
+                max-height: none;
+              }
+              .banner-img { width: 100%; height: auto; transform: none; }
+              .bbb-logo { right: 12px; top: 12px; bottom: auto; width: 64px; }
+            }
 
         .banner-img-wrap .trust-badge {
             position: absolute;
@@ -887,11 +904,11 @@
 
         
         /* Responsive design for mobile */
-        @media (max-width: 768px) {
+            @media (max-width: 768px) {
             .banner-fifty-fifty {
                 flex-direction: column;
                 text-align: center;
-                padding: 2rem;
+                padding: 1.25rem var(--container-pad);
             }
 
             .banner-divider {
@@ -1439,11 +1456,11 @@
             
             /* Mobile hero optimizations */
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: clamp(1.5rem, 6.2vw, 2rem);
             }
             
             .hero h2 {
-                font-size: 1.5rem;
+                font-size: clamp(1rem, 4.2vw, 1.25rem);
             }
             
             .hero p {
@@ -1451,10 +1468,10 @@
             }
             
             .cta-button {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
+                padding: 0.875rem 1.25rem;
+                font-size: 1rem;
                 width: 100%;
-                max-width: 300px;
+                max-width: 320px;
             }
             
             .insurance-types {
@@ -2165,7 +2182,7 @@
                 <div class="banner-content">
                     <h1 class="banner-accent-heading" style="font-size: 2.4rem; line-height: 1.1; margin-bottom: 0.5rem;">Simple. Affordable. Guaranteed Coverage for Veterans</h1>
                     <h2 class="banner-sub-heading" style="font-size: 1.1rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">Join the 50,000+ Veterans who have secured their legacy</h2>
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div class="cta-group" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
                         <a class="cta-btn hollow" href="#" onclick="window.VeteranFunnel.open()">Get Protected Today</a>
                         <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-weight: 400;">No obligation or commitment required.</span>
                     </div>
@@ -2693,9 +2710,9 @@
         return false
       }
       if (isLocal2) {
-        loadFunnelDev2().then((ok) => { if (!ok) import('assets/index-8b4e9c5b.js') })
+        loadFunnelDev2().then((ok) => { if (!ok) import('assets/index-96d53703.js') })
       } else {
-        import('assets/index-8b4e9c5b.js')
+        import('assets/index-96d53703.js')
       }
     </script>
 </body>
