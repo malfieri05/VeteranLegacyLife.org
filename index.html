@@ -606,6 +606,13 @@
         @media (max-width: 768px) {
             /* Hide top navigation links on mobile */
             .header-nav { display: none !important; }
+            /* Compact header spacing on mobile */
+            header { padding: 6px var(--container-pad); }
+            .header-container { gap: 0.25rem; padding: 0; }
+            .brand img { height: 44px; }
+            .brand span { font-size: clamp(1.25rem, 6vw, 1.5rem); }
+            .header-phone-number { font-size: 1rem; }
+            .header-phone { gap: 0.4rem; }
             #chatbot-modal {
                 width: 300px;
                 height: 400px;
