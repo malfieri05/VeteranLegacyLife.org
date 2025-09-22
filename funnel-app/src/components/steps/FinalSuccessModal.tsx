@@ -274,22 +274,22 @@ export const FinalSuccessModal: React.FC = () => {
             <div className="trust-badges">
               <img className="trust-badge" src="/production/NIPR.png" alt="NIPR - National Insurance Producer Registry" />
               <img className="trust-badge" src="/production/BBBblue.png" alt="BBB A+ Rating" />
-            </div>
+          </div>
             <p className="muted" style={{ marginTop: '12px', fontSize: '0.9rem', color: '#475569', fontStyle: 'italic' }}>
               Look out for Michael's call from a (503) area code.
             </p>
-            <button 
+          <button
               onClick={closeModal}
-              style={{ 
+            style={{
                 marginTop: '16px',
                 padding: '10px 32px',
                 fontSize: '1rem',
                 fontWeight: 600,
-                color: 'white',
+              color: 'white',
                 background: '#1A2C42',
-                border: 'none',
+              border: 'none',
                 borderRadius: '8px',
-                cursor: 'pointer',
+              cursor: 'pointer',
                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 transform: 'scale(1)',
@@ -315,11 +315,11 @@ export const FinalSuccessModal: React.FC = () => {
               }}
             >
               Done
-            </button>
+          </button>
           </>
         )}
           </div>
-
+          
       {/* Loading-only: show two cards (Concierge Call, No Obligation) */}
       {phase === 'loading' && (
         <div className="next-steps">

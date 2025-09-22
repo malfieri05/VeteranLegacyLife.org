@@ -932,11 +932,15 @@
             }
 
             .banner-accent-heading {
-                font-size: 1.4rem; /* smaller headline per mock */
+                font-size: clamp(1.25rem, 4.5vw, 1.4rem); /* smaller headline per mock */
+                line-height: 1.2;
+                margin-bottom: 0.75rem;
             }
 
             .banner-sub-heading {
-                font-size: 0.95rem;
+                font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
             }
 
             .two-pack {
@@ -1690,12 +1694,10 @@
         @media (max-width: 768px) {
             /* Ensure full-width, centered layout on mobile */
             .main-hero-section { width: 100%; left: 0; transform: none; margin-right: 0; }
-            .main-hero-section .container { padding-left: 0; padding-right: 0; }
-            .banner-fifty-fifty { flex-direction: column; min-height: auto; padding: 0; }
+            .banner-fifty-fifty { flex-direction: column; min-height: auto; }
             .banner-content { padding: 1.25rem var(--container-pad); align-items: center; text-align: center; }
-            /* Full-bleed image wrapper */
-            .banner-img-wrap { min-width: 0; width: 100vw; margin: 0 calc(50% - 50vw); max-height: none; position: relative; }
-            .banner-img { width: 100vw; height: auto; max-height: none; transform: none; display: block; object-fit: cover; }
+            .banner-img-wrap { min-width: 0; width: 100vw; margin: 0 calc(50% - 50vw); max-height: none; display: flex; justify-content: center; padding: 0; position: relative; }
+            .banner-img { width: 100vw; height: auto; max-width: none; transform: none; display: block; margin: 0; object-fit: cover; }
             .bbb-logo { right: 12px; bottom: 12px; width: 64px; }
         }
 
