@@ -1673,8 +1673,10 @@
             .plan-card h3 { font-size: 1.05rem; }
             .plan-card p { font-size: 0.95rem; }
             .comparison { padding: 20px var(--container-pad); }
-            .comparison-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .comparison-table { min-width: 640px; }
+            /* Show full table width on mobile (no horizontal scroll) */
+            .comparison-table-container { overflow-x: visible; }
+            .comparison-table { min-width: 0; width: 100%; table-layout: fixed; }
+            .comparison-table th, .comparison-table td { word-break: break-word; white-space: normal; }
             .private-logo img { height: 42px; }
             .bbb-logo { width: 72px; right: 8px; top: 8px; }
         }
