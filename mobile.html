@@ -775,18 +775,15 @@
         }
 
         .mobile-funnel-continue {
-            background: #1A2C42;
-            color: white;
+            background: #9ca3af;
+            color: #6b7280;
+            opacity: 0.5;
         }
 
-        .mobile-funnel-continue:hover {
+        .mobile-funnel-continue:hover:not(:disabled) {
             background: #0f172a;
         }
 
-        .mobile-funnel-continue:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
 
         .mobile-success-step {
             text-align: center;
@@ -1211,8 +1208,6 @@
                     break;
                 case 7:
                     content.innerHTML = getContactInfoHTML();
-                    // Update button state after loading contact info step
-                    setTimeout(() => updateNextButtonState(), 100);
                     break;
                 case 8:
                     content.innerHTML = getLoadingHTML();
@@ -1223,6 +1218,9 @@
                     content.innerHTML = getSuccessHTML();
                     break;
             }
+            
+            // Update next button state for all steps
+            setTimeout(() => updateNextButtonState(), 100);
         }
 
         function updateProgressBar() {
@@ -1289,22 +1287,51 @@
             const continueBtn = document.getElementById('mobileContinueBtn');
             if (!continueBtn) return;
             
-            if (mobileFunnelState.currentStep === 7) {
-                // For contact info step, check if all required fields are filled
-                if (isContactInfoValid()) {
-                    continueBtn.disabled = false;
-                    continueBtn.style.opacity = '1';
-                    continueBtn.style.cursor = 'pointer';
-                } else {
-                    continueBtn.disabled = true;
-                    continueBtn.style.opacity = '0.5';
-                    continueBtn.style.cursor = 'not-allowed';
-                }
-            } else {
-                // For other steps, enable the button
+            let isValid = false;
+            
+            // Check if current step is valid based on step number
+            switch (mobileFunnelState.currentStep) {
+                case 1: // State Selection
+                    isValid = !!mobileFunnelState.formData.state;
+                    break;
+                case 2: // Military Status
+                    isValid = !!mobileFunnelState.formData.militaryStatus;
+                    break;
+                case 3: // Branch of Service
+                    isValid = !!mobileFunnelState.formData.branchOfService;
+                    break;
+                case 4: // Marital Status
+                    isValid = !!mobileFunnelState.formData.maritalStatus;
+                    break;
+                case 5: // Coverage Amount
+                    isValid = !!mobileFunnelState.formData.coverageAmount;
+                    break;
+                case 6: // Birthday
+                    isValid = !!mobileFunnelState.formData.dateOfBirth;
+                    break;
+                case 7: // Contact Info
+                    isValid = isContactInfoValid();
+                    break;
+                case 8: // Loading
+                case 9: // Success
+                    isValid = true; // Always enabled for final steps
+                    break;
+                default:
+                    isValid = false;
+            }
+            
+            if (isValid) {
                 continueBtn.disabled = false;
                 continueBtn.style.opacity = '1';
                 continueBtn.style.cursor = 'pointer';
+                continueBtn.style.backgroundColor = '#1A2C42';
+                continueBtn.style.color = 'white';
+            } else {
+                continueBtn.disabled = true;
+                continueBtn.style.opacity = '0.5';
+                continueBtn.style.cursor = 'not-allowed';
+                continueBtn.style.backgroundColor = '#9ca3af';
+                continueBtn.style.color = '#6b7280';
             }
         }
 
@@ -1317,6 +1344,9 @@
         function updateFormData(field, value) {
             mobileFunnelState.formData[field] = value;
             console.log('Updated form data:', mobileFunnelState.formData);
+            
+            // Update next button state
+            updateNextButtonState();
             
             // Auto-advance logic
             checkAndAutoAdvance();
