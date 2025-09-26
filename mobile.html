@@ -769,6 +769,7 @@
         .mobile-next-icon {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color: #1A2C42;
         }
 
         .mobile-next-card h3 {
@@ -1031,6 +1032,8 @@
                     break;
                 case 8:
                     content.innerHTML = getLoadingHTML();
+                    // Auto-advance to success after 4 seconds
+                    setTimeout(() => goToNextStep(), 4000);
                     break;
                 case 9:
                     content.innerHTML = getSuccessHTML();
@@ -1144,8 +1147,7 @@
                     }
                     break;
                 case 8: // Loading
-                    // Auto-advance to success after 4 seconds
-                    setTimeout(() => goToNextStep(), 4000);
+                    // Auto-advance handled in loadMobileFunnelStep
                     break;
             }
         }
