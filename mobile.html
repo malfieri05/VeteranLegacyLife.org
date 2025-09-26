@@ -1307,7 +1307,7 @@
                     isValid = !!mobileFunnelState.formData.coverageAmount;
                     break;
                 case 6: // Birthday
-                    isValid = !!mobileFunnelState.formData.dateOfBirth;
+                    isValid = !!mobileFunnelState.formData.birthday;
                     break;
                 case 7: // Contact Info
                     isValid = isContactInfoValid();
@@ -1430,6 +1430,9 @@
         function updateInputField(field, value) {
             mobileFunnelState.formData[field] = value;
             console.log('Updated input field:', field, value);
+            
+            // Update next button state for all fields
+            updateNextButtonState();
             
             // Auto-advance logic (except for birthday)
             if (field !== 'birthday') {
