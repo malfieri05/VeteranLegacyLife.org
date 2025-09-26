@@ -565,6 +565,17 @@
             margin-bottom: 1rem;
         }
 
+        .mobile-name-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-name-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
         .mobile-form-label {
             display: block;
             margin-bottom: 0.5rem;
@@ -1343,14 +1354,16 @@
                     <h2>Contact Information</h2>
                     <p>Please provide your contact information so we can get in touch with you about your quote.</p>
                     
-                    <div class="mobile-form-group">
-                        <label class="mobile-form-label">First Name</label>
-                        <input type="text" class="mobile-form-input" placeholder="Enter your first name" onchange="updateContactInfo('firstName', this.value)" required>
-                    </div>
-                    
-                    <div class="mobile-form-group">
-                        <label class="mobile-form-label">Last Name</label>
-                        <input type="text" class="mobile-form-input" placeholder="Enter your last name" onchange="updateContactInfo('lastName', this.value)" required>
+                    <div class="mobile-name-row">
+                        <div class="mobile-form-group mobile-name-group">
+                            <label class="mobile-form-label">First Name</label>
+                            <input type="text" class="mobile-form-input" placeholder="First name" onchange="updateContactInfo('firstName', this.value)" required>
+                        </div>
+                        
+                        <div class="mobile-form-group mobile-name-group">
+                            <label class="mobile-form-label">Last Name</label>
+                            <input type="text" class="mobile-form-input" placeholder="Last name" onchange="updateContactInfo('lastName', this.value)" required>
+                        </div>
                     </div>
                     
                     <div class="mobile-form-group">
