@@ -656,10 +656,24 @@
             margin-top: 0.125rem;
         }
 
-        .mobile-checkbox-option span {
+        .mobile-consent-text {
+            flex: 1;
+        }
+
+        .mobile-consent-main {
             font-size: 0.875rem;
-            color: #6b7280;
             line-height: 1.4;
+            color: #374151;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-consent-details {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #6b7280;
+            margin-top: 0.25rem;
         }
 
         .mobile-funnel-navigation {
@@ -1417,11 +1431,21 @@
                         <h3>Required Consents</h3>
                         <label class="mobile-checkbox-option">
                             <input type="checkbox" onchange="updateContactInfo('transactionalConsent', this.checked)" required>
-                            <span>I consent to receive transactional messages from Veteran Legacy Life</span>
+                            <div class="mobile-consent-text">
+                                <span class="mobile-consent-main">I consent to receive transactional messages from Veteran Legacy Life</span>
+                                <div class="mobile-consent-details">
+                                    By checking this box, I consent to receive transactional messages from Veteran Legacy Life related to my account, orders, or services I have requested. These messages may include appointment reminders, order confirmations, and account notifications among others. We will not share your private information with third parties for marketing purposes. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
+                                </div>
+                            </div>
                         </label>
                         <label class="mobile-checkbox-option">
                             <input type="checkbox" onchange="updateContactInfo('marketingConsent', this.checked)" required>
-                            <span>I consent to receive marketing messages from Veteran Legacy Life</span>
+                            <div class="mobile-consent-text">
+                                <span class="mobile-consent-main">I consent to receive marketing messages from Veteran Legacy Life</span>
+                                <div class="mobile-consent-details">
+                                    By checking this box, I consent to receive marketing and promotional messages from Veteran Legacy Life, including special offers, discounts, new product updates among others. We will not share your private information with third parties for marketing purposes. Message frequency may vary. Message & Data rates may apply. Reply HELP for help or STOP to opt-out.
+                                </div>
+                            </div>
                         </label>
                     </div>
                 </div>
