@@ -143,23 +143,27 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         // Check if the answer has changed
         const currentValue = getCurrentStepValue(currentStep, formData)
         const newValue = getCurrentStepValue(currentStep, { ...formData, ...data })
-        
         if (currentValue !== newValue && newValue !== '') {
-          // This is a change to a different answer
           isAnswerChange = true
         } else if (currentValue === newValue && newValue !== '') {
-          // This is a re-click of the same answer
+          // User clicked the same option again (explicit reconfirmation)
           isReclickOfCurrentAnswer = true
         }
       }
       
-      // Auto-advance only for:
-      // 1. New answers (first time visiting)
-      // 2. Answer changes to a different option
-      // 3. Re-clicks of the current answer
-      // 4. NOT during manual navigation (when user went back)
-      const shouldAutoAdvance = (isNewAnswer || isAnswerChange || isReclickOfCurrentAnswer) && !isManualNavigation
-      
+      // If the user navigated back, keep auto-advance disabled until they
+      // either pick a new answer OR re-click their current answer.
+      const unlockAutoAdvance = isManualNavigation && (isNewAnswer || isAnswerChange || isReclickOfCurrentAnswer)
+
+      // Compute whether we should auto-advance for this change
+      const shouldAutoAdvance = (isNewAnswer || isAnswerChange || isReclickOfCurrentAnswer) && (!isManualNavigation || unlockAutoAdvance)
+
+      if (unlockAutoAdvance) {
+        // Clear the manual navigation guard now that the user explicitly chose
+        // an option on this step.
+        set({ isManualNavigation: false })
+      }
+
       if (shouldAutoAdvance) {
         const stepConfig = getStepConfig(currentStep)
         if (stepConfig?.requiresValidation) {
@@ -168,7 +172,7 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
           if (isValid) {
             // Auto-advance after a short delay
             setTimeout(() => {
-              const reason = isNewAnswer ? 'new answer' : isAnswerChange ? 'answer change' : 're-click of current answer'
+              const reason = isNewAnswer ? 'new answer' : (isAnswerChange ? 'answer change' : 're-click of current answer')
               console.log(`🎯 Auto-advancing from radio button step ${currentStep} (${reason})`)
               get().goToNextStep()
             }, 500) // 500ms delay for better UX
@@ -557,19 +561,13 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
     const { currentStep } = get()
     if (currentStep > 1) {
       const previousStep = currentStep - 1
-      // Set manual navigation flag to prevent auto-advance when user makes changes after going back
+      // Enable manual navigation lock; it will be cleared by updateFormData
+      // only when the user selects an option (new or reclick).
       set({ 
         currentStep: previousStep,
         isManualNavigation: true
       })
-      console.log(`🎯 Step changed to ${previousStep} (${getStepName(previousStep)}) - Manual navigation flag set`)
-      
-      // Reset the manual navigation flag after a longer delay to allow user to make changes
-      // This prevents auto-advance until user explicitly selects a new answer or re-clicks current answer
-      setTimeout(() => {
-        set({ isManualNavigation: false })
-        console.log(`🎯 Manual navigation flag reset after back navigation - auto-advance now enabled for new selections`)
-      }, 3000) // 3 second delay to give user time to make changes
+      console.log(`🎯 Step changed to ${previousStep} (${getStepName(previousStep)}) - Manual navigation flag set (no timer reset) `)
     }
   },
   
