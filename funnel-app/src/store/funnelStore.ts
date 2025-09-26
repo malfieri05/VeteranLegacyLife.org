@@ -542,8 +542,18 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
     const { currentStep } = get()
     if (currentStep > 1) {
       const previousStep = currentStep - 1
-      set({ currentStep: previousStep })
-      console.log(`🎯 Step changed to ${previousStep} (${getStepName(previousStep)})`)
+      // Set manual navigation flag to prevent auto-advance when user makes changes after going back
+      set({ 
+        currentStep: previousStep,
+        isManualNavigation: true
+      })
+      console.log(`🎯 Step changed to ${previousStep} (${getStepName(previousStep)}) - Manual navigation flag set`)
+      
+      // Reset the manual navigation flag after a delay to allow normal auto-advance on future steps
+      setTimeout(() => {
+        set({ isManualNavigation: false })
+        console.log(`🎯 Manual navigation flag reset after back navigation`)
+      }, 1000) // 1 second delay to ensure user has time to make changes
     }
   },
   
