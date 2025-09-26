@@ -754,6 +754,17 @@
             min-height: 44px;
         }
 
+        .mobile-funnel-btn:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            background-color: #9ca3af !important;
+        }
+
+        .mobile-funnel-btn:disabled:hover {
+            background-color: #9ca3af !important;
+            transform: none !important;
+        }
+
         .mobile-funnel-back {
             background: #f3f4f6;
             color: #374151;
@@ -1200,6 +1211,8 @@
                     break;
                 case 7:
                     content.innerHTML = getContactInfoHTML();
+                    // Update button state after loading contact info step
+                    setTimeout(() => updateNextButtonState(), 100);
                     break;
                 case 8:
                     content.innerHTML = getLoadingHTML();
@@ -1249,8 +1262,49 @@
         }
 
         function goToNextStep() {
+            // Check if current step is contact info and validate required fields
+            if (mobileFunnelState.currentStep === 7) {
+                if (!isContactInfoValid()) {
+                    return; // Don't proceed if contact info is not valid
+                }
+            }
+            
             if (mobileFunnelState.currentStep < mobileFunnelState.totalSteps) {
                 loadMobileFunnelStep(mobileFunnelState.currentStep + 1);
+            }
+        }
+
+        function isContactInfoValid() {
+            const contactInfo = mobileFunnelState.formData.contactInfo;
+            return contactInfo && 
+                   contactInfo.firstName && 
+                   contactInfo.lastName && 
+                   contactInfo.email && 
+                   contactInfo.phone &&
+                   contactInfo.transactionalConsent &&
+                   contactInfo.marketingConsent;
+        }
+
+        function updateNextButtonState() {
+            const continueBtn = document.getElementById('mobileContinueBtn');
+            if (!continueBtn) return;
+            
+            if (mobileFunnelState.currentStep === 7) {
+                // For contact info step, check if all required fields are filled
+                if (isContactInfoValid()) {
+                    continueBtn.disabled = false;
+                    continueBtn.style.opacity = '1';
+                    continueBtn.style.cursor = 'pointer';
+                } else {
+                    continueBtn.disabled = true;
+                    continueBtn.style.opacity = '0.5';
+                    continueBtn.style.cursor = 'not-allowed';
+                }
+            } else {
+                // For other steps, enable the button
+                continueBtn.disabled = false;
+                continueBtn.style.opacity = '1';
+                continueBtn.style.cursor = 'pointer';
             }
         }
 
@@ -1335,6 +1389,9 @@
         function updateContactInfo(field, value) {
             mobileFunnelState.formData.contactInfo[field] = value;
             console.log('Updated contact info:', mobileFunnelState.formData.contactInfo);
+            
+            // Update next button state
+            updateNextButtonState();
             
             // Auto-advance logic for contact info
             checkAndAutoAdvance();
