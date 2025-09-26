@@ -713,6 +713,153 @@
             color: #10b981;
             font-weight: bold;
         }
+
+        /* Mobile Loading Step Styles */
+        .mobile-loading-step {
+            text-align: center;
+        }
+
+        .mobile-loading-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .mobile-spinner {
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: mobileSpin 1s linear infinite;
+        }
+
+        @keyframes mobileSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .mobile-loading-text {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-next-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .mobile-next-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .mobile-next-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-next-card h3 {
+            color: #1A2C42;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-next-card p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Updated Mobile Success Step Styles */
+        .mobile-success-text {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-agent-assignment {
+            margin-top: 2rem;
+        }
+
+        .mobile-business-card {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #000;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+
+        .mobile-agent-bio {
+            color: #475569;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .mobile-trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-trust-badge {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .mobile-call-notice {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-style: italic;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .mobile-done-button {
+            background: #1A2C42;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-done-button:hover {
+            background: #233552;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .mobile-done-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -823,7 +970,7 @@
         // Mobile Funnel State Management
         let mobileFunnelState = {
             currentStep: 1,
-            totalSteps: 8,
+            totalSteps: 9,
             formData: {
                 state: '',
                 militaryStatus: '',
@@ -883,6 +1030,9 @@
                     content.innerHTML = getContactInfoHTML();
                     break;
                 case 8:
+                    content.innerHTML = getLoadingHTML();
+                    break;
+                case 9:
                     content.innerHTML = getSuccessHTML();
                     break;
             }
@@ -913,8 +1063,11 @@
             // Update continue button text
             if (mobileFunnelState.currentStep === 7) {
                 continueBtn.textContent = 'Submit';
-            } else if (mobileFunnelState.currentStep === 8) {
+                continueBtn.style.display = 'inline-block';
+            } else if (mobileFunnelState.currentStep === 8 || mobileFunnelState.currentStep === 9) {
+                // Hide navigation buttons for loading and success steps
                 continueBtn.style.display = 'none';
+                backBtn.style.display = 'none';
             } else {
                 continueBtn.textContent = 'Continue';
                 continueBtn.style.display = 'inline-block';
@@ -989,6 +1142,10 @@
                         showAutoAdvanceFeedback();
                         setTimeout(() => goToNextStep(), 500);
                     }
+                    break;
+                case 8: // Loading
+                    // Auto-advance to success after 6 seconds
+                    setTimeout(() => goToNextStep(), 6000);
                     break;
             }
         }
@@ -1219,22 +1376,59 @@
             `;
         }
 
+        function getLoadingHTML() {
+            return `
+                <div class="mobile-funnel-step mobile-loading-step">
+                    <div class="mobile-loading-icon">
+                        <div class="mobile-spinner"></div>
+                    </div>
+                    <h2>Loading...</h2>
+                    <p class="mobile-loading-text">Submitting your info and assigning a licensed agent.</p>
+                    
+                    <div class="mobile-next-steps">
+                        <div class="mobile-next-card">
+                            <div class="mobile-next-icon">👤</div>
+                            <h3>Concierge Call</h3>
+                            <p>A licensed specialist reviews your profile and contacts you to tailor options.</p>
+                        </div>
+                        <div class="mobile-next-card">
+                            <div class="mobile-next-icon">🛡️</div>
+                            <h3>No Obligation</h3>
+                            <p>You'll receive clear recommendations from top A‑rated carriers.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         function getSuccessHTML() {
             return `
                 <div class="mobile-funnel-step mobile-success-step">
                     <div class="mobile-success-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h2>Thank You!</h2>
-                    <p>Your information has been submitted successfully. A licensed agent will contact you within 24 hours to discuss your coverage options.</p>
-                    <div class="mobile-success-details">
-                        <h3>What happens next?</h3>
-                        <ul>
-                            <li>Our team will review your information</li>
-                            <li>A licensed agent will contact you within 24 hours</li>
-                            <li>We'll provide personalized quotes based on your needs</li>
-                            <li>You'll have the opportunity to ask questions and compare options</li>
-                        </ul>
+                    <h2>Success!</h2>
+                    <p class="mobile-success-text">Your assigned agent will reach out within 24 hours to consult.</p>
+                    
+                    <div class="mobile-agent-assignment">
+                        <img class="mobile-business-card" src="/production/bestcard.png" alt="Michael Alfieri - Licensed Agent" />
+                        
+                        <div class="mobile-agent-bio">
+                            <strong>ABOUT MR. ALFIERI:</strong> Michael is one of the top-producing agents with Veteran Legacy Life and an industry-leading professional in Insurance. Born and raised in Oregon, he comes from a big Catholic family of 6 kids. 5 years ago he retired from playing Professional Football in Europe and he decided to follow in his father's footsteps to pursue a career in Insurance, dedicated to helping families secure their financial futures.
+                        </div>
+                        
+                        <div class="mobile-trust-badges">
+                            <img class="mobile-trust-badge" src="/production/NIPR.png" alt="NIPR - National Insurance Producer Registry" />
+                            <img class="mobile-trust-badge" src="/production/BBBblue.png" alt="BBB A+ Rating" />
+                        </div>
+                        
+                        <p class="mobile-call-notice">
+                            Look out for Michael's call from a (503) area code.
+                        </p>
+                        
+                        <button class="mobile-done-button" onclick="closeMobileFunnel()">
+                            Done
+                        </button>
                     </div>
                 </div>
             `;
