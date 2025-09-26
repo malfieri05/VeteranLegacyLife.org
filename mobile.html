@@ -628,6 +628,29 @@
             box-shadow: 0 0 0 3px rgba(26, 44, 66, 0.1);
         }
 
+        .mobile-form-select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            min-height: 44px;
+            background-color: white;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            appearance: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .mobile-form-select:focus {
+            outline: none;
+            border-color: #1A2C42;
+            box-shadow: 0 0 0 3px rgba(26, 44, 66, 0.1);
+        }
+
         .mobile-consent-section {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
@@ -1245,27 +1268,61 @@
                 <div class="mobile-funnel-step">
                     <h2>Select Your State</h2>
                     <p>Please select your state of residence to get started.</p>
-                    <div class="mobile-radio-group">
-                        <label class="mobile-radio-option">
-                            <input type="radio" name="state" value="CA" onchange="updateFormData('state', 'CA')">
-                            <span>California</span>
-                        </label>
-                        <label class="mobile-radio-option">
-                            <input type="radio" name="state" value="TX" onchange="updateFormData('state', 'TX')">
-                            <span>Texas</span>
-                        </label>
-                        <label class="mobile-radio-option">
-                            <input type="radio" name="state" value="FL" onchange="updateFormData('state', 'FL')">
-                            <span>Florida</span>
-                        </label>
-                        <label class="mobile-radio-option">
-                            <input type="radio" name="state" value="NY" onchange="updateFormData('state', 'NY')">
-                            <span>New York</span>
-                        </label>
-                        <label class="mobile-radio-option">
-                            <input type="radio" name="state" value="other" onchange="updateFormData('state', 'other')">
-                            <span>Other</span>
-                        </label>
+                    <div class="mobile-form-group">
+                        <label class="mobile-form-label">State of Residence</label>
+                        <select class="mobile-form-select" onchange="updateFormData('state', this.value)" required>
+                            <option value="">Select your state</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
                     </div>
                 </div>
             `;
