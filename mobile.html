@@ -1152,7 +1152,9 @@
                         formData.contactInfo.firstName && 
                         formData.contactInfo.lastName && 
                         formData.contactInfo.email && 
-                        formData.contactInfo.phone) {
+                        formData.contactInfo.phone &&
+                        formData.contactInfo.transactionalConsent &&
+                        formData.contactInfo.marketingConsent) {
                         showAutoAdvanceFeedback();
                         setTimeout(() => goToNextStep(), 500);
                     }
