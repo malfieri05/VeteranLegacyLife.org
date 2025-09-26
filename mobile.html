@@ -359,13 +359,53 @@
             background: var(--text-dark);
             color: var(--text-white);
             padding: 2rem 1.5rem;
+        }
+
+        .mobile-footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-footer-section {
             text-align: center;
         }
 
-        .mobile-footer p {
+        .mobile-footer-section h3 {
+            color: var(--text-white);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-footer-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-white);
+        }
+
+        .mobile-footer-icon {
+            font-size: 1rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+
+        .mobile-footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+        }
+
+        .mobile-footer-bottom p {
             color: var(--text-white);
             opacity: 0.8;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
 
@@ -940,8 +980,40 @@
 
     <!-- Mobile Footer -->
     <footer class="mobile-footer">
-        <p>&copy; 2025 Veteran Legacy Life. All rights reserved.</p>
-        <p>Licensed in all 50 states. Coverage subject to underwriting approval.</p>
+        <div class="mobile-footer-content">
+            <div class="mobile-footer-section">
+                <h3>Our Commitment</h3>
+                <div class="mobile-footer-item">
+                    <span class="mobile-footer-icon">🛡️</span>
+                    <span>A+ Rated Insurance Carriers</span>
+                </div>
+                <div class="mobile-footer-item">
+                    <span class="mobile-footer-icon">⭐</span>
+                    <span>Veteran-Focused Service</span>
+                </div>
+                <div class="mobile-footer-item">
+                    <span class="mobile-footer-icon">❤️</span>
+                    <span>Family-First Approach</span>
+                </div>
+            </div>
+            
+            <div class="mobile-footer-section">
+                <h3>Contact Us</h3>
+                <div class="mobile-footer-item">
+                    <span class="mobile-footer-icon">📞</span>
+                    <span>503-764-5097</span>
+                </div>
+                <div class="mobile-footer-item">
+                    <span class="mobile-footer-icon">🕐</span>
+                    <span>Available 24/7 for Veterans</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-footer-bottom">
+            <p>&copy; 2025 Veteran Legacy Life. All rights reserved.</p>
+            <p>Licensed in all 50 states. Coverage subject to underwriting approval.</p>
+        </div>
     </footer>
 
     <!-- Mobile Funnel Modal -->
