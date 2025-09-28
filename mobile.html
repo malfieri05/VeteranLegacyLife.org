@@ -5,9 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veteran Legacy Life - Mobile</title>
     <meta name="description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://veteranlegacylife.com/mobile.html">
+    <link rel="alternate" media="only screen and (min-width: 768px)" href="https://veteranlegacylife.com/">
+    <meta name="theme-color" content="#1A2C42">
+    <meta name="keywords" content="veteran life insurance, military life insurance, term life, whole life, IUL, living benefits">
+    <meta name="author" content="Veteran Legacy Life">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Veteran Legacy Life">
+    <meta property="og:title" content="Veteran Legacy Life - Mobile Experience">
+    <meta property="og:description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
+    <meta property="og:url" content="https://veteranlegacylife.com/mobile.html">
+    <meta property="og:image" content="https://veteranlegacylife.com/production/armyhouseFULL.png">
+    <meta property="og:image:alt" content="Veteran Legacy Life">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Veteran Legacy Life - Mobile Experience">
+    <meta name="twitter:description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
+    <meta name="twitter:image" content="https://veteranlegacylife.com/production/armyhouseFULL.png">
+
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="preload" as="image" href="/production/armyhouseFULL.png">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,6 +50,67 @@
     
     <!-- Veteran Funnel Styles -->
     <link rel="stylesheet" href="assets/index-f3d073f2.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Veteran Legacy Life",
+      "url": "https://veteranlegacylife.com/",
+      "logo": "https://veteranlegacylife.com/logo.png",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+1-503-764-5097",
+        "contactType": "customer service",
+        "areaServed": "US"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Veteran Legacy Life",
+      "url": "https://veteranlegacylife.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://veteranlegacylife.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Analytics/Ads Loader (config-driven, no-op without IDs) -->
+    <script>
+      (function() {
+        var cfg = (window.VeteranFunnelConfig && window.VeteranFunnelConfig.TRACKING) || null;
+        if (!cfg) return;
+        // Google Tag Manager
+        if (cfg.GTM) {
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer',cfg.GTM);
+        }
+        // GA4 / Google Ads via gtag
+        var ids = [];
+        if (cfg.GA4) ids.push(cfg.GA4);
+        if (cfg.GADS) ids.push(cfg.GADS);
+        if (ids.length) {
+          var gs = document.createElement('script');
+          gs.async = true;
+          gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ids[0]);
+          document.head.appendChild(gs);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);} 
+          window.gtag = gtag;
+          gtag('js', new Date());
+          ids.forEach(function(id){ gtag('config', id, { send_page_view: true }); });
+        }
+      })();
+    </script>
     
     <style>
         /* Mobile-First CSS Reset */
@@ -199,7 +293,7 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto;
-            animation: pulse 2s infinite;
+            animation: pulse-attention 2s ease-in-out infinite;
         }
 
         .mobile-cta-button:hover {
@@ -215,15 +309,18 @@
             font-weight: 400;
         }
 
-        @keyframes pulse {
+        @keyframes pulse-attention {
             0% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(26, 44, 66, 0.3);
             }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(26, 44, 66, 0.5);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(26, 44, 66, 0.3);
             }
         }
 
@@ -247,7 +344,7 @@
 
         .mobile-feature-card {
             background: var(--bg-white);
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 0.75rem;
             box-shadow: 0 8px 25px rgba(26, 44, 66, 0.15), 0 4px 10px rgba(26, 44, 66, 0.1);
             text-align: center;
@@ -275,26 +372,28 @@
         }
 
         .mobile-feature-icon {
-            width: 3rem;
-            height: 3rem;
+            width: 2.5rem;
+            height: 2.5rem;
             background: #1A2C42;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
+            margin: 0 auto 0.75rem;
             color: white;
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
 
         .mobile-feature-card h3 {
             color: var(--text-dark);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
         }
 
         .mobile-feature-card p {
             color: var(--text-light);
-            font-size: 0.875rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
         }
 
         /* Mobile Comparison Section */
@@ -397,7 +496,38 @@
             font-size: 1rem;
         }
 
-
+        .mobile-footer-logos {
+            margin-top: 0.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .mobile-footer-logos img {
+            height: 24px;
+            max-height: 24px;
+            width: auto;
+            object-fit: contain;
+            vertical-align: middle;
+            opacity: 0.95;
+        }
+        /* Make TrustedSite (1st) and BBB (3rd) slightly larger to match NIPR */
+        .mobile-footer-logos img:nth-child(1),
+        .mobile-footer-logos img:nth-child(3) {
+            height: 28px;
+            max-height: 28px;
+        }
+        /* Explicit sizing per logo */
+        .mobile-footer-logos img[alt="Trusted Site"] {
+            height: 47px; /* 30% larger than previous 36px */
+            max-height: 47px;
+        }
+        .mobile-footer-logos img[alt="BBB A+"] {
+            height: 34px; /* ~40% larger than base 24px */
+            max-height: 34px;
+        }
+         
+ 
         /* Mobile Responsive Adjustments */
         @media (min-width: 768px) {
             .mobile-hero h1 {
@@ -592,6 +722,17 @@
 
         .mobile-form-group {
             margin-bottom: 1rem;
+        }
+
+        .mobile-birthday-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-birthday-group .mobile-form-input {
+            max-width: 280px;
+            width: 100%;
         }
 
         .mobile-name-row {
@@ -792,7 +933,7 @@
         .mobile-success-icon {
             width: 4rem;
             height: 4rem;
-            background: #10b981;
+            background: #059669;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -830,7 +971,7 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #10b981;
+            color: #059669;
             font-weight: bold;
         }
 
@@ -842,7 +983,7 @@
         .mobile-loading-icon {
             width: 4rem;
             height: 4rem;
-            background: #10b981;
+            background: #059669;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -991,10 +1132,10 @@
                 <img src="logo.png" alt="Veteran Legacy Life">
                 <span>Veteran Legacy Life<sup>®</sup></span>
             </div>
-            <a href="tel:503-764-5097" class="mobile-phone">
-                <i class="fas fa-phone"></i>
-                <span>1-800-VET-LIFE</span>
-            </a>
+             <a href="tel:+15037645097" class="mobile-phone" onclick="return confirm('Call Veteran Legacy Life at (503) 764-5097?')">
+                 <i class="fas fa-phone"></i>
+                 <span>CALL NOW</span>
+             </a>
         </div>
     </header>
 
@@ -1005,7 +1146,7 @@
             <h1>Simple. Affordable. Guaranteed Coverage for Veterans.</h1>
             <p>Join the 50,000+ Veterans who have secured their legacy.</p>
             <button class="mobile-cta-button" onclick="openMobileFunnel()">
-                Get Protected Today
+                Get Protected Today!
             </button>
             <p class="mobile-fine-print">No obligation or commitment required.</p>
         </div>
@@ -1015,28 +1156,28 @@
     <section class="mobile-features">
         <h2>Why Choose Veteran Legacy Life?</h2>
         <div class="mobile-feature-grid">
-            <div class="mobile-feature-card">
+            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3>No Medical Exam</h3>
                 <p>Qualified veterans can get coverage without a medical exam</p>
             </div>
-            <div class="mobile-feature-card">
+            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-dollar-sign"></i>
                 </div>
                 <h3>Affordable Rates</h3>
                 <p>Exclusive veteran discounts and competitive rates that NEVER INCREASE.</p>
             </div>
-            <div class="mobile-feature-card">
+            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-heart"></i>
                 </div>
                 <h3>Living Benefits</h3>
                 <p>Access your benefits while you're alive for chronic illness, terminal illness, or critical illness.</p>
             </div>
-            <div class="mobile-feature-card">
+            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
@@ -1049,14 +1190,19 @@
 
     <!-- Mobile Footer -->
     <footer class="mobile-footer">
-        <p>&copy; 2025 Veteran Legacy Life. All rights reserved.</p>
-        <p>Licensed in all 50 states. Coverage subject to underwriting approval.</p>
+        <p>Licensed in all 50 states. Coverage subject to underwriting approval. · <a href="/privacy.html" style="color:#cbd5e1; text-decoration: underline;">Privacy Policy</a></p>
         <div class="mobile-footer-phone">
-            <a href="tel:503-764-5097" class="mobile-footer-phone-link">
+            <a href="tel:+15037645097" class="mobile-footer-phone-link" onclick="return confirm('Call Veteran Legacy Life at (503) 764-5097?')">
                 <i class="fas fa-phone"></i>
-                <span>1-800-VET-LIFE</span>
+                <span>CALL NOW</span>
             </a>
+            <div class="mobile-footer-logos">
+                <img src="/production/trustedsitelogo.png" alt="Trusted Site">
+                <img src="/production/NIPR.png" alt="NIPR Licensed">
+                <img src="/production/BBBB.png" alt="BBB A+">
+            </div>
         </div>
+        <p style="margin-top: 0.75rem; opacity: 0.8;">&copy; 2025 Veteran Legacy Life. All rights reserved.</p>
     </footer>
 
     <!-- Mobile Funnel Modal -->
@@ -1098,6 +1244,7 @@
         let mobileFunnelState = {
             currentStep: 1,
             totalSteps: 9,
+            sessionId: generateSessionId(),
             formData: {
                 state: '',
                 militaryStatus: '',
@@ -1115,6 +1262,14 @@
                 }
             }
         };
+
+        // Generate unique session ID for Google Sheets tracking
+        function generateSessionId() {
+            return 'mobile_session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Google Apps Script Configuration
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYU1-57qc-KcsOMzUu27pF4fOY4XSVhLikeQqZ2P7pbmeloONN2xxQ2aeOdNl74CkY8w/exec';
 
         // Main funnel opening function
         function openMobileFunnel() {
@@ -1265,6 +1420,8 @@
                 if (!isContactInfoValid()) {
                     return; // Don't proceed if contact info is not valid
                 }
+                // Submit form data to Google Sheets when completing contact info
+                submitMobileFormData();
             }
             
             if (mobileFunnelState.currentStep < mobileFunnelState.totalSteps) {
@@ -1279,8 +1436,33 @@
                    contactInfo.lastName && 
                    contactInfo.email && 
                    contactInfo.phone &&
+                   isValidPhoneNumber(contactInfo.phone) &&
                    contactInfo.transactionalConsent &&
                    contactInfo.marketingConsent;
+        }
+
+        function isValidPhoneNumber(phone) {
+            // Remove all non-digit characters
+            const digits = phone.replace(/\D/g, '');
+            // Check if it's 10 digits (US phone number)
+            return digits.length === 10;
+        }
+
+        function validatePhoneNumber(input) {
+            const phone = input.value;
+            const isValid = isValidPhoneNumber(phone);
+            
+            // Add visual feedback
+            if (phone && !isValid) {
+                input.style.borderColor = '#dc2626';
+                input.style.backgroundColor = '#fef2f2';
+            } else {
+                input.style.borderColor = '';
+                input.style.backgroundColor = '';
+            }
+            
+            // Update continue button state
+            updateNextButtonState();
         }
 
         function updateNextButtonState() {
@@ -1438,6 +1620,144 @@
             if (field !== 'birthday') {
                 checkAndAutoAdvance();
             }
+        }
+
+        // Submit mobile form data to Google Sheets
+        async function submitMobileFormData() {
+            try {
+                console.log('Submitting mobile form data to Google Sheets...');
+                
+                // Prepare data in the same format as desktop version
+                const payload = {
+                    sessionId: mobileFunnelState.sessionId,
+                    formType: 'Lead',
+                    contactInfo: mobileFunnelState.formData.contactInfo,
+                    preQualification: {
+                        state: mobileFunnelState.formData.state,
+                        militaryStatus: mobileFunnelState.formData.militaryStatus,
+                        branchOfService: mobileFunnelState.formData.branchOfService,
+                        maritalStatus: mobileFunnelState.formData.maritalStatus,
+                        coverageAmount: mobileFunnelState.formData.coverageAmount
+                    },
+                    medicalAnswers: {
+                        tobaccoUse: '',
+                        medicalConditions: [],
+                        height: '',
+                        weight: '',
+                        hospitalCare: '',
+                        diabetesMedication: '',
+                        age: mobileFunnelState.formData.birthday ? calculateAge(mobileFunnelState.formData.birthday) : ''
+                    },
+                    applicationData: {
+                        streetAddress: '',
+                        city: '',
+                        state: mobileFunnelState.formData.state,
+                        zipCode: '',
+                        beneficiaries: [{ name: '', relationship: '', percentage: 100 }],
+                        vaClinicName: '',
+                        primaryDoctor: '',
+                        ssn: '',
+                        driversLicense: '',
+                        licenseState: mobileFunnelState.formData.state,
+                        bankName: '',
+                        routingNumber: '',
+                        accountNumber: ''
+                    },
+                    quoteData: {
+                        policyDate: new Date().toISOString().split('T')[0],
+                        coverage: mobileFunnelState.formData.coverageAmount,
+                        premium: '',
+                        age: mobileFunnelState.formData.birthday ? calculateAge(mobileFunnelState.formData.birthday) : '',
+                        gender: '',
+                        type: ''
+                    },
+                    trackingData: {
+                        currentStep: '7',
+                        stepName: 'Contact Information'
+                    }
+                };
+                
+                // Convert to URL-encoded format
+                const params = new URLSearchParams();
+                for (const [key, value] of Object.entries(payload)) {
+                    if (typeof value === 'object') {
+                        params.append(key, JSON.stringify(value));
+                    } else {
+                        params.append(key, String(value));
+                    }
+                }
+                
+                // Submit to Google Apps Script
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params.toString()
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to submit form data');
+                }
+                
+                const responseText = await response.text();
+                console.log('Mobile form submission response:', responseText);
+                
+                // Parse response
+                let result;
+                if (responseText.startsWith('{') || responseText.startsWith('[')) {
+                    try {
+                        result = JSON.parse(responseText);
+                    } catch (e) {
+                        result = { success: false, error: 'Invalid JSON response' };
+                    }
+                } else if (responseText.includes('=')) {
+                    const responseParams = new URLSearchParams(responseText);
+                    result = {
+                        success: responseParams.get('success') === 'true',
+                        error: responseParams.get('error') || null,
+                        message: responseParams.get('message') || null
+                    };
+                } else {
+                    result = { success: true, message: responseText };
+                }
+                
+                console.log('Mobile form data submitted successfully:', result);
+                try {
+                    if (window && window.gtag) {
+                        // Google Ads conversion if configured
+                        const cfg = (window.VeteranFunnelConfig && window.VeteranFunnelConfig.TRACKING) || {};
+                        if (cfg && cfg.CONVERSION) {
+                            window.gtag('event', 'conversion', { send_to: cfg.CONVERSION });
+                        } else {
+                            // Generic GA4 lead event
+                            window.gtag('event', 'generate_lead', { method: 'mobile_funnel' });
+                        }
+                    } else if (window && window.dataLayer) {
+                        window.dataLayer.push({ event: 'mobile_lead_submitted' });
+                    }
+                } catch (e) {
+                    console.warn('Tracking event failed:', e);
+                }
+                
+            } catch (error) {
+                console.error('Error submitting mobile form data:', error);
+                // Continue with the funnel even if submission fails
+            }
+        }
+
+        // Calculate age from birthday
+        function calculateAge(birthday) {
+            const today = new Date();
+            const birthDate = new Date(birthday);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            return age.toString();
         }
 
         // Step HTML Generators
@@ -1635,7 +1955,7 @@
                 <div class="mobile-funnel-step">
                     <h2>Date of Birth</h2>
                     <p>Please enter your date of birth.</p>
-                    <div class="mobile-form-group">
+                    <div class="mobile-birthday-group">
                         <input type="date" class="mobile-form-input" onchange="updateInputField('birthday', this.value)" required>
                     </div>
                 </div>
@@ -1667,7 +1987,7 @@
                     
                     <div class="mobile-form-group">
                         <label class="mobile-form-label">Phone Number</label>
-                        <input type="tel" class="mobile-form-input" placeholder="Enter your phone number" onchange="updateContactInfo('phone', this.value)" required>
+                        <input type="tel" class="mobile-form-input" placeholder="Enter your phone number" onchange="updateContactInfo('phone', this.value)" oninput="validatePhoneNumber(this)" required>
                     </div>
                     
                     <div class="mobile-consent-section">

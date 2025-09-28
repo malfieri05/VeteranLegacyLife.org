@@ -418,6 +418,26 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       }
       
       console.log('Lead data submitted successfully:', result)
+      try {
+        // Fire tracking events if available
+        // @ts-ignore
+        const cfg = (window && (window as any).VeteranFunnelConfig && (window as any).VeteranFunnelConfig.TRACKING) || {};
+        // @ts-ignore
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          if (cfg && cfg.CONVERSION) {
+            // @ts-ignore
+            (window as any).gtag('event', 'conversion', { send_to: cfg.CONVERSION });
+          } else {
+            // @ts-ignore
+            (window as any).gtag('event', 'generate_lead', { method: 'desktop_funnel' });
+          }
+        } else if (typeof window !== 'undefined' && (window as any).dataLayer) {
+          // @ts-ignore
+          (window as any).dataLayer.push({ event: 'desktop_lead_submitted' });
+        }
+      } catch (e) {
+        console.warn('Tracking event failed:', e)
+      }
     } catch (error) {
       console.error('Error submitting lead data:', error)
       alert('There was an issue submitting your information. Please try again.')
@@ -592,6 +612,15 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
   setAutoAdvanceEnabled: (enabled: boolean) => set({ autoAdvanceEnabled: enabled })
 }))
 
+// Helper function to validate phone number
+const isValidPhoneNumber = (phone: string): boolean => {
+  if (!phone) return false;
+  // Remove all non-digit characters
+  const digits = phone.replace(/\D/g, '');
+  // Check if it's 10 digits (US phone number)
+  return digits.length === 10;
+};
+
 // Helper function to check step validation
 const checkStepValidation = (step: number, formData: FormData): boolean => {
   switch (step) {
@@ -608,7 +637,7 @@ const checkStepValidation = (step: number, formData: FormData): boolean => {
     case 6:
       return !!formData.contactInfo?.dateOfBirth
     case 7:
-      return !!(formData.contactInfo?.firstName && formData.contactInfo?.lastName && formData.contactInfo?.email && formData.contactInfo?.phone)
+      return !!(formData.contactInfo?.firstName && formData.contactInfo?.lastName && formData.contactInfo?.email && formData.contactInfo?.phone && isValidPhoneNumber(formData.contactInfo.phone))
     case 8:
       return !!formData.medicalAnswers?.tobaccoUse
     case 9:

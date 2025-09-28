@@ -115,6 +115,12 @@ export const ContactInfo: React.FC = () => {
         onChange={(value) => handleContactInfoChange('phone', value)}
         placeholder="Enter your phone number"
         required
+        validate={(value) => {
+          if (!value) return 'Phone number is required';
+          const digits = value.replace(/\D/g, '');
+          if (digits.length !== 10) return 'Please enter a valid 10-digit phone number';
+          return null;
+        }}
       />
       
       {/* Required Consent Checkboxes */}

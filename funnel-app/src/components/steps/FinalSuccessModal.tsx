@@ -59,12 +59,12 @@ export const FinalSuccessModal: React.FC = () => {
             width: 84px;
             height: 84px;
             border-radius: 50%;
-            background: #10b981;
+            background: #059669;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            box-shadow: 0 10px 24px rgba(16,185,129,.35);
+            box-shadow: 0 10px 24px rgba(5,150,105,.35);
             animation: popIn .6s ease-out both;
             margin-bottom: 10px;
           }

@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veteran Legacy Life - Mobile</title>
+    <meta name="description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Veteran Funnel Styles -->
+    <link rel="stylesheet" href="assets/index-f3d073f2.css">
+    
+    <style>
+        /* Mobile-First CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: white;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* Mobile-First Variables */
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-dark: #1e40af;
+            --secondary-color: #dc2626;
+            --accent-color: #fbbf24;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --text-white: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Typography */
+        h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+        h2 { font-size: 1.75rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.875rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.75rem; }
+        h4 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.625rem; }
+        h5 { font-size: 1.125rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+        h6 { font-size: 1rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            background: var(--bg-white);
+            padding: 0.75rem 1rem 0.5rem 1rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+            text-align: center;
+            gap: 0.25rem;
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0;
+        }
+
+        .mobile-logo img {
+            height: 3.5rem;
+            width: auto;
+        }
+
+        .mobile-logo span {
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: #1A2C42;
+            letter-spacing: 0.5px;
+        }
+
+        .mobile-logo sup {
+            font-size: 0.7em;
+            font-weight: 700;
+            color: #1A2C42;
+            vertical-align: super;
+            margin-left: 1px;
+        }
+
+        .mobile-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: #1A2C42;
+            font-weight: 500;
+            font-size: 0.8rem;
+            background: rgba(26, 44, 66, 0.08);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid rgba(26, 44, 66, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            opacity: 0.85;
+        }
+
+        .mobile-phone:hover {
+            background: rgba(26, 44, 66, 0.12);
+            transform: translateY(-1px);
+            opacity: 1;
+        }
+
+        .mobile-phone i {
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Hero Section */
+        .mobile-hero {
+            background: var(--bg-white);
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .mobile-hero-content {
+            background: #1A2C42;
+            color: var(--text-white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .mobile-hero h1 {
+            color: var(--text-white);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .mobile-hero p {
+            color: var(--text-white);
+            opacity: 0.9;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-cta-button {
+            background: white;
+            color: #1A2C42;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            animation: pulse 2s infinite;
+        }
+
+        .mobile-cta-button:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .mobile-fine-print {
+            font-size: 0.6rem !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* Mobile Features Section */
+        .mobile-features {
+            padding: 3rem 1.5rem;
+            background: var(--bg-light);
+        }
+
+        .mobile-features h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .mobile-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .mobile-feature-card {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 25px rgba(26, 44, 66, 0.15), 0 4px 10px rgba(26, 44, 66, 0.1);
+            text-align: center;
+            border: 1px solid #1A2C42;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(26, 44, 66, 0.2), 0 6px 15px rgba(26, 44, 66, 0.15);
+        }
+
+        .mobile-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 44, 66, 0.02) 0%, rgba(26, 44, 66, 0.05) 100%);
+            border-radius: 0.75rem;
+            pointer-events: none;
+        }
+
+        .mobile-feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: #1A2C42;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .mobile-feature-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .mobile-feature-card p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Comparison Section */
+        .mobile-comparison {
+            padding: 3rem 1.5rem;
+            background: var(--bg-white);
+        }
+
+        .mobile-comparison h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .mobile-comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .mobile-comparison-table thead {
+            display: table-header-group;
+        }
+
+        .mobile-comparison-table tbody {
+            display: table-row-group;
+        }
+
+        .mobile-comparison-table tr {
+            display: table-row;
+        }
+
+        .mobile-comparison-table th,
+        .mobile-comparison-table td {
+            display: table-cell;
+            padding: 0.75rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        .mobile-comparison-table th {
+            background: var(--primary-color);
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        .mobile-comparison-table td {
+            background: var(--bg-white);
+        }
+
+        .mobile-comparison-table tr:nth-child(even) td {
+            background: var(--bg-light);
+        }
+
+        /* Mobile Footer */
+        .mobile-footer {
+            background: var(--text-dark);
+            color: var(--text-white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .mobile-footer p {
+            color: var(--text-white);
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+
+
+        /* Mobile Responsive Adjustments */
+        @media (min-width: 768px) {
+            .mobile-hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .mobile-feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mobile-comparison-table {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Hide desktop elements */
+        .desktop-only {
+            display: none !important;
+        }
+
+        /* Mobile-specific utilities */
+        .mobile-text-center { text-align: center; }
+        .mobile-text-left { text-align: left; }
+        .mobile-text-right { text-align: right; }
+        .mobile-mb-1 { margin-bottom: 0.5rem; }
+        .mobile-mb-2 { margin-bottom: 1rem; }
+        .mobile-mb-3 { margin-bottom: 1.5rem; }
+        .mobile-mb-4 { margin-bottom: 2rem; }
+        .mobile-mt-1 { margin-top: 0.5rem; }
+        .mobile-mt-2 { margin-top: 1rem; }
+        .mobile-mt-3 { margin-top: 1.5rem; }
+        .mobile-mt-4 { margin-top: 2rem; }
+        .mobile-p-1 { padding: 0.5rem; }
+        .mobile-p-2 { padding: 1rem; }
+        .mobile-p-3 { padding: 1.5rem; }
+        .mobile-p-4 { padding: 2rem; }
+
+        /* Mobile Funnel Modal Styles */
+        .mobile-funnel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .mobile-funnel-modal {
+            background: white;
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-funnel-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+        }
+
+        .mobile-funnel-progress {
+            flex: 1;
+        }
+
+        .mobile-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-progress-fill {
+            height: 100%;
+            background: #1A2C42;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 12.5%; /* 1/8 steps */
+        }
+
+        .mobile-progress-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .mobile-funnel-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 0.25rem;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .mobile-funnel-close:hover {
+            background: #e5e7eb;
+        }
+
+        .mobile-funnel-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mobile-funnel-step h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1A2C42;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-funnel-step p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .mobile-funnel-step {
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-funnel-step.auto-advancing {
+            opacity: 0.7;
+        }
+
+        .mobile-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .mobile-radio-option:hover {
+            border-color: #1A2C42;
+            background: #f8fafc;
+        }
+
+        .mobile-radio-option input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #1A2C42;
+        }
+
+        .mobile-radio-option span {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .mobile-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .mobile-form-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            min-height: 44px;
+            transition: border-color 0.2s ease;
+        }
+
+        .mobile-form-input:focus {
+            outline: none;
+            border-color: #1A2C42;
+            box-shadow: 0 0 0 3px rgba(26, 44, 66, 0.1);
+        }
+
+        .mobile-consent-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .mobile-consent-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .mobile-checkbox-option input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #1A2C42;
+            margin-top: 0.125rem;
+        }
+
+        .mobile-checkbox-option span {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .mobile-funnel-navigation {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.75rem;
+            background: #f8fafc;
+        }
+
+        .mobile-funnel-btn {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 44px;
+        }
+
+        .mobile-funnel-back {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .mobile-funnel-back:hover {
+            background: #e5e7eb;
+        }
+
+        .mobile-funnel-continue {
+            background: #1A2C42;
+            color: white;
+        }
+
+        .mobile-funnel-continue:hover {
+            background: #0f172a;
+        }
+
+        .mobile-funnel-continue:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .mobile-success-step {
+            text-align: center;
+        }
+
+        .mobile-success-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .mobile-success-details {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .mobile-success-details h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-success-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-success-details li {
+            padding: 0.5rem 0;
+            color: #6b7280;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .mobile-success-details li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="mobile-header-content">
+            <div class="mobile-logo">
+                <img src="logo.png" alt="Veteran Legacy Life">
+                <span>Veteran Legacy Life<sup>®</sup></span>
+            </div>
+            <a href="tel:503-764-5097" class="mobile-phone">
+                <i class="fas fa-phone"></i>
+                <span>1-800-VET-LIFE</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Mobile Hero Section -->
+    <section class="mobile-hero">
+        <img src="production/armyhouseFULL.png" alt="Veteran Family" class="mobile-hero-image">
+        <div class="mobile-hero-content">
+            <h1>Simple. Affordable. Guaranteed Coverage for Veterans.</h1>
+            <p>Join the 50,000+ Veterans who have secured their legacy.</p>
+            <button class="mobile-cta-button" onclick="openMobileFunnel()">
+                Get Protected Today
+            </button>
+            <p class="mobile-fine-print">No obligation or commitment required.</p>
+        </div>
+    </section>
+
+    <!-- Mobile Features Section -->
+    <section class="mobile-features">
+        <h2>Why Choose Veteran Legacy Life?</h2>
+        <div class="mobile-feature-grid">
+            <div class="mobile-feature-card">
+                <div class="mobile-feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>No Medical Exam</h3>
+                <p>Qualified veterans can get coverage without a medical exam</p>
+            </div>
+            <div class="mobile-feature-card">
+                <div class="mobile-feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Affordable Rates</h3>
+                <p>Exclusive veteran discounts and competitive rates that NEVER INCREASE.</p>
+            </div>
+            <div class="mobile-feature-card">
+                <div class="mobile-feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Living Benefits</h3>
+                <p>Access your benefits while you're alive for chronic illness, terminal illness, or critical illness.</p>
+            </div>
+            <div class="mobile-feature-card">
+                <div class="mobile-feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Coverage</h3>
+                <p>No 2-year waiting period. Coverage is active instantly.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Mobile Footer -->
+    <footer class="mobile-footer">
+        <p>&copy; 2025 Veteran Legacy Life. All rights reserved.</p>
+        <p>Licensed in all 50 states. Coverage subject to underwriting approval.</p>
+    </footer>
+
+    <!-- Mobile Funnel Modal -->
+    <div id="mobileFunnelModal" class="mobile-funnel-overlay" style="display: none;">
+        <div class="mobile-funnel-modal">
+            <!-- Funnel Header -->
+            <div class="mobile-funnel-header">
+                <div class="mobile-funnel-progress">
+                    <div class="mobile-progress-bar">
+                        <div class="mobile-progress-fill" id="mobileProgressFill"></div>
+                    </div>
+                    <div class="mobile-progress-text">
+                        <span id="mobileCurrentStep">1</span> of <span id="mobileTotalSteps">8</span>
+                    </div>
+                </div>
+                <button class="mobile-funnel-close" onclick="closeMobileFunnel()">&times;</button>
+            </div>
+
+            <!-- Funnel Content -->
+            <div class="mobile-funnel-content" id="mobileFunnelContent">
+                <!-- Step content will be loaded here -->
+            </div>
+
+            <!-- Funnel Navigation -->
+            <div class="mobile-funnel-navigation">
+                <button class="mobile-funnel-btn mobile-funnel-back" id="mobileBackBtn" onclick="goToPreviousStep()" style="display: none;">
+                    Back
+                </button>
+                <button class="mobile-funnel-btn mobile-funnel-continue" id="mobileContinueBtn" onclick="goToNextStep()">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Funnel State Management
+        let mobileFunnelState = {
+            currentStep: 1,
+            totalSteps: 8,
+            formData: {
+                state: '',
+                militaryStatus: '',
+                branchOfService: '',
+                maritalStatus: '',
+                coverageAmount: '',
+                birthday: '',
+                contactInfo: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    transactionalConsent: false,
+                    marketingConsent: false
+                }
+            }
+        };
+
+        // Main funnel opening function
+        function openMobileFunnel() {
+            console.log('Opening mobile funnel...');
+            document.getElementById('mobileFunnelModal').style.display = 'flex';
+            loadMobileFunnelStep(1);
+        }
+
+        function closeMobileFunnel() {
+            document.getElementById('mobileFunnelModal').style.display = 'none';
+        }
+
+        function loadMobileFunnelStep(step) {
+            mobileFunnelState.currentStep = step;
+            updateProgressBar();
+            updateNavigationButtons();
+            
+            const content = document.getElementById('mobileFunnelContent');
+            
+            switch(step) {
+                case 1:
+                    content.innerHTML = getStateSelectionHTML();
+                    break;
+                case 2:
+                    content.innerHTML = getMilitaryStatusHTML();
+                    break;
+                case 3:
+                    content.innerHTML = getBranchOfServiceHTML();
+                    break;
+                case 4:
+                    content.innerHTML = getMaritalStatusHTML();
+                    break;
+                case 5:
+                    content.innerHTML = getCoverageAmountHTML();
+                    break;
+                case 6:
+                    content.innerHTML = getBirthdayHTML();
+                    break;
+                case 7:
+                    content.innerHTML = getContactInfoHTML();
+                    break;
+                case 8:
+                    content.innerHTML = getSuccessHTML();
+                    break;
+            }
+        }
+
+        function updateProgressBar() {
+            const progressFill = document.getElementById('mobileProgressFill');
+            const currentStepSpan = document.getElementById('mobileCurrentStep');
+            const totalStepsSpan = document.getElementById('mobileTotalSteps');
+            
+            const progress = (mobileFunnelState.currentStep / mobileFunnelState.totalSteps) * 100;
+            progressFill.style.width = progress + '%';
+            currentStepSpan.textContent = mobileFunnelState.currentStep;
+            totalStepsSpan.textContent = mobileFunnelState.totalSteps;
+        }
+
+        function updateNavigationButtons() {
+            const backBtn = document.getElementById('mobileBackBtn');
+            const continueBtn = document.getElementById('mobileContinueBtn');
+            
+            // Show/hide back button
+            if (mobileFunnelState.currentStep === 1) {
+                backBtn.style.display = 'none';
+            } else {
+                backBtn.style.display = 'inline-block';
+            }
+            
+            // Update continue button text
+            if (mobileFunnelState.currentStep === 7) {
+                continueBtn.textContent = 'Submit';
+            } else if (mobileFunnelState.currentStep === 8) {
+                continueBtn.style.display = 'none';
+            } else {
+                continueBtn.textContent = 'Continue';
+                continueBtn.style.display = 'inline-block';
+            }
+        }
+
+        function goToNextStep() {
+            if (mobileFunnelState.currentStep < mobileFunnelState.totalSteps) {
+                loadMobileFunnelStep(mobileFunnelState.currentStep + 1);
+            }
+        }
+
+        function goToPreviousStep() {
+            if (mobileFunnelState.currentStep > 1) {
+                loadMobileFunnelStep(mobileFunnelState.currentStep - 1);
+            }
+        }
+
+        function updateFormData(field, value) {
+            mobileFunnelState.formData[field] = value;
+            console.log('Updated form data:', mobileFunnelState.formData);
+            
+            // Auto-advance logic
+            checkAndAutoAdvance();
+        }
+
+        function checkAndAutoAdvance() {
+            const currentStep = mobileFunnelState.currentStep;
+            const formData = mobileFunnelState.formData;
+            
+            // Check if current step is complete and auto-advance
+            switch(currentStep) {
+                case 1: // State Selection
+                    if (formData.state) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 2: // Military Status
+                    if (formData.militaryStatus) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 3: // Branch of Service
+                    if (formData.branchOfService) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 4: // Marital Status
+                    if (formData.maritalStatus) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 5: // Coverage Amount
+                    if (formData.coverageAmount) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 6: // Birthday
+                    if (formData.birthday) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+                case 7: // Contact Info
+                    if (formData.contactInfo && 
+                        formData.contactInfo.firstName && 
+                        formData.contactInfo.lastName && 
+                        formData.contactInfo.email && 
+                        formData.contactInfo.phone) {
+                        showAutoAdvanceFeedback();
+                        setTimeout(() => goToNextStep(), 500);
+                    }
+                    break;
+            }
+        }
+
+        function showAutoAdvanceFeedback() {
+            const stepElement = document.querySelector('.mobile-funnel-step');
+            if (stepElement) {
+                stepElement.classList.add('auto-advancing');
+            }
+        }
+
+        function updateContactInfo(field, value) {
+            mobileFunnelState.formData.contactInfo[field] = value;
+            console.log('Updated contact info:', mobileFunnelState.formData.contactInfo);
+            
+            // Auto-advance logic for contact info
+            checkAndAutoAdvance();
+        }
+
+        function updateInputField(field, value) {
+            mobileFunnelState.formData[field] = value;
+            console.log('Updated input field:', field, value);
+            
+            // Auto-advance logic
+            checkAndAutoAdvance();
+        }
+
+        // Step HTML Generators
+        function getStateSelectionHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Select Your State</h2>
+                    <p>Please select your state of residence to get started.</p>
+                    <div class="mobile-radio-group">
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="state" value="CA" onchange="updateFormData('state', 'CA')">
+                            <span>California</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="state" value="TX" onchange="updateFormData('state', 'TX')">
+                            <span>Texas</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="state" value="FL" onchange="updateFormData('state', 'FL')">
+                            <span>Florida</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="state" value="NY" onchange="updateFormData('state', 'NY')">
+                            <span>New York</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="state" value="other" onchange="updateFormData('state', 'other')">
+                            <span>Other</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getMilitaryStatusHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Military Status</h2>
+                    <p>What is your current military status?</p>
+                    <div class="mobile-radio-group">
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="militaryStatus" value="veteran" onchange="updateFormData('militaryStatus', 'veteran')">
+                            <span>Veteran</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="militaryStatus" value="active" onchange="updateFormData('militaryStatus', 'active')">
+                            <span>Active Duty</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="militaryStatus" value="reserve" onchange="updateFormData('militaryStatus', 'reserve')">
+                            <span>Reserve/Guard</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="militaryStatus" value="spouse" onchange="updateFormData('militaryStatus', 'spouse')">
+                            <span>Military Spouse</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getBranchOfServiceHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Branch of Service</h2>
+                    <p>Which branch of service did you serve in?</p>
+                    <div class="mobile-radio-group">
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="branchOfService" value="army" onchange="updateFormData('branchOfService', 'army')">
+                            <span>Army</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="branchOfService" value="navy" onchange="updateFormData('branchOfService', 'navy')">
+                            <span>Navy</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="branchOfService" value="airforce" onchange="updateFormData('branchOfService', 'airforce')">
+                            <span>Air Force</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="branchOfService" value="marines" onchange="updateFormData('branchOfService', 'marines')">
+                            <span>Marines</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="branchOfService" value="coastguard" onchange="updateFormData('branchOfService', 'coastguard')">
+                            <span>Coast Guard</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getMaritalStatusHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Marital Status</h2>
+                    <p>What is your current marital status?</p>
+                    <div class="mobile-radio-group">
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="maritalStatus" value="single" onchange="updateFormData('maritalStatus', 'single')">
+                            <span>Single</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="maritalStatus" value="married" onchange="updateFormData('maritalStatus', 'married')">
+                            <span>Married</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="maritalStatus" value="divorced" onchange="updateFormData('maritalStatus', 'divorced')">
+                            <span>Divorced</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="maritalStatus" value="widowed" onchange="updateFormData('maritalStatus', 'widowed')">
+                            <span>Widowed</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getCoverageAmountHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Coverage Amount</h2>
+                    <p>How much life insurance coverage would you like?</p>
+                    <div class="mobile-radio-group">
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="coverageAmount" value="25000" onchange="updateFormData('coverageAmount', '25000')">
+                            <span>$25,000</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="coverageAmount" value="50000" onchange="updateFormData('coverageAmount', '50000')">
+                            <span>$50,000</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="coverageAmount" value="100000" onchange="updateFormData('coverageAmount', '100000')">
+                            <span>$100,000</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="coverageAmount" value="250000" onchange="updateFormData('coverageAmount', '250000')">
+                            <span>$250,000</span>
+                        </label>
+                        <label class="mobile-radio-option">
+                            <input type="radio" name="coverageAmount" value="500000" onchange="updateFormData('coverageAmount', '500000')">
+                            <span>$500,000</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getBirthdayHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Date of Birth</h2>
+                    <p>Please enter your date of birth.</p>
+                    <div class="mobile-form-group">
+                        <input type="date" class="mobile-form-input" onchange="updateInputField('birthday', this.value)" required>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getContactInfoHTML() {
+            return `
+                <div class="mobile-funnel-step">
+                    <h2>Contact Information</h2>
+                    <p>Please provide your contact information so we can get in touch with you about your quote.</p>
+                    
+                    <div class="mobile-form-group">
+                        <label class="mobile-form-label">First Name</label>
+                        <input type="text" class="mobile-form-input" placeholder="Enter your first name" onchange="updateContactInfo('firstName', this.value)" required>
+                    </div>
+                    
+                    <div class="mobile-form-group">
+                        <label class="mobile-form-label">Last Name</label>
+                        <input type="text" class="mobile-form-input" placeholder="Enter your last name" onchange="updateContactInfo('lastName', this.value)" required>
+                    </div>
+                    
+                    <div class="mobile-form-group">
+                        <label class="mobile-form-label">Email Address</label>
+                        <input type="email" class="mobile-form-input" placeholder="Enter your email address" onchange="updateContactInfo('email', this.value)" required>
+                    </div>
+                    
+                    <div class="mobile-form-group">
+                        <label class="mobile-form-label">Phone Number</label>
+                        <input type="tel" class="mobile-form-input" placeholder="Enter your phone number" onchange="updateContactInfo('phone', this.value)" required>
+                    </div>
+                    
+                    <div class="mobile-consent-section">
+                        <h3>Required Consents</h3>
+                        <label class="mobile-checkbox-option">
+                            <input type="checkbox" onchange="updateContactInfo('transactionalConsent', this.checked)" required>
+                            <span>I consent to receive transactional messages from Veteran Legacy Life</span>
+                        </label>
+                        <label class="mobile-checkbox-option">
+                            <input type="checkbox" onchange="updateContactInfo('marketingConsent', this.checked)" required>
+                            <span>I consent to receive marketing messages from Veteran Legacy Life</span>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getSuccessHTML() {
+            return `
+                <div class="mobile-funnel-step mobile-success-step">
+                    <div class="mobile-success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Thank You!</h2>
+                    <p>Your information has been submitted successfully. A licensed agent will contact you within 24 hours to discuss your coverage options.</p>
+                    <div class="mobile-success-details">
+                        <h3>What happens next?</h3>
+                        <ul>
+                            <li>Our team will review your information</li>
+                            <li>A licensed agent will contact you within 24 hours</li>
+                            <li>We'll provide personalized quotes based on your needs</li>
+                            <li>You'll have the opportunity to ask questions and compare options</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Enhanced mobile experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add touch-friendly interactions
+            const buttons = document.querySelectorAll('.mobile-cta-button');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                button.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Check if funnel is loaded and add fallback
+            setTimeout(() => {
+                console.log('✅ Mobile funnel is self-contained and ready');
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>
