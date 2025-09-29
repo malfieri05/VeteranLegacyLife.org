@@ -377,12 +377,10 @@
         /* Main Hero Section */
         .main-hero-section {
             background: #F8FAFC; /* light gray background */
-            width: 100vw;
+            width: 100%;
             position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-right: -50vw;
-            padding: 0; /* removed padding to eliminate white space */
+            margin-top: 0;
+            padding-top: 0;
         }
 
         .hero-blue {
@@ -1854,6 +1852,48 @@
           .footer-section ul { grid-template-columns: 1fr; }
           .footer { padding: 18px 0 10px; }
         }
+
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.fade-in-left {
+            transform: translateX(-30px);
+        }
+
+        .animate-on-scroll.fade-in-left.animated {
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll.fade-in-right {
+            transform: translateX(30px);
+        }
+
+        .animate-on-scroll.fade-in-right.animated {
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll.scale-in {
+            transform: scale(0.9);
+        }
+
+        .animate-on-scroll.scale-in.animated {
+            transform: scale(1);
+        }
+
+        /* Staggered animations for feature cards */
+        .animate-on-scroll.stagger-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.stagger-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.stagger-3 { transition-delay: 0.3s; }
+        .animate-on-scroll.stagger-4 { transition-delay: 0.4s; }
     </style>
   <script type="module">
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
@@ -2330,7 +2370,7 @@
 
 
     <!-- Main Hero Section -->
-    <section class="main-hero-section" id="main-content">
+    <section class="main-hero-section animate-on-scroll" id="main-content">
         <div class="hero-blue">
         <div class="container">
             <div class="banner-fifty-fifty">
@@ -2373,11 +2413,11 @@
     
 
     <!-- Insurance Plans Section -->
-    <section id="insurance-plans" class="insurance-plans-section">
+    <section id="insurance-plans" class="insurance-plans-section animate-on-scroll">
         <div class="container">
             <h2 class="section-heading">Plans for Veterans, Active Service and Family Members</h2>
             <div class="plans-container">
-                <div class="plan-card">
+                <div class="plan-card animate-on-scroll stagger-1">
                     <div class="plan-icon">
                         <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
                             <path d="M32 4L8 14V30C8 44.6 18.2 58.2 32 62C45.8 58.2 56 44.6 56 30V14L32 4ZM32 57.8V8.2L52 16.8V30C52 42.6 43.4 54.4 32 57.8Z" fill="#1A2C42"/>
@@ -2393,7 +2433,7 @@
                     </ul>
                 </div>
 
-                <div class="plan-card">
+                <div class="plan-card animate-on-scroll stagger-2">
                     <div class="plan-icon">
                         <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
                             <path d="M32 8C18.8 8 8 18.8 8 32C8 45.2 18.8 56 32 56C45.2 56 56 45.2 56 32C56 18.8 45.2 8 32 8ZM32 52C20.96 52 12 43.04 12 32C12 20.96 20.96 12 32 12C43.04 12 52 20.96 52 32C52 43.04 43.04 52 32 52ZM33 18H29V34H41V30H33V18Z" fill="#1A2C42"/>
@@ -2409,7 +2449,7 @@
                     </ul>
                 </div>
 
-                <div class="plan-card">
+                <div class="plan-card animate-on-scroll stagger-3">
                     <span class="badge-popular">Most Popular</span>
                     <div class="plan-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -2430,7 +2470,7 @@
     </section>
 
     <!-- Comparison Section -->
-    <section class="comparison" id="compare">
+    <section class="comparison animate-on-scroll" id="compare">
         <div class="container">
             <h2 class="section-title">The VA Option vs Our Options... What's the difference?</h2>
             <div class="comparison-table-container">
@@ -2545,7 +2585,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq" id="faq">
+    <section class="faq animate-on-scroll" id="faq">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
@@ -2831,6 +2871,26 @@
                         });
                     }
                 });
+            });
+
+            // Scroll Animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animate-on-scroll class
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => {
+                observer.observe(el);
             });
         });
     </script>

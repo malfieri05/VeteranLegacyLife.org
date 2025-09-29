@@ -1138,6 +1138,48 @@
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Scroll Animations for Mobile */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.fade-in-left {
+            transform: translateX(-20px);
+        }
+
+        .animate-on-scroll.fade-in-left.animated {
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll.fade-in-right {
+            transform: translateX(20px);
+        }
+
+        .animate-on-scroll.fade-in-right.animated {
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll.scale-in {
+            transform: scale(0.95);
+        }
+
+        .animate-on-scroll.scale-in.animated {
+            transform: scale(1);
+        }
+
+        /* Staggered animations for mobile feature cards */
+        .animate-on-scroll.stagger-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.stagger-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.stagger-3 { transition-delay: 0.3s; }
+        .animate-on-scroll.stagger-4 { transition-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -1156,7 +1198,7 @@
     </header>
 
     <!-- Mobile Hero Section -->
-    <section class="mobile-hero">
+    <section class="mobile-hero animate-on-scroll">
         <img src="production/armyhouseFULL.png" alt="Veteran Family" class="mobile-hero-image">
         <div class="mobile-hero-content">
             <h1>Simple. Affordable. Guaranteed Coverage for Veterans.</h1>
@@ -1169,31 +1211,31 @@
     </section>
 
     <!-- Mobile Features Section -->
-    <section class="mobile-features">
+    <section class="mobile-features animate-on-scroll">
         <h2>Why Choose Veteran Legacy Life?</h2>
         <div class="mobile-feature-grid">
-            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
+            <div class="mobile-feature-card animate-on-scroll stagger-1" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3>No Medical Exam</h3>
                 <p>Qualified veterans can get coverage without a medical exam</p>
             </div>
-            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
+            <div class="mobile-feature-card animate-on-scroll stagger-2" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-dollar-sign"></i>
                 </div>
                 <h3>Affordable Rates</h3>
                 <p>Exclusive veteran discounts and competitive rates that NEVER INCREASE.</p>
             </div>
-            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
+            <div class="mobile-feature-card animate-on-scroll stagger-3" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-heart"></i>
                 </div>
                 <h3>Living Benefits</h3>
                 <p>Access your benefits while you're alive for chronic illness, terminal illness, or critical illness.</p>
             </div>
-            <div class="mobile-feature-card" onclick="openMobileFunnel()" style="cursor: pointer;">
+            <div class="mobile-feature-card animate-on-scroll stagger-4" onclick="openMobileFunnel()" style="cursor: pointer;">
                 <div class="mobile-feature-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
@@ -1205,7 +1247,7 @@
 
 
     <!-- Mobile Footer -->
-    <footer class="mobile-footer">
+    <footer class="mobile-footer animate-on-scroll">
         <p>Licensed in all 50 states. Coverage subject to underwriting approval. · <a href="/privacy.html" style="color:#cbd5e1; text-decoration: underline;">Privacy Policy</a></p>
         <div class="mobile-footer-phone">
             <a href="tel:+15037645097" class="mobile-footer-phone-link">
@@ -2110,6 +2152,26 @@
             setTimeout(() => {
                 console.log('✅ Mobile funnel is self-contained and ready');
             }, 2000);
+
+            // Scroll Animations for Mobile
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animate-on-scroll class
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 
