@@ -419,21 +419,40 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       
       console.log('Lead data submitted successfully:', result)
       try {
-        // Fire tracking events if available
-        // @ts-ignore
-        const cfg = (window && (window as any).VeteranFunnelConfig && (window as any).VeteranFunnelConfig.TRACKING) || {};
-        // @ts-ignore
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          if (cfg && cfg.CONVERSION) {
+        // Enhanced tracking events for Google Ads conversion tracking
+        if (typeof window !== 'undefined') {
+          // Google Ads conversion tracking
+          if ((window as any).gtag) {
             // @ts-ignore
-            (window as any).gtag('event', 'conversion', { send_to: cfg.CONVERSION });
-          } else {
+            (window as any).gtag('event', 'conversion', {
+              send_to: 'AW-17196490702', // Your Google Ads conversion ID
+              value: 1.0,
+              currency: 'USD',
+              transaction_id: get().sessionId
+            });
+            
+            // Lead generation event
             // @ts-ignore
-            (window as any).gtag('event', 'generate_lead', { method: 'desktop_funnel' });
+            (window as any).gtag('event', 'generate_lead', {
+              currency: 'USD',
+              value: 1.0,
+              lead_type: 'life_insurance_quote',
+              funnel_step: 'contact_info_completed'
+            });
           }
-        } else if (typeof window !== 'undefined' && (window as any).dataLayer) {
-          // @ts-ignore
-          (window as any).dataLayer.push({ event: 'desktop_lead_submitted' });
+          
+          // DataLayer events for GTM
+          if ((window as any).dataLayer) {
+            // @ts-ignore
+            (window as any).dataLayer.push({
+              event: 'lead_generated',
+              event_category: 'engagement',
+              event_label: 'contact_info_form',
+              value: 1,
+              session_id: get().sessionId,
+              lead_type: 'life_insurance_quote'
+            });
+          }
         }
       } catch (e) {
         console.warn('Tracking event failed:', e)
@@ -531,6 +550,52 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       }
       
       console.log('Application data submitted successfully:', result)
+      
+      // Enhanced tracking for application completion
+      try {
+        if (typeof window !== 'undefined') {
+          // Google Ads conversion tracking for application completion
+          if ((window as any).gtag) {
+            // @ts-ignore
+            (window as any).gtag('event', 'conversion', {
+              send_to: 'AW-17196490702', // Your Google Ads conversion ID
+              value: 5.0, // Higher value for completed application
+              currency: 'USD',
+              transaction_id: get().sessionId
+            });
+            
+            // Application completion event
+            // @ts-ignore
+            (window as any).gtag('event', 'purchase', {
+              currency: 'USD',
+              value: 5.0,
+              transaction_id: get().sessionId,
+              items: [{
+                item_id: 'life_insurance_application',
+                item_name: 'Life Insurance Application',
+                category: 'insurance',
+                quantity: 1,
+                price: 5.0
+              }]
+            });
+          }
+          
+          // DataLayer events for GTM
+          if ((window as any).dataLayer) {
+            // @ts-ignore
+            (window as any).dataLayer.push({
+              event: 'application_completed',
+              event_category: 'conversion',
+              event_label: 'full_application_submitted',
+              value: 5,
+              session_id: get().sessionId,
+              application_type: 'life_insurance'
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('Application tracking event failed:', e)
+      }
     } catch (error) {
       console.error('Error submitting application data:', error)
       alert('There was an issue submitting your application. Please try again.')
@@ -573,6 +638,23 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
     // Move to next step
     set({ currentStep: nextStep })
     console.log(`🎯 Step changed to ${nextStep} (${getStepName(nextStep)})`)
+    
+    // Track funnel progression
+    try {
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        // @ts-ignore
+        (window as any).dataLayer.push({
+          event: 'funnel_step_completed',
+          event_category: 'funnel_progression',
+          event_label: getStepName(currentStep),
+          step_number: currentStep,
+          next_step: nextStep,
+          session_id: sessionId
+        });
+      }
+    } catch (e) {
+      console.warn('Step tracking event failed:', e)
+    }
     
     // UI will reset manual navigation flag after navigation
   },
