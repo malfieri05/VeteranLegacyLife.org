@@ -3,10 +3,10 @@ import { GLOBAL_CONFIG } from './globalConfig';
 export const EMAIL_CONFIG = {
   // Reference your existing globalConfig.ts values
   ADMIN_EMAIL: GLOBAL_CONFIG.EMAIL.ADMIN,
-  FROM_EMAIL: 'noreply@veteranlegacylife.com',
+  FROM_EMAIL: 'noreply@veteranlegacylife.org',
   COMPANY_NAME: GLOBAL_CONFIG.COMPANY.NAME,
   SUPPORT_PHONE: GLOBAL_CONFIG.COMPANY.PHONE,
-  LOGO_URL: 'https://veteranlegacylife.com/public/logo.png',
+  LOGO_URL: 'https://veteranlegacylife.org/public/logo.png',
   
   // Email styling
   COLORS: {

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://veteranlegacylife.com/sitemap.xml
+Sitemap: https://veteranlegacylife.org/sitemap.xml
