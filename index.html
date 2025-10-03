@@ -16,8 +16,8 @@
     <title>Veteran Legacy Life - Insurance Benefits for Veterans</title>
     <meta name="description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
     <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://veteranlegacylife.com/">
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="https://veteranlegacylife.com/mobile.html">
+    <link rel="canonical" href="https://veteranlegacylife.org/">
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="https://veteranlegacylife.org/mobile.html">
     <meta name="theme-color" content="#1A2C42">
     <meta name="keywords" content="veteran life insurance, military life insurance, term life, whole life, IUL, living benefits">
     <meta name="author" content="Veteran Legacy Life">
@@ -28,15 +28,15 @@
     <meta property="og:site_name" content="Veteran Legacy Life">
     <meta property="og:title" content="Veteran Legacy Life - Insurance Benefits for Veterans">
     <meta property="og:description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
-    <meta property="og:url" content="https://veteranlegacylife.com/">
-    <meta property="og:image" content="https://veteranlegacylife.com/production/armyhouseFULL.png">
+    <meta property="og:url" content="https://veteranlegacylife.org/">
+    <meta property="og:image" content="https://veteranlegacylife.org/production/armyhouseFULL.png">
     <meta property="og:image:alt" content="Veteran Legacy Life">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Veteran Legacy Life - Insurance Benefits for Veterans">
     <meta name="twitter:description" content="Exclusive 2025 life insurance benefits for veterans, active service members, and their families. Get whole life, term life, and IUL coverage with living benefits.">
-    <meta name="twitter:image" content="https://veteranlegacylife.com/production/armyhouseFULL.png">
+    <meta name="twitter:image" content="https://veteranlegacylife.org/production/armyhouseFULL.png">
 
     <!-- Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -59,7 +59,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Veteran Funnel Styles -->
-    <link rel="stylesheet" href="assets/index-f3d073f2.css">
+    <link rel="stylesheet" href="assets/index-0b8ff63a.css">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -67,8 +67,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Veteran Legacy Life",
-      "url": "https://veteranlegacylife.com/",
-      "logo": "https://veteranlegacylife.com/logo.png",
+      "url": "https://veteranlegacylife.org/",
+      "logo": "https://veteranlegacylife.org/logo.png",
       "contactPoint": [{
         "@type": "ContactPoint",
         "telephone": "+1-503-764-5097",
@@ -82,10 +82,10 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Veteran Legacy Life",
-      "url": "https://veteranlegacylife.com/",
+      "url": "https://veteranlegacylife.org/",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://veteranlegacylife.com/?q={search_term_string}",
+        "target": "https://veteranlegacylife.org/?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -2354,6 +2354,9 @@
   </style>
 </head>
 <body>
+    <!-- React App Root -->
+    <div id="root"></div>
+    
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -2919,9 +2922,43 @@
         return false
       }
       if (isLocal2) {
-        loadFunnelDev2().then((ok) => { if (!ok) import('assets/index-96d53703.js') })
+        loadFunnelDev2().then((ok) => { if (!ok) import('assets/index-307ab848.js') })
       } else {
-        import('assets/index-96d53703.js')
+        import('assets/index-307ab848.js')
+      }
+    </script>
+    
+    <!-- Fallback for funnel button -->
+    <script>
+      // Ensure VeteranFunnel is available
+      if (typeof window.VeteranFunnel === 'undefined') {
+        window.VeteranFunnel = {
+          open: function() {
+            console.log('Funnel opening...');
+            // Redirect to mobile version as fallback
+            window.location.href = '/mobile.html';
+          },
+          close: function() {
+            console.log('Funnel closing...');
+          }
+        };
+      }
+    </script>
+    
+    <!-- Fallback for funnel button -->
+    <script>
+      // Ensure VeteranFunnel is available
+      if (typeof window.VeteranFunnel === 'undefined') {
+        window.VeteranFunnel = {
+          open: function() {
+            console.log('Funnel opening...');
+            // Redirect to mobile version as fallback
+            window.location.href = '/mobile.html';
+          },
+          close: function() {
+            console.log('Funnel closing...');
+          }
+        };
       }
     </script>
 </body>
