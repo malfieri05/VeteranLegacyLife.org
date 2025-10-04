@@ -32,7 +32,7 @@ var CONFIG = {
     NAME: 'Veteran Legacy Life',
     PHONE: '503-764-5097',
     PHONE_DIALABLE: '5037645097', // Actual number to dial
-    WEBSITE: 'https://veteranlegacylife.com'
+    WEBSITE: 'https://veteranlegacylife.org'
   },
   
   // Environment Settings

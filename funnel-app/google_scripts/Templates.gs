@@ -732,7 +732,7 @@ function generateApplicationConfirmationHTML(data) {
                         <!-- Header -->
                         <tr>
                             <td style="padding: 20px 30px 10px 30px; text-align: center; background-color: transparent;">
-                                <img src="https://www.veteranlegacylife.com/logo.png" alt="Veteran Legacy Life" style="max-width: 120px; height: auto; margin-bottom: 8px; display: block; margin-left: auto; margin-right: auto;">
+                                <img src="https://www.veteranlegacylife.org/logo.png" alt="Veteran Legacy Life" style="max-width: 120px; height: auto; margin-bottom: 8px; display: block; margin-left: auto; margin-right: auto;">
                                 <h1 style="color: #1f2937; font-size: 20px; font-weight: 600; margin: 0 0 4px 0;">Veteran Legacy Life</h1>
                                 <p style="color: #6b7280; font-size: 14px; margin: 0 0 20px 0; font-weight: 400;">Veteran Life Insurance Specialists</p>
                             </td>
@@ -912,7 +912,7 @@ function generateApplicationConfirmationHTML(data) {
                         <!-- Footer -->
                         <tr>
                             <td style="background: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
-                                <img src="https://www.veteranlegacylife.com/logo.png" alt="Veteran Legacy Life" style="max-width: 120px; height: auto; margin: 0 auto 16px; display: block;">
+                                <img src="https://www.veteranlegacylife.org/logo.png" alt="Veteran Legacy Life" style="max-width: 120px; height: auto; margin: 0 auto 16px; display: block;">
                                 
                                 <div style="font-size: 16px; font-weight: 700; color: #1f2937; margin-bottom: 4px;">Veteran Legacy Life</div>
                                 <div style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Veteran Life Insurance Specialists</div>

@@ -43,7 +43,7 @@ function generateEmailHeader(title, subtitle = '') {
       
       <!-- Logo Section -->
       <div style="margin-bottom: 15px;">
-        <img src="https://veteranlegacylife.com/wp-content/uploads/2024/01/veteran-legacy-life-logo-white.png" 
+        <img src="https://veteranlegacylife.org/wp-content/uploads/2024/01/veteran-legacy-life-logo-white.png" 
              alt="Veteran Legacy Life" 
              style="height: 60px; width: auto; max-width: 200px; object-fit: contain;">
       </div>
@@ -74,7 +74,7 @@ function generateEmailFooter() {
       
       <!-- Company Info -->
       <div style="margin-bottom: 15px;">
-        <img src="https://veteranlegacylife.com/wp-content/uploads/2024/01/veteran-legacy-life-logo.png" 
+        <img src="https://veteranlegacylife.org/wp-content/uploads/2024/01/veteran-legacy-life-logo.png" 
              alt="Veteran Legacy Life" 
              style="height: 40px; width: auto; margin-bottom: 10px;">
         <p style="margin: 0; font-size: 14px; color: ${EMAIL_STYLES.gray};">
