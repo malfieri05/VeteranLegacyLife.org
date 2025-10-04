@@ -424,6 +424,10 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
         const cfg = (window && (window as any).VeteranFunnelConfig && (window as any).VeteranFunnelConfig.TRACKING) || {};
         // @ts-ignore
         if (typeof window !== 'undefined' && (window as any).gtag) {
+          // Google Ads conversion tracking
+          // @ts-ignore
+          (window as any).gtag('event', 'conversion', {'send_to': 'AW-17196490702/E36jCNzg_aUbEM6_9odA'});
+          
           if (cfg && cfg.CONVERSION) {
             // @ts-ignore
             (window as any).gtag('event', 'conversion', { send_to: cfg.CONVERSION });
@@ -531,6 +535,18 @@ export const useFunnelStore = create<FunnelStore>((set, get) => ({
       }
       
       console.log('Application data submitted successfully:', result)
+      
+      // Fire Google Ads conversion tracking for full application
+      try {
+        // @ts-ignore
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          // Google Ads conversion tracking for full application
+          // @ts-ignore
+          (window as any).gtag('event', 'conversion', {'send_to': 'AW-17196490702/E36jCNzg_aUbEM6_9odA'});
+        }
+      } catch (e) {
+        console.warn('Application conversion tracking failed:', e)
+      }
     } catch (error) {
       console.error('Error submitting application data:', error)
       alert('There was an issue submitting your application. Please try again.')
