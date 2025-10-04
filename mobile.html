@@ -1793,6 +1793,9 @@
                 console.log('Mobile form data submitted successfully:', result);
                 try {
                     if (window && window.gtag) {
+                        // Google Ads conversion tracking
+                        window.gtag('event', 'conversion', {'send_to': 'AW-17196490702/E36jCNzg_aUbEM6_9odA'});
+                        
                         // Google Ads conversion if configured
                         const cfg = (window.VeteranFunnelConfig && window.VeteranFunnelConfig.TRACKING) || {};
                         if (cfg && cfg.CONVERSION) {
