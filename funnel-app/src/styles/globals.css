@@ -85,7 +85,7 @@
 }
 
 .veteran-funnel .cta-button.secondary {
-  background: white;
+  background: white !important;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
   /* Explicitly disable any attention animations on Back/secondary buttons */
