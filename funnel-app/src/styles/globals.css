@@ -93,8 +93,8 @@
 }
 
 .veteran-funnel .cta-button.secondary:hover {
-  background: #f8fafc;
-  color: var(--primary-color);
+  background: var(--primary-color);
+  color: var(--text-white);
 }
 
 /* Form styles */
