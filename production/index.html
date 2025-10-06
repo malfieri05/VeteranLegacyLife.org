@@ -2945,6 +2945,19 @@
       }
     </script>
     
+    <!-- Fix for back button styling -->
+    <style>
+      .veteran-funnel .cta-button.secondary {
+        background: transparent !important;
+        color: var(--primary-color) !important;
+        border: 2px solid var(--primary-color) !important;
+      }
+      .veteran-funnel .cta-button.secondary:hover {
+        background: var(--primary-color) !important;
+        color: white !important;
+      }
+    </style>
+    
     <!-- Fallback for funnel button -->
     <script>
       // Ensure VeteranFunnel is available
